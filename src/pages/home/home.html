@@ -1,18 +1,44 @@
 <ion-header>
-  <ion-navbar>
+  <!-- <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Home</ion-title>
-  </ion-navbar>
+  </ion-navbar> -->
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content class="background">
+  <ion-grid>
+    <ion-row style="margin-top: 150px">
+      <ion-col col-2></ion-col>
+      <ion-col col-8 align-self-center>
+        <div text-center>
+          <img src="../assets/imgs/qme_web_light.png" />
+        </div>
+      </ion-col>
+      <ion-col col-2></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-2></ion-col>
+      <ion-col>
+        <ion-input type="email" placeholder="Email Address"></ion-input>
+      </ion-col>
+      <ion-col col-2></ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-2></ion-col>
+        <ion-col>
+          <ion-input type="password" placeholder="Password"></ion-input>
+        </ion-col>
+        <ion-col col-2></ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col col-2></ion-col>
+          <ion-col>
+              <button ion-button full>SIGN IN</button>
+          </ion-col>
+          <ion-col col-2></ion-col>
+        </ion-row>
+  </ion-grid>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
 </ion-content>
