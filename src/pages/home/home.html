@@ -7,7 +7,7 @@
   </ion-navbar> -->
 </ion-header>
 
-<ion-content class="background">
+<ion-content class="background" padding>
   <ion-grid>
     <ion-row style="margin-top: 150px">
       <ion-col col-1></ion-col>
@@ -35,10 +35,18 @@
       <ion-row>
           <ion-col col-2></ion-col>
           <ion-col>
-              <button color="queueme" ion-button full>SIGN IN</button>
+              <button color="queueme-orange" ion-button full>SIGN IN</button>
           </ion-col>
           <ion-col col-2></ion-col>
         </ion-row>
+        <ion-row text-center >
+          <ion-col>
+              <a (click)="openForgetPasswordPage()" style="color:slategray">Forget Password?</a>
+          </ion-col>
+        </ion-row>
   </ion-grid>
-
+  
 </ion-content>
+<ion-footer text-center no-shadow no-border padding-bottom class="background">
+      <a (click)="openCreateAccountPage()" style="color:royalblue; font-size: 1.2em">Don't have an account?</a>
+ </ion-footer>
