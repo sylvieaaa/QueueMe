@@ -2,29 +2,23 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the ForgetPasswordPage page.
+ * Generated class for the MainPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-forget-password',
-  templateUrl: 'forget-password.html',
+  selector: 'page-main',
+  templateUrl: 'main.html',
 })
-export class ForgetPasswordPage {
-
-  username: string;
+export class MainPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ForgetPasswordPage');
-  }
-
-  resetPassword() {
-    
+    console.log('ionViewDidLoad MainPage');
   }
 
 }
