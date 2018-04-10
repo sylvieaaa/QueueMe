@@ -8,7 +8,6 @@
   "proxies" : [
     {
       "path": "/api",
-<<<<<<< HEAD
       "proxyUrl" : "http://172.25.105.243:8080/QueueMeSystemJsf/Resources"
     }
   ]
