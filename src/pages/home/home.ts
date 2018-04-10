@@ -29,7 +29,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     if (sessionStorage.getItem('customerEntity') != null) {
-      this.navCtrl.setRoot(ProfilePage);
+      this.navCtrl.setRoot(MainPage);
     }
   }
 
