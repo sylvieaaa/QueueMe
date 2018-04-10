@@ -7,12 +7,24 @@
 <ion-header>
 
   <ion-navbar>
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
-    <ion-title>Main</ion-title>
+    <ion-grid>
+      <ion-row text-center>
+        <ion-col col-3 align-self-center>
+          <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-6>
+            <ion-title><img src="../assets/imgs/qme_web_light.png"/></ion-title>
+        </ion-col>
+        <!-- <ion-col col-1></ion-col>
+        <ion-col col-2 align-self-center>
+            <button ion-button icon-only block color="queueme-orange"><ion-icon text-right name="cart"></ion-icon></button>
+        </ion-col> -->
+        <ion-col col-3 align-self-center><ion-icon text-right name="cart"></ion-icon></ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-navbar>
-
 </ion-header>
 
 

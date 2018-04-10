@@ -21,16 +21,13 @@ export class HomePage {
   // a: any;
 
   constructor(public navCtrl: NavController, public customerEntityProvider: CustomerEntityProvider, private toastCtrl: ToastController) {
-    
+
   }
 
-  toast = this.toastCtrl.create({
-    duration: 3000,
-    position: 'bottom'
-  });
+
 
   ionViewDidLoad() {
-    if(sessionStorage.getItem('customerEntity') != null) {
+    if (sessionStorage.getItem('customerEntity') != null) {
       this.navCtrl.setRoot(MainPage);
     }
   }
@@ -44,19 +41,28 @@ export class HomePage {
   }
 
   doLogin() {
-    this.customerEntityProvider.doCustomerLogin(this.username, this.password).subscribe(
-      response => {
-        this.customerEntity = response.customerEntity;
-        // this.a = response.customerEntity;
-        sessionStorage.setItem("customerEntity", JSON.stringify(this.customerEntity));
-        this.toast.setMessage("Welcome " + this.customerEntity.firstName);
-        this.toast.present();
-        this.navCtrl.setRoot(MainPage);
-      }, error => {
-        this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
-        this.toast.setMessage("Invalid login credentials");
-        this.toast.present();
-      }
-    )
+    let toast = this.toastCtrl.create({
+      duration: 3000,
+      position: 'bottom'
+    });
+    if (this.username == null || this.password == null || this.username.trim() == "" || this.password == "") {
+
+      toast.setMessage("Please fill in ");
+      toast.present();
+    } else {
+      this.customerEntityProvider.doCustomerLogin(this.username, this.password).subscribe(
+        response => {
+          this.customerEntity = response.customerEntity;
+          // this.a = response.customerEntity;
+          sessionStorage.setItem("customerEntity", JSON.stringify(this.customerEntity));
+          toast.setMessage("Welcome " + this.customerEntity.firstName);
+          toast.present();
+          this.navCtrl.setRoot(MainPage);
+        }, error => {
+          this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+          toast.setMessage("Invalid login credentials");
+          toast.present();
+        })
+    }
   }
 }
