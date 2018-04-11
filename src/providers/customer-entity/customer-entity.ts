@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { Injectable } from '@angular/core';
 import { Platform } from 'ionic-angular';
+import { CustomerEntity } from '../../entities/CustomerEntity';
 
 const httpOptions = {
 	headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -58,8 +59,8 @@ export class CustomerEntityProvider {
 		(
 			catchError(this.handleError)
 		);
-  }
-
+	}
+	
   private handleError(error: HttpErrorResponse)
 	{
 		if (error.error instanceof ErrorEvent) 
@@ -72,5 +73,25 @@ export class CustomerEntityProvider {
 		}
 		
 		return new ErrorObservable(error);
+	}
+
+	updateCustomer(customerEntity: CustomerEntity): Observable<any>
+	{
+		let updateCustomerReq = {"customerEntity": customerEntity};
+		let path: string = '';
+		
+		if(this.platform.is('core') || this.platform.is('mobileweb')) 
+		{
+			path = this.baseUrl;
+		}
+		else
+		{
+			path = this.fullBaseUrl;
+		}				
+		
+		return this.httpClient.post<any>(path, updateCustomerReq, httpOptions).pipe
+		(
+			catchError(this.handleError)
+		);
 	}
 }
