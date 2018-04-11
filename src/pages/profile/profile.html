@@ -1,18 +1,48 @@
-<!--
-  Generated template for the ProfilePage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>profile</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Profile</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
+
+  <br>  
+  <div align="center"><h6>Personal Information</h6></div>
+    <br>
+
+      <ion-list>
+          <ion-item>
+            <ion-label color="primary">First Name: </ion-label>
+            <ion-input value={{customerEntity.firstName}} type="text" [(ngModel)]="customerEntity.firstName" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+              <ion-label color="primary">Last Name: </ion-label>
+              <ion-input value={{customerEntity.lastName}} type="text" [(ngModel)]="customerEntity.lastName"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label color="primary">Contact Number: </ion-label>
+                <ion-input value={{customerEntity.contactNumber}} type="text" min="8" max="8" [(ngModel)]="customerEntity.contactNumber"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label color="primary">Address: </ion-label>
+                  <ion-input value={{customerEntity.address}} type="text" [(ngModel)]="customerEntity.address"></ion-input>
+                </ion-item>
+
+                <br>
+                <ion-item>
+                    <button ion-button block (click)="editCustomer()">
+                      Save Changes
+                    </button>
+                    </ion-item>
+
+          </ion-list>
 
 </ion-content>
