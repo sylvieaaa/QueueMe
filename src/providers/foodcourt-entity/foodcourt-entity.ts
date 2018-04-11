@@ -1,27 +1,33 @@
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Platform } from 'ionic-angular';
+/*
+  Generated class for the FoodcourtEntityProvider provider.
+
+  See https://angular.io/guide/dependency-injection for more info on providers
+  and Angular DI.
+*/
 
 const httpOptions = {
 	headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable()
-export class CustomerEntityProvider {
+export class FoodcourtEntityProvider {
 
   ipAddress = '172.25.97.234';
-	portNo = '8080';
-	fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystem/Resources/Customer';
-	baseUrl = "/api/Customer";
+  portNo = '8080';
+  fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystem/Resources/FoodCourt';
+  baseUrl = "/api/FoodCourt";
 
   constructor(public httpClient: HttpClient, public platform: Platform) {
     console.log('Hello CustomerEntityProvider Provider');
   }
 
-  doCustomerLogin(username:string, password:string): Observable<any> {
+  doFoodCourt(): Observable<any> {
     let path: string = '';
     
     if(this.platform.is('core') || this.platform.is('mobileweb')) 
@@ -33,31 +39,11 @@ export class CustomerEntityProvider {
 			path = this.fullBaseUrl;
 		}
 
+    return this.httpClient.get<any>(path + "/retrieveAll").pipe
+		(
+			catchError(this.handleError)
+		);
 
-		console.error('******************* HERE 1');
-	
-		return this.httpClient.get<any>(path + "/login?username=" + username + "&password=" + password).pipe
-		(
-			catchError(this.handleError)
-		);
-	}
-	
-	doResetPassword(username:string): Observable<any> {
-    let path: string = '';
-    
-    if(this.platform.is('core') || this.platform.is('mobileweb')) 
-		{
-			path = this.baseUrl;
-		}
-		else
-		{
-			path = this.fullBaseUrl;
-		}
-	
-		return this.httpClient.get<any>(path + "/resetPassword?username=" + username).pipe
-		(
-			catchError(this.handleError)
-		);
   }
 
   private handleError(error: HttpErrorResponse)
@@ -73,4 +59,5 @@ export class CustomerEntityProvider {
 		
 		return new ErrorObservable(error);
 	}
+
 }
