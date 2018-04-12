@@ -34,10 +34,13 @@
 		{{errorMessage}}
   </div>
   
-  <div *ngIf = "!notChosen" style="text-align: center">
+  <div *ngIf="!notChosen" style="text-align: center">
     <h3>Hi, You're currently in: </h3>
-    {{foodCourt.name}}
-  
+            {{name}}
+    <br/>
+    <button ion-button block (click)="clear()">
+      Clear
+    </button>		
   </div>
 
   <div *ngIf = "notChosen">
