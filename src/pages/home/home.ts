@@ -27,9 +27,7 @@ export class HomePage {
 
 
   ionViewDidLoad() {
-    if (sessionStorage.getItem('customerEntity') != null) {
-      this.navCtrl.setRoot(MainPage);
-    }
+    
   }
 
   openForgetPasswordPage() {
