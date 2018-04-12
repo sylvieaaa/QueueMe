@@ -49,12 +49,16 @@ export class MainPage {
 
   clear(){
     this.notChosen=true;
+    this.name ="";
+    sessionStorage.setItem("foodCourt", null);
+    sessionStorage.setItem("name", null);
     sessionStorage.setItem("notChosen","true");
   }
 
   clickOption(fcourt) {
     this.notChosen = false;
     this.foodCourt = fcourt;
+    this.name = fcourt.name;
     sessionStorage.setItem("foodCourt", JSON.stringify(this.foodCourt));
     sessionStorage.setItem("name", fcourt.name);
     sessionStorage.setItem("notChosen","false");
