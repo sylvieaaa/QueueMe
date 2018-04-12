@@ -13,82 +13,94 @@ const httpOptions = {
 @Injectable()
 export class CustomerEntityProvider {
 
-  ipAddress = '172.17.168.75';
+	ipAddress = '172.25.97.234';
 	portNo = '8080';
 	fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystem/Resources/Customer';
 	baseUrl = "/api/Customer";
 
-  constructor(public httpClient: HttpClient, public platform: Platform) {
-    console.log('Hello CustomerEntityProvider Provider');
-  }
+	constructor(public httpClient: HttpClient, public platform: Platform) {
+		console.log('Hello CustomerEntityProvider Provider');
+	}
 
-  doCustomerLogin(username:string, password:string): Observable<any> {
-    let path: string = '';
-    
-    if(this.platform.is('core') || this.platform.is('mobileweb')) 
-		{
+	doCustomerLogin(username: string, password: string): Observable<any> {
+		let path: string = '';
+
+		if (this.platform.is('core') || this.platform.is('mobileweb')) {
 			path = this.baseUrl;
 		}
-		else
-		{
+		else {
 			path = this.fullBaseUrl;
 		}
-	
+
+
+		console.error('******************* HERE 1');
+
 		return this.httpClient.get<any>(path + "/login?username=" + username + "&password=" + password).pipe
-		(
+			(
 			catchError(this.handleError)
-		);
+			);
 	}
-	
-	doResetPassword(username:string): Observable<any> {
-    let path: string = '';
-    
-    if(this.platform.is('core') || this.platform.is('mobileweb')) 
-		{
+
+	doResetPassword(username: string): Observable<any> {
+		let path: string = '';
+
+		if (this.platform.is('core') || this.platform.is('mobileweb')) {
 			path = this.baseUrl;
 		}
-		else
-		{
+		else {
 			path = this.fullBaseUrl;
 		}
-	
+
 		return this.httpClient.get<any>(path + "/resetPassword?username=" + username).pipe
-		(
+			(
 			catchError(this.handleError)
-		);
+			);
 	}
-	
-  private handleError(error: HttpErrorResponse)
-	{
-		if (error.error instanceof ErrorEvent) 
-		{		
+
+	createAccount(customerEntity: CustomerEntity): Observable<any> {
+
+		let createCustomerReq = { "customerEntity": customerEntity };
+		let path: string = '';
+
+		if (this.platform.is('core') || this.platform.is('mobileweb')) {
+			path = this.baseUrl;
+		}
+		else {
+			path = this.fullBaseUrl;
+		}
+
+
+		return this.httpClient.put<any>(path, createCustomerReq, httpOptions).pipe
+			(
+			catchError(this.handleError)
+			);
+	}
+
+	private handleError(error: HttpErrorResponse) {
+		if (error.error instanceof ErrorEvent) {
 			console.error('An unknown error has occurred:', error.error.message);
-		} 
-		else 
-		{		
+		}
+		else {
 			console.error(" A HTTP error has occurred: " + `HTTP ${error.status}: ${error.error.message}`);
 		}
-		
+
 		return new ErrorObservable(error);
 	}
 
-	updateCustomer(customerEntity: CustomerEntity): Observable<any>
-	{
-		let updateCustomerReq = {"customerEntity": customerEntity};
+	updateCustomer(customerEntity: CustomerEntity): Observable<any> {
+		let updateCustomerReq = { "customerEntity": customerEntity };
 		let path: string = '';
-		
-		if(this.platform.is('core') || this.platform.is('mobileweb')) 
-		{
+
+		if (this.platform.is('core') || this.platform.is('mobileweb')) {
 			path = this.baseUrl;
 		}
-		else
-		{
+		else {
 			path = this.fullBaseUrl;
-		}				
-		
+		}
+
 		return this.httpClient.post<any>(path, updateCustomerReq, httpOptions).pipe
-		(
+			(
 			catchError(this.handleError)
-		);
+			);
 	}
 }

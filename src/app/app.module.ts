@@ -14,6 +14,7 @@ import { ProfilePage} from '../pages/profile/profile';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CustomerEntityProvider } from '../providers/customer-entity/customer-entity';
+import { FoodcourtEntityProvider } from '../providers/foodcourt-entity/foodcourt-entity';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { CustomerEntityProvider } from '../providers/customer-entity/customer-en
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    CustomerEntityProvider
+    CustomerEntityProvider,
+    FoodcourtEntityProvider
   ]
 })
 export class AppModule {}
