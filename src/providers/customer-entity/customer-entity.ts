@@ -13,7 +13,7 @@ const httpOptions = {
 @Injectable()
 export class CustomerEntityProvider {
 
-  	ipAddress = '172.25.97.234';
+	ipAddress = '172.25.97.234';
 	portNo = '8080';
 	fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystem/Resources/Customer';
 	baseUrl = "/api/Customer";
@@ -34,7 +34,7 @@ export class CustomerEntityProvider {
 
 
 		console.error('******************* HERE 1');
-	
+
 		return this.httpClient.get<any>(path + "/login?username=" + username + "&password=" + password).pipe
 			(
 			catchError(this.handleError)
@@ -57,30 +57,27 @@ export class CustomerEntityProvider {
 			);
 	}
 
-	createAccount(customerEntity: CustomerEntity): Observable<any>{ 
-	
-		let createCustomerReq = {"customerEntity": customerEntity};
+	createAccount(customerEntity: CustomerEntity): Observable<any> {
+
+		let createCustomerReq = { "customerEntity": customerEntity };
 		let path: string = '';
-		
-		if(this.platform.is('core') || this.platform.is('mobileweb')) 
-		{
+
+		if (this.platform.is('core') || this.platform.is('mobileweb')) {
 			path = this.baseUrl;
 		}
-		else
-		{
+		else {
 			path = this.fullBaseUrl;
-		}				
-		
+		}
+
+
 		return this.httpClient.put<any>(path, createCustomerReq, httpOptions).pipe
-		(
+			(
 			catchError(this.handleError)
-		);
+			);
 	}
-	
-  private handleError(error: HttpErrorResponse)
-	{
-		if (error.error instanceof ErrorEvent) 
-		{		
+
+	private handleError(error: HttpErrorResponse) {
+		if (error.error instanceof ErrorEvent) {
 			console.error('An unknown error has occurred:', error.error.message);
 		}
 		else {
@@ -90,23 +87,20 @@ export class CustomerEntityProvider {
 		return new ErrorObservable(error);
 	}
 
-	updateCustomer(customerEntity: CustomerEntity): Observable<any>
-	{
-		let updateCustomerReq = {"customerEntity": customerEntity};
+	updateCustomer(customerEntity: CustomerEntity): Observable<any> {
+		let updateCustomerReq = { "customerEntity": customerEntity };
 		let path: string = '';
-		
-		if(this.platform.is('core') || this.platform.is('mobileweb')) 
-		{
+
+		if (this.platform.is('core') || this.platform.is('mobileweb')) {
 			path = this.baseUrl;
 		}
-		else
-		{
+		else {
 			path = this.fullBaseUrl;
-		}				
-		
+		}
+
 		return this.httpClient.post<any>(path, updateCustomerReq, httpOptions).pipe
-		(
+			(
 			catchError(this.handleError)
-		);
+			);
 	}
 }
