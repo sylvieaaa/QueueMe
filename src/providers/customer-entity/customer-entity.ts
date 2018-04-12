@@ -13,7 +13,7 @@ const httpOptions = {
 @Injectable()
 export class CustomerEntityProvider {
 
-  ipAddress = '172.25.97.234';
+  	ipAddress = '172.25.97.234';
 	portNo = '8080';
 	fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystem/Resources/Customer';
 	baseUrl = "/api/Customer";
