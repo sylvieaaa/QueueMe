@@ -29,6 +29,17 @@
 
 
 <ion-content padding>
+
+    <ion-searchbar></ion-searchbar>
+  <ion-card *ngFor="let foodCourt of foodCourts">
+    <ion-item>
+      <h2>{{foodCourt.name}}</h2>
+    </ion-item>
+    
+    <ion-card-content>
+        {{foodCourt.description}}
+    </ion-card-content>
+  </ion-card>
   	
 	<div *ngIf="errorMessage" class="errorText">
 		{{errorMessage}}
