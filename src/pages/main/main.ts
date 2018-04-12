@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, trigger } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FoodcourtEntityProvider } from '../../providers/foodcourt-entity/foodcourt-entity';
 
@@ -16,6 +16,7 @@ import { FoodcourtEntityProvider } from '../../providers/foodcourt-entity/foodco
 export class MainPage {
   foodCourts: any;
   foodCourt: any;
+  name: string;
   errorMessage: string;
   notChosen: boolean;
 
@@ -28,7 +29,10 @@ export class MainPage {
     console.log(sessionStorage.getItem("notChosen"));
 
     if (sessionStorage.getItem("notChosen") === 'false') {
+      this.notChosen= false;
       this.foodCourt = sessionStorage.getItem("foodCourt");
+      this.name = sessionStorage.getItem('name');
+      console.log("this is : " + sessionStorage.getItem('name'));
     }
     
       this.foodCourtEntityProvider.doFoodCourt().subscribe(
@@ -43,11 +47,17 @@ export class MainPage {
 
   }
 
+  clear(){
+    this.notChosen=true;
+    sessionStorage.setItem("notChosen","true");
+  }
+
   clickOption(fcourt) {
     this.notChosen = false;
     this.foodCourt = fcourt;
     sessionStorage.setItem("foodCourt", JSON.stringify(this.foodCourt));
-    sessionStorage.setItem("notChosen", "false");
+    sessionStorage.setItem("name", fcourt.name);
+    sessionStorage.setItem("notChosen","false");
   }
 
 
