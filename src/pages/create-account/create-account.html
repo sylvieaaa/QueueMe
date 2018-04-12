@@ -14,5 +14,58 @@
 
 
 <ion-content padding class="background">
-
+  <ion-grid>
+    <ion-row style="margin-top: 10%">
+      <ion-col>
+        <ion-input class="textboxWhite" [(ngModel)]="customerEntity.firstName" type="text" placeholder="First Name" clearInput></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-input class="textboxWhite" [(ngModel)]="customerEntity.lastName" type="text" placeholder="Last Name" clearInput></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-input class="textboxWhite" [(ngModel)]="customerEntity.contactNumber" type="tel" placeholder="Contact Number" clearInput></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-input class="textboxWhite" [(ngModel)]="customerEntity.address" type="text" placeholder="Address" clearInput></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-input class="textboxWhite" [(ngModel)]="customerEntity.username" type="email" placeholder="Email Address" clearInput></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-input class="textboxWhite" [(ngModel)]="customerEntity.password" type="password" placeholder="Password" clearInput></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row padding-top>
+      <ion-col col-2></ion-col>
+      <ion-col>
+        <button color="queueme-orange" ion-button full (click)="createAccount()">Register</button>
+      </ion-col>
+      <ion-col col-2></ion-col>
+    </ion-row>
+    <ion-row text-center>
+      <ion-col>
+        <p>By signing up, you agree to our
+          <a style="color:queueme-orange; font-size: 1em">Terms & conditions</a>
+          and
+          <a style="color:queueme-orange; font-size: 1em">Privacy Policy</a>
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+<ion-footer text-center no-shadow no-border padding-bottom class="background">
+  <p>Already have an account?
+    <a (click)="openHomePage()" style="color:queueme-orange; font-size: 1em">Log In</a>
+  </p>
+</ion-footer>

@@ -7,6 +7,7 @@ import { CustomerEntity } from '../../entities/CustomerEntity';
 import { MainPage } from '../main/main';
 
 import { ToastController } from 'ionic-angular';
+import { ProfilePage } from '../profile/profile';
 
 @Component({
   selector: 'page-home',
@@ -36,6 +37,10 @@ export class HomePage {
 
   openCreateAccountPage() {
     this.navCtrl.push(CreateAccountPage);
+  }
+
+  openProfilePage(){
+    this.navCtrl.setRoot(ProfilePage);
   }
 
   doLogin() {
