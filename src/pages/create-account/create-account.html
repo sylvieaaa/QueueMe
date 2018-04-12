@@ -41,8 +41,11 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col>
-        <ion-input class="textboxWhite" [(ngModel)]="customerEntity.password" type="password" placeholder="Password" clearInput></ion-input>
+      <ion-col col-10>
+        <ion-input class="textboxWhite" [(ngModel)]="customerEntity.password" [type]="passwordType" placeholder="Password" clearInput></ion-input>
+      </ion-col>
+      <ion-col style="padding-top: 5%">
+        <ion-icon name="eye" colour="gray" item-end (click) = "togglePassword()"></ion-icon>
       </ion-col>
     </ion-row>
     <ion-row padding-top>
