@@ -29,5 +29,46 @@
 
 
 <ion-content padding>
+  	
+	<div *ngIf="errorMessage" class="errorText">
+		{{errorMessage}}
+  </div>
+  
+  <div *ngIf = "!notChosen" style="text-align: center">
+    <h3>Hi, You're currently in: </h3>
+    {{foodCourt.name}}
+  
+  </div>
+
+  <div *ngIf = "notChosen">
+  <ion-item>
+    <ion-label>FoodCourt</ion-label>
+    <ion-select (ionChange)="clickOption($event)" [(ngModel)]= "fcourt">
+      <ion-option *ngFor="let foodCourt of foodCourts" [value]="foodCourt">{{foodCourt.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+</div>
+
+<div style="padding-top: 3em">
+  <ion-slides>
+    <ion-slide>
+      <h1>Slide 1</h1>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 2</h1>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 3</h1>
+    </ion-slide>
+  </ion-slides>
+</div>
+
+  <ion-content>
+    <ion-list>
+     
+    </ion-list>
+  </ion-content>
+  
+  
 
 </ion-content>
