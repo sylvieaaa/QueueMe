@@ -15,6 +15,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CustomerEntityProvider } from '../providers/customer-entity/customer-entity';
 import { FoodcourtEntityProvider } from '../providers/foodcourt-entity/foodcourt-entity';
+import { ChangePasswordPage } from '../pages/change-password/change-password';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FoodcourtEntityProvider } from '../providers/foodcourt-entity/foodcourt
     ForgetPasswordPage,
     CreateAccountPage,
     MainPage,
-    ProfilePage
+    ProfilePage,
+    ChangePasswordPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { FoodcourtEntityProvider } from '../providers/foodcourt-entity/foodcourt
     ForgetPasswordPage,
     CreateAccountPage,
     MainPage,
-    ProfilePage
+    ProfilePage,
+    ChangePasswordPage
   ],
   providers: [
     StatusBar,

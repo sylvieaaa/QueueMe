@@ -98,7 +98,24 @@ export class CustomerEntityProvider {
 			path = this.fullBaseUrl;
 		}
 
-		return this.httpClient.post<any>(path, updateCustomerReq, httpOptions).pipe
+		return this.httpClient.post<any>(path +  "/updateCustomer", updateCustomerReq, httpOptions).pipe
+			(
+			catchError(this.handleError)
+			);
+	}
+
+	updateCustomerPassword(customerEntity: CustomerEntity, oldPassword: String, newPassword: String): Observable<any> {
+		let changePasswordReq = { "customerEntity" : customerEntity, "oldPassword" : oldPassword, "newPassword": newPassword };
+		let path: string = '';
+
+		if (this.platform.is('core') || this.platform.is('mobileweb')) {
+			path = this.baseUrl;
+		}
+		else {
+			path = this.fullBaseUrl;
+		}
+
+		return this.httpClient.post<any>(path + "/changePassword", changePasswordReq, httpOptions).pipe
 			(
 			catchError(this.handleError)
 			);

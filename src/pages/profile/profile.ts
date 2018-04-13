@@ -50,6 +50,7 @@ export class ProfilePage {
 			response => {	
          
          sessionStorage.setItem("customerEntity", JSON.stringify(this.customerEntity));
+         console.log(JSON.stringify(this.customerEntity));
          toast.setMessage("Profile Updated!");
          toast.present();
 			},
