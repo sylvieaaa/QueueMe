@@ -19,9 +19,11 @@ export class MainPage {
   name: string;
   errorMessage: string;
   notChosen: boolean;
+  queryText: string;
 
   constructor(public navCtrl: NavController, public foodCourtEntityProvider: FoodcourtEntityProvider, public navParams: NavParams) {
     this.notChosen = true;
+    this.name="";
   }
 
   ionViewDidLoad() {
@@ -35,23 +37,26 @@ export class MainPage {
       console.log("this is : " + sessionStorage.getItem('name'));
     }
     
-      this.foodCourtEntityProvider.doFoodCourt().subscribe(
-        response => {
-          this.foodCourts = response.foodCourts;
-        },
-        error => {
-          this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
-        }
-      )
-    
+    this.generateFoodCourt();
 
+  }
+
+  generateFoodCourt(){
+    this.foodCourtEntityProvider.doFoodCourt().subscribe(
+      response => {
+        this.foodCourts = response.foodCourts;
+      },
+      error => {
+        this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+      }
+    )
   }
 
   clear(){
     this.notChosen=true;
     this.name ="";
     sessionStorage.setItem("foodCourt", null);
-    sessionStorage.setItem("name", null);
+    sessionStorage.setItem("name", " ");
     sessionStorage.setItem("notChosen","true");
   }
 
@@ -62,6 +67,19 @@ export class MainPage {
     sessionStorage.setItem("foodCourt", JSON.stringify(this.foodCourt));
     sessionStorage.setItem("name", fcourt.name);
     sessionStorage.setItem("notChosen","false");
+  }
+
+  getFoodCourt(ev: any){
+    
+    this.generateFoodCourt();
+
+    let val = ev.target.value;
+
+    if (val && val.trim() != '') {
+      this.foodCourts = this.foodCourts.filter((foodCourt) => {
+        return (foodCourt.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
   }
 
 
