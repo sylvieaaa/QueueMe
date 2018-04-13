@@ -20,8 +20,12 @@ export class MainPage {
   name: string;
   errorMessage: string;
   notChosen: boolean;
+<<<<<<< HEAD
   queryText: string;
   fcourt:any;
+=======
+  fcourt: any;
+>>>>>>> eef6d8e69300107a3e3f73a0eb661b81cb93e94c
 
   constructor(public navCtrl: NavController, public foodCourtEntityProvider: FoodcourtEntityProvider, public navParams: NavParams) {
     this.notChosen = true;
