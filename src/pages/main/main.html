@@ -46,16 +46,18 @@
 
 
 <ion-content padding>
-  <ion-searchbar></ion-searchbar>
-  <ion-card *ngFor="let foodCourt of foodCourts">
-    <ion-item>
+    <div *ngIf="notChosen">
+    <ion-searchbar [(ngModel)]="queryText" (ionInput)="getFoodCourt($event)" ></ion-searchbar>
+  <ion-card *ngFor="let foodCourt of foodCourts" >
+    <button ion-item (click)="navFoodCourt()">
       <h2>{{foodCourt.name}}</h2>
-    </ion-item>
+    </button>
 
     <ion-card-content>
       {{foodCourt.description}}
     </ion-card-content>
   </ion-card>
+  </div>
 
   <div *ngIf="errorMessage" class="errorText">
     {{errorMessage}}
@@ -80,19 +82,19 @@
     </ion-item>
   </div>
 
-  <div style="padding-top: 3em">
-    <ion-slides>
-      <ion-slide>
-        <h1>Slide 1</h1>
-      </ion-slide>
-      <ion-slide>
-        <h1>Slide 2</h1>
-      </ion-slide>
-      <ion-slide>
-        <h1>Slide 3</h1>
-      </ion-slide>
-    </ion-slides>
-  </div>
+<div style="padding-top: 3em">
+  <ion-slides>
+    <ion-slide>
+      <img src= "http://localhost:8080/queueme-uploads/foodPhotos/chicken_rice.png"/>
+    </ion-slide>
+    <ion-slide>
+      <img src= "http://localhost:8080/queueme-uploads/foodPhotos/hotplate.png"/>
+    </ion-slide>
+    <ion-slide>
+      <img src= "http://localhost:8080/queueme-uploads/foodPhotos/beef_horfun.png"/>
+    </ion-slide>
+  </ion-slides>
+</div>
 
   <ion-content>
     <ion-list>

@@ -1,6 +1,7 @@
 import { Component, trigger } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FoodcourtEntityProvider } from '../../providers/foodcourt-entity/foodcourt-entity';
+import { FoodcourtPage } from '../foodcourt/foodcourt';
 
 /**
  * Generated class for the MainPage page.
@@ -19,9 +20,16 @@ export class MainPage {
   name: string;
   errorMessage: string;
   notChosen: boolean;
+<<<<<<< HEAD
+  queryText: string;
   fcourt:any;
+=======
+  fcourt: any;
+>>>>>>> eef6d8e69300107a3e3f73a0eb661b81cb93e94c
+
   constructor(public navCtrl: NavController, public foodCourtEntityProvider: FoodcourtEntityProvider, public navParams: NavParams) {
     this.notChosen = true;
+    this.name="";
   }
 
   ionViewDidLoad() {
@@ -35,23 +43,26 @@ export class MainPage {
       console.log("this is : " + sessionStorage.getItem('name'));
     }
     
-      this.foodCourtEntityProvider.doFoodCourt().subscribe(
-        response => {
-          this.foodCourts = response.foodCourts;
-        },
-        error => {
-          this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
-        }
-      )
-    
+    this.generateFoodCourt();
 
+  }
+
+  generateFoodCourt(){
+    this.foodCourtEntityProvider.doFoodCourt().subscribe(
+      response => {
+        this.foodCourts = response.foodCourts;
+      },
+      error => {
+        this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+      }
+    )
   }
 
   clear(){
     this.notChosen=true;
     this.name ="";
     sessionStorage.setItem("foodCourt", null);
-    sessionStorage.setItem("name", null);
+    sessionStorage.setItem("name", " ");
     sessionStorage.setItem("notChosen","true");
   }
 
@@ -62,6 +73,23 @@ export class MainPage {
     sessionStorage.setItem("foodCourt", JSON.stringify(this.foodCourt));
     sessionStorage.setItem("name", fcourt.name);
     sessionStorage.setItem("notChosen","false");
+  }
+
+  getFoodCourt(ev: any){
+    
+    this.generateFoodCourt();
+
+    let val = ev.target.value;
+
+    if (val && val.trim() != '') {
+      this.foodCourts = this.foodCourts.filter((foodCourt) => {
+        return (foodCourt.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
+
+  navFoodCourt(){
+   this.navCtrl.push(FoodcourtPage); 
   }
 
 
