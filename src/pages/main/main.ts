@@ -15,21 +15,18 @@ import { FoodcourtPage } from '../foodcourt/foodcourt';
   templateUrl: 'main.html',
 })
 export class MainPage {
-  foodCourts: any;
+  foodCourts: any; 
   foodCourt: any;
   name: string;
   errorMessage: string;
   notChosen: boolean;
-<<<<<<< HEAD
   queryText: string;
   fcourt:any;
-=======
-  fcourt: any;
->>>>>>> eef6d8e69300107a3e3f73a0eb661b81cb93e94c
-
+replicate:any;
   constructor(public navCtrl: NavController, public foodCourtEntityProvider: FoodcourtEntityProvider, public navParams: NavParams) {
     this.notChosen = true;
     this.name="";
+    this.generateFoodCourt();
   }
 
   ionViewDidLoad() {
@@ -40,10 +37,11 @@ export class MainPage {
       this.notChosen= false;
       this.foodCourt = sessionStorage.getItem("foodCourt");
       this.name = sessionStorage.getItem('name');
-      console.log("this is : " + sessionStorage.getItem('name'));
+      // console.log("this is : " + sessionStorage.getItem('name'));
     }
     
     this.generateFoodCourt();
+
 
   }
 
@@ -51,6 +49,7 @@ export class MainPage {
     this.foodCourtEntityProvider.doFoodCourt().subscribe(
       response => {
         this.foodCourts = response.foodCourts;
+        this.replicate = response.foodCourts;
       },
       error => {
         this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
@@ -75,21 +74,43 @@ export class MainPage {
     sessionStorage.setItem("notChosen","false");
   }
 
+  copyArray() {
+    this.foodCourts = Array.from(this.replicate);
+  }
+
   getFoodCourt(ev: any){
     
-    this.generateFoodCourt();
+    //this.generateFoodCourt();
+    this.copyArray();
 
     let val = ev.target.value;
 
     if (val && val.trim() != '') {
-      this.foodCourts = this.foodCourts.filter((foodCourt) => {
-        return (foodCourt.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      this.foodCourts = this.foodCourts.filter((foodcourt) => {
+        return (foodcourt.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }
 
-  navFoodCourt(){
+  navFoodCourt(event, fc){
+    this.foodCourt = fc;
+
+   sessionStorage.setItem("foodCourt", JSON.stringify(this.foodCourt)); 
    this.navCtrl.push(FoodcourtPage); 
+  }
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      for (let i = 0; i < 30; i++) {
+        this.foodCourts.push( this.foodCourts.length );
+      }
+    
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 500);
   }
 
 
