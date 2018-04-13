@@ -19,7 +19,7 @@ export class MainPage {
   name: string;
   errorMessage: string;
   notChosen: boolean;
-
+  fcourt:any;
   constructor(public navCtrl: NavController, public foodCourtEntityProvider: FoodcourtEntityProvider, public navParams: NavParams) {
     this.notChosen = true;
   }
