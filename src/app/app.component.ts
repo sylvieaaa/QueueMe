@@ -8,6 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { MainPage } from '../pages/main/main';
 import { ProfilePage} from '../pages/profile/profile';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
+import { FoodcourtPage } from '../pages/foodcourt/foodcourt';
 
 
 @Component({

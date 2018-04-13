@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -10,13 +11,17 @@ import { ForgetPasswordPage } from '../pages/forget-password/forget-password';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { MainPage } from '../pages/main/main';
 import { ProfilePage} from '../pages/profile/profile';
+import { FoodcourtPage} from '../pages/foodcourt/foodcourt';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CustomerEntityProvider } from '../providers/customer-entity/customer-entity';
 import { FoodcourtEntityProvider } from '../providers/foodcourt-entity/foodcourt-entity';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
+import { VendorEntityProvider } from '../providers/vendor-entity/vendor-entity';
+import { MenuitemEntityProvider } from '../providers/menuitem-entity/menuitem-entity';
 
+import {RatingModule} from 'primeng/rating';
 @NgModule({
   declarations: [
     MyApp,
@@ -27,11 +32,14 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
     MainPage,
     ProfilePage,
     ChangePasswordPage
+    FoodcourtPage
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    RatingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,13 +51,16 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
     MainPage,
     ProfilePage,
     ChangePasswordPage
+    FoodcourtPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CustomerEntityProvider,
-    FoodcourtEntityProvider
+    FoodcourtEntityProvider,
+    VendorEntityProvider,
+    MenuitemEntityProvider
   ]
 })
 export class AppModule {}

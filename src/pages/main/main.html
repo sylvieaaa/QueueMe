@@ -6,13 +6,13 @@
 -->
 <ion-header>
   <ion-navbar>
-          <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-          </button>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-toolbar>
-      
+
       <ion-title align-self-center>
-          <img src="../assets/imgs/qme_web_light.png" height="80px"/>
+        <img src="../assets/imgs/qme_web_light.png" height="80px" />
       </ion-title>
       <ion-buttons end>
         <button ion-button icon-only color="queueme-orange" padding-right>
@@ -46,16 +46,29 @@
 
 
 <ion-content padding>
-  <ion-searchbar></ion-searchbar>
-  <ion-card *ngFor="let foodCourt of foodCourts">
-    <ion-item>
-      <h2>{{foodCourt.name}}</h2>
-    </ion-item>
+  <div *ngIf="notChosen">
+    <ion-searchbar (ionInput)="getFoodCourt($event)"></ion-searchbar>
+    
+    <ion-card *ngFor="let foodcourt of foodCourts">
+      <button ion-item (click)="navFoodCourt($event, foodcourt)">
+        <h2>{{foodcourt.name}}</h2>
+      </button>
 
-    <ion-card-content>
-      {{foodCourt.description}}
-    </ion-card-content>
-  </ion-card>
+      <ion-card-content>
+        {{foodcourt.description}}
+      </ion-card-content>
+
+    </ion-card>
+  </div>
+
+  
+  <ion-content>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-content>
+  
+
 
   <div *ngIf="errorMessage" class="errorText">
     {{errorMessage}}
@@ -71,34 +84,28 @@
     </button>
   </div>
 
-  <div *ngIf="notChosen">
+  <!-- <div *ngIf="notChosen">
     <ion-item>
       <ion-label>FoodCourt</ion-label>
       <ion-select (ionChange)="clickOption($event)" [(ngModel)]="fcourt">
         <ion-option *ngFor="let foodCourt of foodCourts" [value]="foodCourt">{{foodCourt.name}}</ion-option>
       </ion-select>
     </ion-item>
-  </div>
+  </div> -->
 
-  <div style="padding-top: 3em">
+  <!-- <div style="padding-top: 3em">
     <ion-slides>
       <ion-slide>
-        <h1>Slide 1</h1>
+        <img src="http://localhost:8080/queueme-uploads/foodPhotos/chicken_rice.png" />
       </ion-slide>
       <ion-slide>
-        <h1>Slide 2</h1>
+        <img src="http://localhost:8080/queueme-uploads/foodPhotos/hotplate.png" />
       </ion-slide>
       <ion-slide>
-        <h1>Slide 3</h1>
+        <img src="http://localhost:8080/queueme-uploads/foodPhotos/beef_horfun.png" />
       </ion-slide>
     </ion-slides>
-  </div>
-
-  <ion-content>
-    <ion-list>
-
-    </ion-list>
-  </ion-content>
+  </div> -->
 
 
 
