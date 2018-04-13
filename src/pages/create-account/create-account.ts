@@ -19,7 +19,7 @@ import { Directive, HostBinding, ElementRef } from '@angular/core';
 })
 export class CreateAccountPage {
   passwordType: string = 'password';
-  passwordIcon: string = 'eye-off';
+  passwordShown: boolean = false;
   errorMessage: string;
   customerEntity: CustomerEntity;
 
@@ -36,6 +36,16 @@ export class CreateAccountPage {
 
   openHomePage() {
     this.navCtrl.push(HomePage);
+  }
+
+  togglePassword(){
+    if(this.passwordShown){
+      this.passwordShown = false;
+      this.passwordType = 'password';
+    } else {
+      this.passwordShown = true;
+      this.passwordType = 'text';
+    }
   }
 
   createAccount() {

@@ -10,6 +10,7 @@ import { ForgetPasswordPage } from '../pages/forget-password/forget-password';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { MainPage } from '../pages/main/main';
 import { ProfilePage} from '../pages/profile/profile';
+import { FoodcourtPage} from '../pages/foodcourt/foodcourt';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -24,7 +25,8 @@ import { FoodcourtEntityProvider } from '../providers/foodcourt-entity/foodcourt
     ForgetPasswordPage,
     CreateAccountPage,
     MainPage,
-    ProfilePage
+    ProfilePage,
+    FoodcourtPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { FoodcourtEntityProvider } from '../providers/foodcourt-entity/foodcourt
     ForgetPasswordPage,
     CreateAccountPage,
     MainPage,
-    ProfilePage
+    ProfilePage,
+    FoodcourtPage
   ],
   providers: [
     StatusBar,

@@ -1,6 +1,7 @@
 import { Component, trigger } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FoodcourtEntityProvider } from '../../providers/foodcourt-entity/foodcourt-entity';
+import { FoodcourtPage } from '../foodcourt/foodcourt';
 
 /**
  * Generated class for the MainPage page.
@@ -20,6 +21,7 @@ export class MainPage {
   errorMessage: string;
   notChosen: boolean;
   queryText: string;
+  fcourt:any;
 
   constructor(public navCtrl: NavController, public foodCourtEntityProvider: FoodcourtEntityProvider, public navParams: NavParams) {
     this.notChosen = true;
@@ -80,6 +82,10 @@ export class MainPage {
         return (foodCourt.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
+  }
+
+  navFoodCourt(){
+   this.navCtrl.push(FoodcourtPage); 
   }
 
 

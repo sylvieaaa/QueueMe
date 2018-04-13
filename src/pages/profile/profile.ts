@@ -39,15 +39,16 @@ export class ProfilePage {
       duration: 3000,
       position: 'bottom'
     });
-     if (this.firstName == null || this.lastName == null || this.address == null || this.contactNumber == null)
-     //  if (this.firstName == "" || this.lastName == "" || this.address == "" || this.contactNumber == "") 
-      {
-      toast.setMessage("Please fill in ");
-      toast.present();
-    } else {
+    //  if (this.firstName == null || this.lastName == null || this.address == null || this.contactNumber == null)
+    //  //  if (this.firstName == "" || this.lastName == "" || this.address == "" || this.contactNumber == "") 
+    //   {
+    //     console.log(JSON.parse(sessionStorage.getItem('customerEntity')));
+    //     toast.setMessage("Please fill in ");
+    //   toast.present();
+    // } else {
     this.customerEntityProvider.updateCustomer(this.customerEntity).subscribe(
 			response => {	
-        // this.customerEntity = response.customerEntity;
+         
          sessionStorage.setItem("customerEntity", JSON.stringify(this.customerEntity));
          toast.setMessage("Profile Updated!");
          toast.present();
@@ -59,4 +60,4 @@ export class ProfilePage {
 		);
   }
 }
-}
+//}
