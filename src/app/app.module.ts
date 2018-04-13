@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -19,6 +20,7 @@ import { FoodcourtEntityProvider } from '../providers/foodcourt-entity/foodcourt
 import { VendorEntityProvider } from '../providers/vendor-entity/vendor-entity';
 import { MenuitemEntityProvider } from '../providers/menuitem-entity/menuitem-entity';
 
+import {RatingModule} from 'primeng/rating';
 @NgModule({
   declarations: [
     MyApp,
@@ -32,8 +34,10 @@ import { MenuitemEntityProvider } from '../providers/menuitem-entity/menuitem-en
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    RatingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

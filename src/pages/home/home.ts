@@ -5,7 +5,7 @@ import { CreateAccountPage } from '../create-account/create-account';
 import { CustomerEntityProvider } from '../../providers/customer-entity/customer-entity';
 import { CustomerEntity } from '../../entities/CustomerEntity';
 import { MainPage } from '../main/main';
-
+import {RatingModule} from 'primeng/rating';
 import { ToastController } from 'ionic-angular';
 import { ProfilePage } from '../profile/profile';
 
@@ -14,6 +14,7 @@ import { ProfilePage } from '../profile/profile';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  val: 3;
   username: string;
   password: string;
   errorMessage: string;

@@ -4,5 +4,7 @@ export class CustomerEntity {
     lastName: string;
     contactNumber: string;
     address: string;
+    username: string;
+    password: null;
     constructor(){}
 }
