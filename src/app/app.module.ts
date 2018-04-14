@@ -17,6 +17,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CustomerEntityProvider } from '../providers/customer-entity/customer-entity';
 import { FoodcourtEntityProvider } from '../providers/foodcourt-entity/foodcourt-entity';
+import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { VendorEntityProvider } from '../providers/vendor-entity/vendor-entity';
 import { MenuitemEntityProvider } from '../providers/menuitem-entity/menuitem-entity';
 
@@ -30,6 +31,7 @@ import {RatingModule} from 'primeng/rating';
     CreateAccountPage,
     MainPage,
     ProfilePage,
+    ChangePasswordPage,
     FoodcourtPage
   ],
   imports: [
@@ -48,6 +50,7 @@ import {RatingModule} from 'primeng/rating';
     CreateAccountPage,
     MainPage,
     ProfilePage,
+    ChangePasswordPage,
     FoodcourtPage
   ],
   providers: [
