@@ -33,8 +33,6 @@ export class CustomerEntityProvider {
 		}
 
 
-		console.error('******************* HERE 1');
-
 		return this.httpClient.get<any>(path + "/login?username=" + username + "&password=" + password).pipe
 			(
 			catchError(this.handleError)

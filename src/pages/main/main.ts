@@ -22,7 +22,8 @@ export class MainPage {
   notChosen: boolean;
   queryText: string;
   fcourt:any;
-replicate:any;
+  replicate:any;
+
   constructor(public navCtrl: NavController, public foodCourtEntityProvider: FoodcourtEntityProvider, public navParams: NavParams) {
     this.notChosen = true;
     this.name="";
@@ -75,7 +76,7 @@ replicate:any;
   }
 
   copyArray() {
-    this.foodCourts = Array.from(this.replicate);
+    this.foodCourts = Array.from(this.replicate); //copy rep to foodcourts
   }
 
   getFoodCourt(ev: any){
