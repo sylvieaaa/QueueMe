@@ -12,6 +12,8 @@ import { CreateAccountPage } from '../pages/create-account/create-account';
 import { MainPage } from '../pages/main/main';
 import { ProfilePage} from '../pages/profile/profile';
 import { FoodcourtPage} from '../pages/foodcourt/foodcourt';
+import { VendorPage } from '../pages/vendor/vendor';
+import { ModalPage } from '../pages/modal/modal';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,6 +24,7 @@ import { VendorEntityProvider } from '../providers/vendor-entity/vendor-entity';
 import { MenuitemEntityProvider } from '../providers/menuitem-entity/menuitem-entity';
 
 import {RatingModule} from 'primeng/rating';
+import {AccordionModule} from 'primeng/accordion';
 @NgModule({
   declarations: [
     MyApp,
@@ -32,14 +35,17 @@ import {RatingModule} from 'primeng/rating';
     MainPage,
     ProfilePage,
     ChangePasswordPage,
-    FoodcourtPage
+    FoodcourtPage,
+    VendorPage,
+    ModalPage
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    RatingModule
+    RatingModule,
+    AccordionModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -51,7 +57,9 @@ import {RatingModule} from 'primeng/rating';
     MainPage,
     ProfilePage,
     ChangePasswordPage,
-    FoodcourtPage
+    FoodcourtPage,
+    VendorPage,
+    ModalPage
   ],
   providers: [
     StatusBar,

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {VendorEntityProvider} from '../../providers/vendor-entity/vendor-entity';
-
+import { VendorPage } from '../vendor/vendor';
 /**
  * Generated class for the FoodcourtPage page.
  *
@@ -18,6 +18,7 @@ export class FoodcourtPage {
   vendors: any ;
   foodCourt: any;
   errorMessage: string;
+  selectVendor: any;
 
 
   constructor(public navCtrl: NavController, public vendorEntityProvider: VendorEntityProvider, public navParams: NavParams) {
@@ -34,6 +35,7 @@ export class FoodcourtPage {
     this.vendorEntityProvider.doVendors(this.foodCourt).subscribe(
       response => {
         this.vendors = response.vendorEntities;
+   
       
       },
       error => {
@@ -41,5 +43,15 @@ export class FoodcourtPage {
       }
     )
   }
+
+  navVendor(event, selected){
+    this.selectVendor = selected;
+    sessionStorage.setItem("selectVendor", JSON.stringify(this.selectVendor));
+    this.navCtrl.push(VendorPage);
+  }
+
+  starClicked(value){
+    console.log("Rated :", value);
+ }
 
 }

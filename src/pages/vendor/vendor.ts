@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { MenuitemEntityProvider } from '../../providers/menuitem-entity/menuitem-entity';
+import { ModalPage } from '../modal/modal';
 
 /**
  * Generated class for the VendorPage page.
@@ -14,11 +16,50 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class VendorPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  vendor: any;
+  menu: any;
+  errorMessage: string;
+  categories: any;
+  menuItems:any;
+  selectCategory:any;
+
+  constructor(public modal: ModalController, public navCtrl: NavController, public menuitemEntityProvider: MenuitemEntityProvider, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VendorPage');
+    this.vendor = sessionStorage.getItem("selectVendor");
+    this.retrieveVendor();
+
   }
+
+  retrieveVendor(){
+    this.menuitemEntityProvider.retrieveMenu(this.vendor).subscribe(
+      response => {
+        this.menu = response.menuEntity;
+        this.categories = this.menu.categoryEntities;
+        for (let category of this.categories){
+          this.selectCategory = category;
+          this.menuItems = category.menuItemEntities;
+        }
+      },
+      error => {
+        this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+      }
+    )
+  }
+
+  openModal(event, menuItem){
+    let myModal = this.modal.create(ModalPage, {data: menuItem});
+    console.log(menuItem);
+    myModal.present();
+
+
+  }
+  
+
+
+
+
 
 }

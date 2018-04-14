@@ -9,7 +9,8 @@ import { MainPage } from '../pages/main/main';
 import { ProfilePage} from '../pages/profile/profile';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { FoodcourtPage } from '../pages/foodcourt/foodcourt';
-
+import { VendorPage } from '../pages/vendor/vendor';
+import { ModalPage } from '../pages/modal/modal';
 
 @Component({
   templateUrl: 'app.html'
