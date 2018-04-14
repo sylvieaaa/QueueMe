@@ -14,11 +14,13 @@
 
 
 <ion-content padding>
-    <ion-card *ngFor="let vendor of vendors" >
-      <ion-item>
-        <h2>{{vendor.vendorName}}</h2>
-      </ion-item>
-      </ion-card>
-  
+  <ion-card *ngFor="let vendor of vendors">
+    <button ion-item (click)="navVendor($event, vendor)">
+      <img src="http://localhost:8080/queueme-uploads/vendorLogos/{{vendor.photoURL}}">
+      <ion-card-title>{{vendor.vendorName}}</ion-card-title>
+      <p-rating text-center [ngModel]="vendor.rating" readonly="true" stars="5" [cancel]="false"></p-rating>
+    </button>
+  </ion-card>
+
 
 </ion-content>

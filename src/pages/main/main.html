@@ -48,26 +48,34 @@
 <ion-content padding>
   <div *ngIf="notChosen">
     <ion-searchbar (ionInput)="getFoodCourt($event)"></ion-searchbar>
-    
+
     <ion-card *ngFor="let foodcourt of foodCourts">
       <button ion-item (click)="navFoodCourt($event, foodcourt)">
-        <h2>{{foodcourt.name}}</h2>
+      
+          <img src="http://localhost:8080/queueme-uploads/foodCourtLogos/{{foodcourt.fileURL}}">
+          
+          <ion-card-title>{{foodcourt.name}}</ion-card-title>
+
       </button>
 
+    
       <ion-card-content>
-        {{foodcourt.description}}
+       <h2> {{foodcourt.address}}</h2> 
+       <h2> {{foodcourt.postalCode}}</h2>
       </ion-card-content>
-
+   
+     
     </ion-card>
+  
   </div>
 
-  
+
   <ion-content>
-      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-    </ion-content>
-  
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+
 
 
   <div *ngIf="errorMessage" class="errorText">

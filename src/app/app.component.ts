@@ -9,8 +9,13 @@ import { MainPage } from '../pages/main/main';
 import { ProfilePage} from '../pages/profile/profile';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { FoodcourtPage } from '../pages/foodcourt/foodcourt';
+
 import { CreditcardPage } from '../pages/creditcard/creditcard';
 import { AddcardPage } from '../pages/addcard/addcard'
+
+
+import { VendorPage } from '../pages/vendor/vendor';
+import { ModalPage } from '../pages/modal/modal';
 
 
 @Component({
