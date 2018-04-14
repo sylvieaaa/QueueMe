@@ -25,6 +25,7 @@ import { MenuitemEntityProvider } from '../providers/menuitem-entity/menuitem-en
 
 import {RatingModule} from 'primeng/rating';
 import {AccordionModule} from 'primeng/accordion';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -45,7 +46,7 @@ import {AccordionModule} from 'primeng/accordion';
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     RatingModule,
-    AccordionModule
+    AccordionModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
