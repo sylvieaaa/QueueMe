@@ -12,6 +12,8 @@ import { CreateAccountPage } from '../pages/create-account/create-account';
 import { MainPage } from '../pages/main/main';
 import { ProfilePage} from '../pages/profile/profile';
 import { FoodcourtPage} from '../pages/foodcourt/foodcourt';
+import { CreditcardPage } from '../pages/creditcard/creditcard';
+import { AddcardPage } from '../pages/addcard/addcard';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -20,8 +22,11 @@ import { FoodcourtEntityProvider } from '../providers/foodcourt-entity/foodcourt
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { VendorEntityProvider } from '../providers/vendor-entity/vendor-entity';
 import { MenuitemEntityProvider } from '../providers/menuitem-entity/menuitem-entity';
+import { CreditcardEntityProvider } from '../providers/creditcard-entity/creditcard-entity';
 
 import {RatingModule} from 'primeng/rating';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -32,7 +37,9 @@ import {RatingModule} from 'primeng/rating';
     MainPage,
     ProfilePage,
     ChangePasswordPage,
-    FoodcourtPage
+    FoodcourtPage,
+    CreditcardPage,
+    AddcardPage
   ],
   imports: [
     BrowserModule,
@@ -51,7 +58,9 @@ import {RatingModule} from 'primeng/rating';
     MainPage,
     ProfilePage,
     ChangePasswordPage,
-    FoodcourtPage
+    FoodcourtPage,
+    CreditcardPage,
+    AddcardPage
   ],
   providers: [
     StatusBar,
@@ -60,7 +69,8 @@ import {RatingModule} from 'primeng/rating';
     CustomerEntityProvider,
     FoodcourtEntityProvider,
     VendorEntityProvider,
-    MenuitemEntityProvider
+    MenuitemEntityProvider,
+    CreditcardEntityProvider
   ]
 })
 export class AppModule {}
