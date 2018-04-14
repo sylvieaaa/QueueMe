@@ -31,7 +31,7 @@ import {RatingModule} from 'primeng/rating';
     CreateAccountPage,
     MainPage,
     ProfilePage,
-    ChangePasswordPage
+    ChangePasswordPage,
     FoodcourtPage
   ],
   imports: [
@@ -50,7 +50,7 @@ import {RatingModule} from 'primeng/rating';
     CreateAccountPage,
     MainPage,
     ProfilePage,
-    ChangePasswordPage
+    ChangePasswordPage,
     FoodcourtPage
   ],
   providers: [
