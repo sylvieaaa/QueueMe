@@ -27,11 +27,13 @@
             </ion-icon>
         <!-- <ion-item> -->
           </ion-card-header>
-          <ion-card-header>{{creditCard.cardNo}}</ion-card-header>
+          <ion-card-header>{{creditCard.cardNo}} <ion-radio style="float: right;" (ionSelect)="selectedCard($event, creditCard)">
+            </ion-radio>  </ion-card-header>
+          <!-- <ion-radio (ionSelect)="selectedCard($event, creditCard)">
+            </ion-radio>  -->
           <!-- <ion-label><h2>{{creditCard.cardNo}}</h2>
         </ion-label> -->
-          <ion-radio>(ionSelect)="selectedCard($event, creditCard)">
-          </ion-radio> 
+         
           <!-- <ion-toggle (ionSelect)="selectedCard($event, creditCard)"></ion-toggle> -->
         <!-- </ion-item>          -->
         </ion-card> 
