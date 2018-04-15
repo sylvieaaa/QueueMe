@@ -19,6 +19,7 @@ import { ToastController } from 'ionic-angular';
 export class CreditcardPage {
   cardNum: String;
   cardName: String;
+  creditCardId: any;
   cardExp: number;
   chosen: boolean;
   creditCards: any;
@@ -59,8 +60,8 @@ export class CreditcardPage {
   }
 
   checkDefaultCard() {
-    for(var i = 0; i < this.creditCards.length; i++) {
-      if(this.creditCards[i].defaultCard) {
+    for (var i = 0; i < this.creditCards.length; i++) {
+      if (this.creditCards[i].defaultCard) {
         this.radioGroup = this.creditCards[i].creditCardId;
         return;
       }
@@ -78,7 +79,7 @@ export class CreditcardPage {
     });
     this.creditCardEntityProvider.selectedCreditCard(this.customerEntity, creditcard).subscribe(
       response => {
-        
+
         toast.setMessage("Default credit card selected");
         toast.present();
       },
@@ -86,8 +87,25 @@ export class CreditcardPage {
         this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
       }
     );
-   
+  }
 
+  deleteCard(event, creditcard) {
+    let toast = this.toastCtrl.create({
+      duration: 3000,
+      position: 'bottom'
+    });
+    this.creditCardEntityProvider.deleteCreditCard(creditcard.creditCardId).subscribe(
+      response => {
+        console.log("this is the creditcardid: " + creditcard.creditCardId);
+        toast.setMessage("Card deleted!");
+        toast.present();
+      }, error => {
+        this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+        console.log(this.errorMessage);
+        toast.setMessage("Unable to delete account");
+        toast.present();
+      }
+    );
   }
 
 
