@@ -12,29 +12,26 @@
 
   <br>
   <div align="center">
-    <h5>Select a credit card as the default.</h5>
+    <h5>Select a default credit card.</h5>
   </div>
   <br>
 
   <ion-card radio-group [(ngModel)]="radioGroup" *ngFor="let creditCard of creditCards">
-    <!-- <ion-card *ngFor="let creditCard of creditCards"> -->
-    <ion-item>
-      <ion-label>
-        <h2>{{creditCard.cardNo}}</h2>
-        <br>
-        <p>{{creditCard.name}}</p>
-      </ion-label>
-      <ion-radio item-right [value]="creditCard.creditCardId" [checked]="creditCard.defaultCard" (ionSelect)="selectedCard($event, creditCard)">
-      </ion-radio>
-
-    </ion-item>
+    <ion-card-header>{{creditCard.cardNo}}
+    <ion-icon style="float: right;" name="ios-remove-circle" block color="danger" (click)="deleteCard($event, creditCard)">
+      </ion-icon>
+    </ion-card-header> 
+    <ion-card-header>{{creditCard.name}} <ion-radio style="float: right;" [value]="creditCard.creditCardId" [checked]="creditCard.defaultCard" (ionSelect)="selectedCard($event, creditCard)">
+    </ion-radio> </ion-card-header>
   </ion-card>
 
-  <ion-item>
-    <button ion-button block (click)="addCard()">
+  <br>
+  <div style="display:block; text-align: center">
+    <button ion-button block color="myColor" icon-start (click)="addCard()">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
       Add Card
     </button>
-  </ion-item>
+  </div>
 
 
 </ion-content>

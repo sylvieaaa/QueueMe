@@ -97,6 +97,7 @@ export class CreditcardPage {
     this.creditCardEntityProvider.deleteCreditCard(creditcard.creditCardId).subscribe(
       response => {
         console.log("this is the creditcardid: " + creditcard.creditCardId);
+        this.navCtrl.setRoot(this.navCtrl.getActive().component);
         toast.setMessage("Card deleted!");
         toast.present();
       }, error => {
