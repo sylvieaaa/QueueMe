@@ -12,6 +12,8 @@ import { CreateAccountPage } from '../pages/create-account/create-account';
 import { MainPage } from '../pages/main/main';
 import { ProfilePage} from '../pages/profile/profile';
 import { FoodcourtPage} from '../pages/foodcourt/foodcourt';
+import { CreditcardPage } from '../pages/creditcard/creditcard';
+import { AddcardPage } from '../pages/addcard/addcard';
 import { VendorPage } from '../pages/vendor/vendor';
 import { ModalPage } from '../pages/modal/modal';
 
@@ -22,8 +24,10 @@ import { FoodcourtEntityProvider } from '../providers/foodcourt-entity/foodcourt
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { VendorEntityProvider } from '../providers/vendor-entity/vendor-entity';
 import { MenuitemEntityProvider } from '../providers/menuitem-entity/menuitem-entity';
+import { CreditcardEntityProvider } from '../providers/creditcard-entity/creditcard-entity';
 
 import {RatingModule} from 'primeng/rating';
+
 import {AccordionModule} from 'primeng/accordion';
 
 @NgModule({
@@ -37,6 +41,8 @@ import {AccordionModule} from 'primeng/accordion';
     ProfilePage,
     ChangePasswordPage,
     FoodcourtPage,
+    CreditcardPage,
+    AddcardPage,
     VendorPage,
     ModalPage
   ],
@@ -59,6 +65,8 @@ import {AccordionModule} from 'primeng/accordion';
     ProfilePage,
     ChangePasswordPage,
     FoodcourtPage,
+    CreditcardPage,
+    AddcardPage,
     VendorPage,
     ModalPage
   ],
@@ -69,7 +77,8 @@ import {AccordionModule} from 'primeng/accordion';
     CustomerEntityProvider,
     FoodcourtEntityProvider,
     VendorEntityProvider,
-    MenuitemEntityProvider
+    MenuitemEntityProvider,
+    CreditcardEntityProvider
   ]
 })
 export class AppModule {}
