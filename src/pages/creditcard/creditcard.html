@@ -1,37 +1,42 @@
 <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Saved Credit Card</ion-title>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Payment Method</ion-title>
+  </ion-navbar>
+</ion-header>
 
 
 <ion-content padding>
-    
-  <br>  
-  <div align="center"><h5>Select a credit card as the default.</h5></div>
-    <br>
 
-    <ion-card radio-group [(ngModel)]="radioGroup" *ngFor="let creditCard of creditCards" >
-      <!-- <ion-card *ngFor="let creditCard of creditCards"> -->
-      <ion-item>
-          <ion-label><h2>{{creditCard.cardNo}}</h2>
-          <br>
-          <p>{{creditCard.name}}</p>
-        </ion-label>
-          <ion-radio item-right (ionSelect)="selectedCard($event, creditCard)">
-          </ion-radio>
-          
-        </ion-item>
-        </ion-card>
+  <br>
+  <div align="center">
+    <h5>Select a credit card as the default.</h5>
+  </div>
+  <br>
 
-      <ion-item>
-          <button ion-button block (click)="addCard()">
-        Add Card
-          </button>
-          </ion-item>
- 
+  <ion-card radio-group [(ngModel)]="radioGroup" *ngFor="let creditCard of creditCards">
+    <!-- <ion-card *ngFor="let creditCard of creditCards"> -->
+    <ion-item>
+      <ion-label>
+        <h2>{{creditCard.cardNo}}</h2>
+        <br>
+        <p>{{creditCard.name}}</p>
+      </ion-label>
+      <ion-radio item-right (ionSelect)="selectedCard($event, creditCard)">
+      </ion-radio>
+
+    </ion-item>
+  </ion-card>
+  <br/>
+
+  <div>
+      <button ion-button block color="light" icon-start (click)="addCard()">
+          <ion-icon name="card"></ion-icon>
+          Add Payment Method
+        </button>
+      </div>
+
 
 </ion-content>

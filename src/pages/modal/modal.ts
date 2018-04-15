@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 
-
 /**
  * Generated class for the ModalPage page.
  *
@@ -16,6 +15,8 @@ import { ToastController } from 'ionic-angular';
 })
 export class ModalPage {
   data:any;
+  quantity: number;
+  specialRequest: string;
 
   constructor(public navParams: NavParams, public view: ViewController, private toastCtrl: ToastController) {
     this.data= this.navParams.get('data');

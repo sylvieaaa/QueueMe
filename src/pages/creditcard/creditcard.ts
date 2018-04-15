@@ -70,7 +70,7 @@ selectedCard(event,creditcard) {
   });
   console.log(creditcard);
   this.creditCardEntityProvider.selectedCreditCard(this.customerEntity, creditcard).subscribe;
-  toast.setMessage("Default credit card selected");
+  toast.setMessage("Default payment method selected");
   toast.present();
 
 }

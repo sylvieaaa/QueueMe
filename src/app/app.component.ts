@@ -39,7 +39,7 @@ export class MyApp {
       { title: 'Home', component: MainPage },
       { title: 'Profile', component: ProfilePage},
       { title: 'Change Password', component: ChangePasswordPage },
-      { title: 'Saved Credit Card', component: CreditcardPage },
+      { title: 'Payment', component: CreditcardPage },
       { title: 'List', component: ListPage },
     ];
 

@@ -27,8 +27,9 @@ import { MenuitemEntityProvider } from '../providers/menuitem-entity/menuitem-en
 import { CreditcardEntityProvider } from '../providers/creditcard-entity/creditcard-entity';
 
 import {RatingModule} from 'primeng/rating';
-
+import {SpinnerModule} from 'primeng/spinner';
 import {AccordionModule} from 'primeng/accordion';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,8 @@ import {AccordionModule} from 'primeng/accordion';
     IonicModule.forRoot(MyApp),
     RatingModule,
     AccordionModule,
+    SpinnerModule,
+    InputTextareaModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

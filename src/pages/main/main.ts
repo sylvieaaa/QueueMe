@@ -28,6 +28,7 @@ export class MainPage {
     this.notChosen = true;
     this.name="";
     this.generateFoodCourt();
+
   }
 
   ionViewDidLoad() {
@@ -105,7 +106,7 @@ export class MainPage {
 
     setTimeout(() => {
       for (let i = 0; i < 30; i++) {
-        this.foodCourts.push( this.foodCourts.length );
+        this.foodCourts.push(this.foodCourts.length );
       }
     
 

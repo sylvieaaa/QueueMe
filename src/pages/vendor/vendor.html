@@ -16,7 +16,7 @@
 <ion-content padding>
   <ion-card *ngFor="let category of categories">
     <p-accordion [multiple]="true">
-      <p-accordionTab header = {{category.name}}>
+      <p-accordionTab header = {{category.name}} >
           <ion-card *ngFor="let menuItem of category.menuItemEntities" >
            <ion-item (click)="openModal($event, menuItem)">
             <img src = "http://localhost:8080/queueme-uploads/foodPhotos/{{menuItem.photoURL}}"> 
