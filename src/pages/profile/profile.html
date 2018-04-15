@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
@@ -11,38 +10,41 @@
 
 <ion-content padding>
 
-  <br>  
-  <div align="center"><h6>Personal Information</h6></div>
+  <br>
+  <div align="center">
+    <h6>Personal Information</h6>
+  </div>
+  <br>
+
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary">First Name: </ion-label>
+      <ion-input value={{customerEntity.firstName}} type="text" [(ngModel)]="customerEntity.firstName" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary">Last Name: </ion-label>
+      <ion-input value={{customerEntity.lastName}} type="text" [(ngModel)]="customerEntity.lastName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary">Contact Number: </ion-label>
+      <ion-input value={{customerEntity.contactNumber}} type="tel" [(ngModel)]="customerEntity.contactNumber"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary">Address: </ion-label>
+      <ion-input value={{customerEntity.address}} type="text" [(ngModel)]="customerEntity.address"></ion-input>
+    </ion-item>
+
     <br>
 
-      <ion-list>
-          <ion-item>
-            <ion-label color="primary">First Name: </ion-label>
-            <ion-input value={{customerEntity.firstName}} type="text" [(ngModel)]="customerEntity.firstName" required></ion-input>
-          </ion-item>
+    <button ion-button block color="myColor" icon-start (click)="editCustomer()">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+      Save Changes
+    </button>
 
-          <ion-item>
-              <ion-label color="primary">Last Name: </ion-label>
-              <ion-input value={{customerEntity.lastName}} type="text" [(ngModel)]="customerEntity.lastName"></ion-input>
-            </ion-item>
 
-            <ion-item>
-                <ion-label color="primary">Contact Number: </ion-label>
-                <ion-input value={{customerEntity.contactNumber}} type="tel" [(ngModel)]="customerEntity.contactNumber"></ion-input>
-              </ion-item>
-
-              <ion-item>
-                  <ion-label color="primary">Address: </ion-label>
-                  <ion-input value={{customerEntity.address}} type="text" [(ngModel)]="customerEntity.address"></ion-input>
-                </ion-item>
-
-                <br>
-                <ion-item>
-                    <button ion-button block (click)="editCustomer()">
-                      Save Changes
-                    </button>
-                    </ion-item>
-
-          </ion-list>
+  </ion-list>
 
 </ion-content>
