@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
+
 
 /**
  * Generated class for the ModalPage page.
@@ -15,7 +17,7 @@ import { NavParams, ViewController } from 'ionic-angular';
 export class ModalPage {
   data:any;
 
-  constructor(public navParams: NavParams, public view: ViewController) {
+  constructor(public navParams: NavParams, public view: ViewController, private toastCtrl: ToastController) {
     this.data= this.navParams.get('data');
     console.log(this.data);
   }
@@ -26,6 +28,12 @@ export class ModalPage {
   }
 
   closeModal(){
+    let toast = this.toastCtrl.create({
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.setMessage("Added to cart successfully!");
+    toast.present();
     this.view.dismiss();
   }
 
