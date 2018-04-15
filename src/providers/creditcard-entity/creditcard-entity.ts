@@ -71,7 +71,7 @@ export class CreditcardEntityProvider {
 	}
 
 	selectedCreditCard(customerEntity: CustomerEntity, creditCard: any): Observable<any> {
-		let selectedCreditCardReq = { "customerEntity" : customerEntity, "creditCard" : creditCard};
+		let selectedCreditCardReq = { "creditCardEntity" : creditCard };
 		let path: string = '';
 
 		if (this.platform.is('core') || this.platform.is('mobileweb')) {
@@ -81,8 +81,8 @@ export class CreditcardEntityProvider {
 			path = this.fullBaseUrl;
 		}
 
-		console.log(creditCard.creditCardId);
-		return this.httpClient.get<any>(path + "/selectedCard?creditCardId=" + creditCard.creditCardId).pipe
+		console.log(creditCard);
+		return this.httpClient.post<any>(path + "/selectedCard", selectedCreditCardReq, httpOptions).pipe
 			(
 			catchError(this.handleError)
 			);
