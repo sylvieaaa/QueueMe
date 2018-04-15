@@ -19,6 +19,7 @@ import { ToastController } from 'ionic-angular';
 export class CreditcardPage {
   cardNum: String;
   cardName: String;
+  creditCardId: any;
   cardExp: number;
   chosen: boolean;
   creditCards: any;
@@ -72,7 +73,25 @@ selectedCard(event,creditcard) {
   this.creditCardEntityProvider.selectedCreditCard(this.customerEntity, creditcard).subscribe;
   toast.setMessage("Default credit card selected");
   toast.present();
+}
 
+deleteCard(event, creditcard) {
+  let toast = this.toastCtrl.create({
+    duration: 3000,
+    position: 'bottom'
+  });
+  this.creditCardEntityProvider.deleteCreditCard(creditcard.creditCardId).subscribe(
+  response => {
+  console.log("this is the creditcardid: " + creditcard.creditCardId);
+  toast.setMessage("Card deleted!");
+  toast.present();
+}, error => {
+  this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+  console.log(this.errorMessage);
+  toast.setMessage("Unable to delete account");
+  toast.present();
+}
+);
 }
 
 

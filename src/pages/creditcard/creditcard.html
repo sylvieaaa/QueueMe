@@ -4,6 +4,11 @@
         <ion-icon name="menu"></ion-icon>
       </button>
       <ion-title>Saved Credit Card</ion-title>
+      <!-- <ion-buttons end>
+          <button ion-button icon-only padding-right>
+            <p> Edit</p>
+          </button>
+        </ion-buttons> -->
     </ion-navbar>
   </ion-header>
 
@@ -16,16 +21,20 @@
 
     <ion-card radio-group [(ngModel)]="radioGroup" *ngFor="let creditCard of creditCards" >
       <!-- <ion-card *ngFor="let creditCard of creditCards"> -->
-      <ion-item>
-          <ion-label><h2>{{creditCard.cardNo}}</h2>
-          <br>
-          <p>{{creditCard.name}}</p>
-        </ion-label>
-          <ion-radio item-right (ionSelect)="selectedCard($event, creditCard)">
-          </ion-radio>
-          
-        </ion-item>
-        </ion-card>
+        <ion-card-header>{{creditCard.name}}
+          <ion-icon style="float: right;" name="ios-remove-circle-outline" (click)="deleteCard($event, creditCard)">
+              <!-- <ion-icon name="ios-remove-circle-outline"(click)="selectedCard()"></ion-icon> -->
+            </ion-icon>
+        <!-- <ion-item> -->
+          </ion-card-header>
+          <ion-card-header>{{creditCard.cardNo}}</ion-card-header>
+          <!-- <ion-label><h2>{{creditCard.cardNo}}</h2>
+        </ion-label> -->
+          <ion-radio>(ionSelect)="selectedCard($event, creditCard)">
+          </ion-radio> 
+          <!-- <ion-toggle (ionSelect)="selectedCard($event, creditCard)"></ion-toggle> -->
+        <!-- </ion-item>          -->
+        </ion-card> 
 
       <ion-item>
           <button ion-button block (click)="addCard()">

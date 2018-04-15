@@ -88,6 +88,26 @@ export class CreditcardEntityProvider {
 			);
 	}
 
+	deleteCreditCard(creditCardId: any): Observable<any> 
+	{	
+    let path: string = '';
+    
+		
+		if(this.platform.is('core') || this.platform.is('mobileweb')) 
+		{
+			path = this.baseUrl;
+		}
+		else
+		{
+			path = this.fullBaseUrl;
+		}
+		console.log("this is from the provider method: " + creditCardId);
+		return this.httpClient.get<any>(path + "/deleteCreditCard?creditCardId="+ creditCardId).pipe
+		(
+			catchError(this.handleError)
+		);		
+  }
+
   private handleError(error: HttpErrorResponse)
 	{
 		if (error.error instanceof ErrorEvent) 
