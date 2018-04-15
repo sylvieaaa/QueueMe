@@ -19,62 +19,91 @@ import { ToastController } from 'ionic-angular';
 export class CreditcardPage {
   cardNum: String;
   cardName: String;
+  creditCardId: any;
   cardExp: number;
   chosen: boolean;
   creditCards: any;
   errorMessage: String;
-  customerEntity : CustomerEntity;
+  customerEntity: CustomerEntity;
   radioGroup: String;
-  
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
     public creditCardEntityProvider: CreditcardEntityProvider, private toastCtrl: ToastController) {
-      this.customerEntity = new CustomerEntity();
+    this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
+    this.creditCardEntityProvider.retrieveAllCreditCards(this.customerEntity.businessId).subscribe(
+      response => {
+        this.creditCards = response.creditCardEntities;
+        this.checkDefaultCard();
+      },
+      error => {
+        this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+      }
+    );
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CreditcardPage');
-    this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
-  this.creditCardEntityProvider.retrieveAllCreditCards(this.customerEntity.businessId).subscribe(
-    response => {
-      this.creditCards = response.creditCardEntities;
-      console.log(response.creditCards)
-    },
-    error => {				
-      this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+  }
+
+  ionViewDidEnter() {
+    this.creditCardEntityProvider.retrieveAllCreditCards(this.customerEntity.businessId).subscribe(
+      response => {
+        this.creditCards = response.creditCardEntities;
+        this.checkDefaultCard();
+        console.log(response.creditCards)
+      },
+      error => {
+        this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+      }
+    );
+
+  }
+
+  checkDefaultCard() {
+    for (var i = 0; i < this.creditCards.length; i++) {
+      if (this.creditCards[i].defaultCard) {
+        this.radioGroup = this.creditCards[i].creditCardId;
+        return;
+      }
     }
-  );
-}
+  }
 
-ionViewDidEnter() {
-  this.creditCardEntityProvider.retrieveAllCreditCards(this.customerEntity.businessId).subscribe(
-    response => {
-      this.creditCards = response.creditCardEntities;
-      console.log(response.creditCards)
-    },
-    error => {				
-      this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
-    }
-  );
+  addCard() {
+    this.navCtrl.push(AddcardPage);
+  }
 
-}
+  selectedCard(event, creditcard) {
+    let toast = this.toastCtrl.create({
+      duration: 3000,
+      position: 'bottom'
+    });
+    this.creditCardEntityProvider.selectedCreditCard(this.customerEntity, creditcard).subscribe(
+      response => {
 
-addCard() {
-  this.navCtrl.push(AddcardPage);
-}
+        toast.setMessage("Default credit card selected");
+        toast.present();
+      },
+      error => {
+        this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+      }
+    );
+  }
 
-selectedCard(event,creditcard) {
-  let toast = this.toastCtrl.create({
-    duration: 3000,
-    position: 'bottom'
-  });
-  console.log(creditcard);
-  this.creditCardEntityProvider.selectedCreditCard(this.customerEntity, creditcard).subscribe;
-  toast.setMessage("Default payment method selected");
-  toast.present();
-
-}
-
-
-
+  deleteCard(event, creditcard) {
+    let toast = this.toastCtrl.create({
+      duration: 3000,
+      position: 'bottom'
+    });
+    this.creditCardEntityProvider.deleteCreditCard(creditcard.creditCardId).subscribe(
+      response => {
+        this.navCtrl.setRoot(this.navCtrl.getActive().component);
+        toast.setMessage("Card deleted!");
+        toast.present();
+      }, error => {
+        this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+        toast.setMessage("Unable to delete account");
+        toast.present();
+      }
+    );
+  }
 }

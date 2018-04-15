@@ -3,7 +3,11 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+<<<<<<< HEAD
     <ion-title>Payment Method</ion-title>
+=======
+    <ion-title>Saved Credit Card</ion-title>
+>>>>>>> 8fe6492e24a27a425154e465e6dfc833153ea353
   </ion-navbar>
 </ion-header>
 
@@ -37,6 +41,24 @@
           Add Payment Method
         </button>
       </div>
+
+
+</ion-content>
+    <ion-card-header>{{creditCard.cardNo}}
+    <ion-icon style="float: right;" name="ios-remove-circle" block color="danger" (click)="deleteCard($event, creditCard)">
+      </ion-icon>
+    </ion-card-header> 
+    <ion-card-header>{{creditCard.name}} <ion-radio style="float: right;" [value]="creditCard.creditCardId" [checked]="creditCard.defaultCard" (ionSelect)="selectedCard($event, creditCard)">
+    </ion-radio> </ion-card-header>
+  </ion-card>
+
+  <br>
+  <div style="display:block; text-align: center">
+    <button ion-button block color="myColor" icon-start (click)="addCard()">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+      Add Card
+    </button>
+  </div>
 
 
 </ion-content>
