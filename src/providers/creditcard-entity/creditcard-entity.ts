@@ -101,7 +101,6 @@ export class CreditcardEntityProvider {
 		{
 			path = this.fullBaseUrl;
 		}
-		console.log("this is from the provider method: " + creditCardId);
 		return this.httpClient.get<any>(path + "/deleteCreditCard?creditCardId="+ creditCardId).pipe
 		(
 			catchError(this.handleError)

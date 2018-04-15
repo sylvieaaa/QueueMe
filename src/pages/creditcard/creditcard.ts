@@ -96,19 +96,14 @@ export class CreditcardPage {
     });
     this.creditCardEntityProvider.deleteCreditCard(creditcard.creditCardId).subscribe(
       response => {
-        console.log("this is the creditcardid: " + creditcard.creditCardId);
         this.navCtrl.setRoot(this.navCtrl.getActive().component);
         toast.setMessage("Card deleted!");
         toast.present();
       }, error => {
         this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
-        console.log(this.errorMessage);
         toast.setMessage("Unable to delete account");
         toast.present();
       }
     );
   }
-
-
-
 }
