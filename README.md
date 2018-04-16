@@ -9,9 +9,8 @@
 copyPrimeng: {
     src: ['{{ROOT}}/node_modules/primeng/resources/themes/omega/theme.css', '{{ROOT}}/node_modules/primeng/resources/primeng.min.css', '{{ROOT}}/node_modules/font-awesome/css/font-awesome.min.css'],
     dest: '{{BUILD}}/assets/css'
-  }, 
-  
-  copyFontAwesome: {
+  }, <br/>
+copyFontAwesome: {
     src: ["{{ROOT}}/node_modules/font-awesome/fonts/**/*"],
     dest: "{{BUILD}}/assets/fonts"
   }
