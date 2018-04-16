@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Orders</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding>
+
+    <ion-card *ngFor="let order of orders">
+        <ion-card-title>{{order.vendorEntity.foodCourtEntity.name}}</ion-card-title> 
+        <ion-card-header>{{order.vendorEntity.vendorName}}></ion-card-header>
+        <ion-card-header>{{order.dateTime}}></ion-card-header>
+        <ion-card-header> Items: </ion-card-header>
+          <ion-card *ngFor="let saleTransactionLineItem of order.saleTransactionLineItemEntities">
+            <ion-card-content>{{saleTransactionLineItem.menuItemEntity.menuItemName}}</ion-card-content>
+          </ion-card>
+        <ion-card-content style="float: right;">{{order.totalEarnings}}</ion-card-content>
+      </ion-card>
+</ion-content>

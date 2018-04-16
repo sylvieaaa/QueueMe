@@ -30,6 +30,8 @@ import {RatingModule} from 'primeng/rating';
 import {SpinnerModule} from 'primeng/spinner';
 import {AccordionModule} from 'primeng/accordion';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import { ViewOrderPage } from '../pages/view-order/view-order';
+import { OrderEntityProvider } from '../providers/order-entity/order-entity';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     CreditcardPage,
     AddcardPage,
     VendorPage,
-    ModalPage
+    ModalPage,
+    ViewOrderPage
   ],
   imports: [
     BrowserModule,
@@ -71,7 +74,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     CreditcardPage,
     AddcardPage,
     VendorPage,
-    ModalPage
+    ModalPage,
+    ViewOrderPage
   ],
   providers: [
     StatusBar,
@@ -81,7 +85,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     FoodcourtEntityProvider,
     VendorEntityProvider,
     MenuitemEntityProvider,
-    CreditcardEntityProvider
+    CreditcardEntityProvider,
+    OrderEntityProvider
   ]
 })
 export class AppModule {}
