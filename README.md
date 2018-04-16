@@ -18,4 +18,6 @@ copyPrimeng: {
 
 ## Set up firebase
 **ionic cordova platform remove android**
-**ionic cordova platform add android@6.4.0 --save
+**ionic cordova platform add android@6.4.0 --save**
+**ionic cordova plugin add cordova-plugin-fcm**
+**npm install --save @ionic-native/fcm**
