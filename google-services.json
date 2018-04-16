@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "735404994916",
+    "firebase_url": "https://queueme-e5bfe.firebaseio.com",
+    "project_id": "queueme-e5bfe",
+    "storage_bucket": "queueme-e5bfe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735404994916:android:28dff1ba14a7d172",
+        "android_client_info": {
+          "package_name": "com.queueme.queueme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "735404994916-niebir6029mtnbtgq9o4hpctcp9som5t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6ODaRyRzuuHhbtzhDTWGV8Bai5JZAfJk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735404994916:android:683c6e70a777f5fb",
+        "android_client_info": {
+          "package_name": "com.yxsoong.queueme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "735404994916-niebir6029mtnbtgq9o4hpctcp9som5t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6ODaRyRzuuHhbtzhDTWGV8Bai5JZAfJk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

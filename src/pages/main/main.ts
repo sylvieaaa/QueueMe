@@ -1,3 +1,5 @@
+import { CustomerEntity } from './../../entities/CustomerEntity';
+import { ShoppingCartPage } from './../shopping-cart/shopping-cart';
 import { Component, trigger } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FoodcourtEntityProvider } from '../../providers/foodcourt-entity/foodcourt-entity';
@@ -15,6 +17,7 @@ import { FoodcourtPage } from '../foodcourt/foodcourt';
   templateUrl: 'main.html',
 })
 export class MainPage {
+  customerEntity: CustomerEntity;
   foodCourts: any; 
   foodCourt: any;
   name: string;
@@ -25,10 +28,20 @@ export class MainPage {
   replicate:any;
 
   constructor(public navCtrl: NavController, public foodCourtEntityProvider: FoodcourtEntityProvider, public navParams: NavParams) {
+    this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
+    // this.firebase.getToken()
+    // .then(token => {
+    //   console.log(`The token is ${token}`);
+    //   this.customerEntity.token = token;
+    //   sessionStorage.setItem('customerEntity', JSON.stringify(this.customerEntity));
+    // })
+    // .catch(error => console.error('Error getting token', error));
     this.notChosen = true;
     this.name="";
     this.generateFoodCourt();
   }
+
+  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MainPage');
@@ -114,5 +127,7 @@ export class MainPage {
     }, 500);
   }
 
-
+  openShoppingCart() {
+    this.navCtrl.push(ShoppingCartPage);
+  }
 }

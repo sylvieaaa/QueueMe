@@ -13,9 +13,9 @@ const httpOptions = {
 @Injectable()
 export class CustomerEntityProvider {
 
-	ipAddress = '172.25.97.234';
+	ipAddress = '172.17.169.193';
 	portNo = '8080';
-	fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystem/Resources/Customer';
+	fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystemJsf/Resources/Customer';
 	baseUrl = "/api/Customer";
 
 	constructor(public httpClient: HttpClient, public platform: Platform) {
@@ -31,7 +31,7 @@ export class CustomerEntityProvider {
 		else {
 			path = this.fullBaseUrl;
 		}
-
+		console.log(path);
 
 		return this.httpClient.get<any>(path + "/login?username=" + username + "&password=" + password).pipe
 			(

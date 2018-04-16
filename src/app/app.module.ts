@@ -1,3 +1,4 @@
+import { ShoppingCartPage } from './../pages/shopping-cart/shopping-cart';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -29,6 +30,9 @@ import { CreditcardEntityProvider } from '../providers/creditcard-entity/creditc
 import {RatingModule} from 'primeng/rating';
 
 import {AccordionModule} from 'primeng/accordion';
+import { CheckoutProvider } from '../providers/checkout/checkout';
+// import { Push } from '@ionic-native/push';
+import { FCM } from '@ionic-native/fcm';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,8 @@ import {AccordionModule} from 'primeng/accordion';
     CreditcardPage,
     AddcardPage,
     VendorPage,
-    ModalPage
+    ModalPage,
+    ShoppingCartPage
   ],
   imports: [
     BrowserModule,
@@ -68,7 +73,8 @@ import {AccordionModule} from 'primeng/accordion';
     CreditcardPage,
     AddcardPage,
     VendorPage,
-    ModalPage
+    ModalPage,
+    ShoppingCartPage
   ],
   providers: [
     StatusBar,
@@ -78,7 +84,9 @@ import {AccordionModule} from 'primeng/accordion';
     FoodcourtEntityProvider,
     VendorEntityProvider,
     MenuitemEntityProvider,
-    CreditcardEntityProvider
+    CreditcardEntityProvider,
+    CheckoutProvider,
+    FCM
   ]
 })
 export class AppModule {}

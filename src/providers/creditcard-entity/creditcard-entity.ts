@@ -21,57 +21,51 @@ const httpOptions = {
 @Injectable()
 export class CreditcardEntityProvider {
 
-  ipAddress = '192.168.1.98';
-  portNo = '8080';
-  fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystem/Resources/CreditCard';
-  baseUrl = "/api/CreditCard";
+	ipAddress = '172.17.169.193';
+	portNo = '8080';
+	fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystemJsf/Resources/CreditCard';
+	baseUrl = "/api/CreditCard";
 
-  constructor(public httpClient: HttpClient, public platform: Platform) {
-    console.log('Hello CreditcardEntityProvider Provider');
-  }
+	constructor(public httpClient: HttpClient, public platform: Platform) {
+		console.log('Hello CreditcardEntityProvider Provider');
+	}
 
-  retrieveAllCreditCards(customerId: number): Observable<any> 
-	{	
-    let path: string = '';
-    
-		
-		if(this.platform.is('core') || this.platform.is('mobileweb')) 
-		{
-			path = this.baseUrl;
-		}
-		else
-		{
-			path = this.fullBaseUrl;
-		}
-	
-		return this.httpClient.get<any>(path + "/retrieveCreditCards?customerId="+ customerId).pipe
-		(
-			catchError(this.handleError)
-		);		
-  }
-  
-  createCard(cardNum: String, cardName: String, customerEntity: CustomerEntity): Observable<any>
-	{
-		let createCardReq = {"cardNum": cardNum, "cardName": cardName, "customerEntity" : customerEntity};
+	retrieveAllCreditCards(customerId: number): Observable<any> {
 		let path: string = '';
-		
-		if(this.platform.is('core') || this.platform.is('mobileweb')) 
-		{
+
+
+		if (this.platform.is('core') || this.platform.is('mobileweb')) {
 			path = this.baseUrl;
 		}
-		else
-		{
+		else {
 			path = this.fullBaseUrl;
-		}				
-		
-		return this.httpClient.put<any>(path + "/createCard", createCardReq, httpOptions).pipe
-		(
+		}
+
+		return this.httpClient.get<any>(path + "/retrieveCreditCards?customerId=" + customerId).pipe
+			(
 			catchError(this.handleError)
-		);
+			);
+	}
+
+	createCard(cardNum: String, cardName: String, customerEntity: CustomerEntity): Observable<any> {
+		let createCardReq = { "cardNum": cardNum, "cardName": cardName, "customerEntity": customerEntity };
+		let path: string = '';
+
+		if (this.platform.is('core') || this.platform.is('mobileweb')) {
+			path = this.baseUrl;
+		}
+		else {
+			path = this.fullBaseUrl;
+		}
+
+		return this.httpClient.put<any>(path + "/createCard", createCardReq, httpOptions).pipe
+			(
+			catchError(this.handleError)
+			);
 	}
 
 	selectedCreditCard(customerEntity: CustomerEntity, creditCard: any): Observable<any> {
-		let selectedCreditCardReq = { "creditCardEntity" : creditCard };
+		let selectedCreditCardReq = { "creditCardEntity": creditCard };
 		let path: string = '';
 
 		if (this.platform.is('core') || this.platform.is('mobileweb')) {
@@ -88,36 +82,30 @@ export class CreditcardEntityProvider {
 			);
 	}
 
-	deleteCreditCard(creditCardId: any): Observable<any> 
-	{	
-    let path: string = '';
-    
-		
-		if(this.platform.is('core') || this.platform.is('mobileweb')) 
-		{
+	deleteCreditCard(creditCardId: any): Observable<any> {
+		let path: string = '';
+
+
+		if (this.platform.is('core') || this.platform.is('mobileweb')) {
 			path = this.baseUrl;
 		}
-		else
-		{
+		else {
 			path = this.fullBaseUrl;
 		}
-		return this.httpClient.get<any>(path + "/deleteCreditCard?creditCardId="+ creditCardId).pipe
-		(
+		return this.httpClient.get<any>(path + "/deleteCreditCard?creditCardId=" + creditCardId).pipe
+			(
 			catchError(this.handleError)
-		);		
-  }
+			);
+	}
 
-  private handleError(error: HttpErrorResponse)
-	{
-		if (error.error instanceof ErrorEvent) 
-		{		
+	private handleError(error: HttpErrorResponse) {
+		if (error.error instanceof ErrorEvent) {
 			console.error('An unknown error has occurred:', error.error.message);
-		} 
-		else 
-		{		
+		}
+		else {
 			console.error(" A HTTP error has occurred: " + `HTTP ${error.status}: ${error.error.message}`);
 		}
-		
+
 		return new ErrorObservable(error);
-  }
+	}
 }

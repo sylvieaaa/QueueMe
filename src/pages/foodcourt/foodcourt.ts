@@ -28,15 +28,14 @@ export class FoodcourtPage {
     console.log('ionViewDidLoad FoodcourtPage');
     this.foodCourt = sessionStorage.getItem("foodCourt");
     this.retrieveVendors();
-    console.log(this.vendors);
+    
   }
 
   retrieveVendors(){
     this.vendorEntityProvider.doVendors(this.foodCourt).subscribe(
       response => {
         this.vendors = response.vendorEntities;
-   
-      
+        console.log(this.vendors);
       },
       error => {
         this.errorMessage = "HTTP " + error.status + ": " + error.error.message;

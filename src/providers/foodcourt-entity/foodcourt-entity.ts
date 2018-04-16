@@ -18,9 +18,9 @@ const httpOptions = {
 @Injectable()
 export class FoodcourtEntityProvider {
 
-  ipAddress = '172.25.97.234';
+  ipAddress = '172.17.169.193';
   portNo = '8080';
-  fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystem/Resources/FoodCourt';
+  fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystemJsf/Resources/FoodCourt';
   baseUrl = "/api/FoodCourt";
 
   constructor(public httpClient: HttpClient, public platform: Platform) {

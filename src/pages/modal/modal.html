@@ -19,22 +19,22 @@
 
 <ion-content padding>
   <ion-card>
-    <img src="http://localhost:8080/queueme-uploads/foodPhotos/{{data.photoURL}}">
+    <img src="http://localhost:8080/queueme-uploads/foodPhotos/{{menuItem.photoURL}}">
     <ion-row>
-      <ion-title>{{data.menuItemName}}</ion-title>
+      <ion-title>{{menuItem.menuItemName}}</ion-title>
     </ion-row>
     <ion-row>
-      <ion-title>$ {{data.price}}</ion-title>
+      <ion-title>$ {{menuItem.price}}</ion-title>
     </ion-row>
 
 
     <ion-card-content text-wrap>
     <ion-item>
-      <ion-input type="number" placeholder="Quantity"></ion-input>
+      <ion-input type="number" [(ngModel)]="quantity" placeholder="Quantity"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-textarea type="text" placeholder="Enter your special requests if any"></ion-textarea>
+      <ion-textarea type="text" [(ngModel)]="specialRequest" placeholder="Enter your special requests if any"></ion-textarea>
      
     </ion-item>
 
@@ -44,7 +44,7 @@
 
   <div style="text-align: center">
   <ion-buttons>
-      <button ion-button (click)="closeModal()" round outline>Add to Cart</button>
+      <button ion-button (click)="addItemToCart()" round outline>Add to Cart</button>
   </ion-buttons>
 </div>
 </ion-content>

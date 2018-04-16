@@ -18,9 +18,9 @@ export class MenuitemEntityProvider {
     console.log('Hello MenuitemEntityProvider Provider');
   }
 
-  ipAddress = '172.25.97.234';
+  ipAddress = '172.17.169.193';
   portNo = '8080';
-  fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystem/Resources/Menu';
+  fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystemJsf/Resources/Menu';
   baseUrl = "/api/Menu";
 
   retrieveMenu(vendor: any): Observable<any> {
