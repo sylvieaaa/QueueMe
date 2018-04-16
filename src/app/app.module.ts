@@ -28,11 +28,14 @@ import { MenuitemEntityProvider } from '../providers/menuitem-entity/menuitem-en
 import { CreditcardEntityProvider } from '../providers/creditcard-entity/creditcard-entity';
 
 import {RatingModule} from 'primeng/rating';
-
+import {SpinnerModule} from 'primeng/spinner';
 import {AccordionModule} from 'primeng/accordion';
 import { CheckoutProvider } from '../providers/checkout/checkout';
 // import { Push } from '@ionic-native/push';
 import { FCM } from '@ionic-native/fcm';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import { ViewOrderPage } from '../pages/view-order/view-order';
+import { OrderEntityProvider } from '../providers/order-entity/order-entity';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,8 @@ import { FCM } from '@ionic-native/fcm';
     AddcardPage,
     VendorPage,
     ModalPage,
-    ShoppingCartPage
+    ShoppingCartPage,
+    ViewOrderPage
   ],
   imports: [
     BrowserModule,
@@ -58,6 +62,8 @@ import { FCM } from '@ionic-native/fcm';
     IonicModule.forRoot(MyApp),
     RatingModule,
     AccordionModule,
+    SpinnerModule,
+    InputTextareaModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -74,7 +80,8 @@ import { FCM } from '@ionic-native/fcm';
     AddcardPage,
     VendorPage,
     ModalPage,
-    ShoppingCartPage
+    ShoppingCartPage,
+    ViewOrderPage
   ],
   providers: [
     StatusBar,
@@ -86,7 +93,8 @@ import { FCM } from '@ionic-native/fcm';
     MenuitemEntityProvider,
     CreditcardEntityProvider,
     CheckoutProvider,
-    FCM
+    FCM,
+    OrderEntityProvider
   ]
 })
 export class AppModule {}

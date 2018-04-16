@@ -45,43 +45,35 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="background">
   <div *ngIf="notChosen">
     <ion-searchbar (ionInput)="getFoodCourt($event)"></ion-searchbar>
 
-    <ion-card *ngFor="let foodcourt of foodCourts">
-      <button ion-item (click)="navFoodCourt($event, foodcourt)">
-      
+      <ion-card *ngFor="let foodcourt of foodCourts">
+        <button ion-item (click)="navFoodCourt($event, foodcourt)" style="background-color:white">
           <img src="http://localhost:8080/queueme-uploads/foodCourtLogos/{{foodcourt.fileURL}}">
           
-          <ion-card-title>{{foodcourt.name}}</ion-card-title>
-
-      </button>
-
-    
-      <ion-card-content>
-       <h2> {{foodcourt.address}}</h2> 
-       <h2> {{foodcourt.postalCode}}</h2>
-      </ion-card-content>
+          <h2 style="font-weight:bold; margin-top: 15px">{{foodcourt.name}}</h2>
+          <h3 style="color: #696969"> {{foodcourt.address}}</h3>
+          <h3 style="color: #696969"> S{{foodcourt.postalCode}}</h3>
+        </button>
+      </ion-card>
    
-     
-    </ion-card>
+  <ion-content>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-content>
+  
   
   </div>
-
-
-  <ion-content>
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-  </ion-content>
 
 
 
   <div *ngIf="errorMessage" class="errorText">
     {{errorMessage}}
   </div>
-
+  <!-- 
   <div *ngIf="!notChosen" style="text-align: center">
     <h3>Hi, You're currently in: </h3>
     {{name}}
@@ -90,7 +82,7 @@
     <button ion-button block (click)="clear()">
       Clear
     </button>
-  </div>
+  </div> -->
 
   <!-- <div *ngIf="notChosen">
     <ion-item>

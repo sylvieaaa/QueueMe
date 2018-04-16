@@ -7,30 +7,36 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Add new card</ion-title>
+    <ion-title>Add New Card</ion-title>
   </ion-navbar>
 
 </ion-header>
 <ion-content padding>
 
-    <br>
-        <div align="center"><h5>Enter credit card details</h5></div>
-          <br>
+  <br>
+  <div align="center">
+    <h5>Enter credit card details</h5>
+  </div>
+  <br>
 
           <ion-item>
               <ion-label color="primary">Card Number: </ion-label>
               <ion-input placeholder="xxxx-xxxx-xxxx-xxxx" type="text" [(ngModel)]="cardNum" ></ion-input>
             </ion-item>
 
-            <ion-item>
-                <ion-label color="primary">Cardholder Name: </ion-label>
-                <ion-input placeholder="Name" type="text" [(ngModel)]="cardName" ></ion-input>
-              </ion-item>
+  <ion-item>
+    <ion-label color="primary">Cardholder Name: </ion-label>
+    <ion-input placeholder="Name" type="text" [(ngModel)]="cardName"></ion-input>
+  </ion-item>
 
-              <br>
-                <ion-item>
-                    <button ion-button block (click)="createCard()">Add Card</button>
-                    </ion-item>
+  <br>
+
+  <div style="display:block; text-align:center">
+    <button ion-button round outline color="myColor" icon-start (click)="createCard()">
+      <ion-icon name="add"></ion-icon>
+      Add Card
+    </button>
+  </div>
 
 
 </ion-content>

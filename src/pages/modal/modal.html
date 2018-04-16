@@ -29,22 +29,17 @@
 
 
     <ion-card-content text-wrap>
-    <ion-item>
-      <ion-input type="number" [(ngModel)]="quantity" placeholder="Quantity"></ion-input>
-    </ion-item>
+      <p-spinner size="45" [(ngModel)]="quantity" placeholder="Quantity"></p-spinner>
+      <br/>
+      <br/>
+      <textarea [rows]="5" [cols]="50" placeholder="Enter special request(s), if any" pInputTextarea autoResize="autoResize" [(ngModel)]="specialRequest"></textarea>
 
-    <ion-item>
-      <ion-textarea type="text" [(ngModel)]="specialRequest" placeholder="Enter your special requests if any"></ion-textarea>
-     
-    </ion-item>
-
-
-  </ion-card-content>
-</ion-card>
+    </ion-card-content>
+  </ion-card>
 
   <div style="text-align: center">
-  <ion-buttons>
+    <ion-buttons>
       <button ion-button (click)="addItemToCart()" round outline>Add to Cart</button>
-  </ion-buttons>
-</div>
+    </ion-buttons>
+  </div>
 </ion-content>

@@ -11,6 +11,7 @@ import { MainPage } from '../pages/main/main';
 import { ProfilePage } from '../pages/profile/profile';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { FoodcourtPage } from '../pages/foodcourt/foodcourt';
+import { ViewOrderPage } from '../pages/view-order/view-order';
 
 import { CreditcardPage } from '../pages/creditcard/creditcard';
 import { AddcardPage } from '../pages/addcard/addcard'
@@ -46,7 +47,8 @@ export class MyApp {
       { title: 'Home', component: MainPage },
       { title: 'Profile', component: ProfilePage },
       { title: 'Change Password', component: ChangePasswordPage },
-      { title: 'Saved Credit Card', component: CreditcardPage },
+      { title: 'Payment', component: CreditcardPage },
+      { title: "Orders", component: ViewOrderPage },
       { title: 'List', component: ListPage },
     ];
 

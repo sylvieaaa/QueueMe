@@ -5,7 +5,6 @@ import { NavParams, ViewController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { splitClasses } from '@angular/compiler';
 
-
 /**
  * Generated class for the ModalPage page.
  *
@@ -20,6 +19,7 @@ import { splitClasses } from '@angular/compiler';
 export class ModalPage {
   shoppingCart: any;
   menuItem:any;
+  data:any;
   quantity: number;
   specialRequest: string;
 
