@@ -10,7 +10,7 @@
     <ion-title>Order</ion-title>
 
     <ion-buttons end>
-      <button ion-button (click)="closeModal()">Close</button>
+      <button ion-button (click)="returnBack()">Close</button>
     </ion-buttons>
   </ion-navbar>
 
@@ -29,10 +29,10 @@
 
 
     <ion-card-content text-wrap>
-      <p-spinner size="45" [(ngModel)]="quantity" placeholder="Quantity"></p-spinner>
+      <p-spinner size="35" [(ngModel)]="quantity" placeholder="Quantity"></p-spinner>
       <br/>
       <br/>
-      <textarea [rows]="5" [cols]="50" placeholder="Enter special request(s), if any" pInputTextarea autoResize="autoResize" [(ngModel)]="specialRequest"></textarea>
+      <textarea [rows]="5" [cols]="40" placeholder="Enter special request(s), if any" pInputTextarea autoResize="autoResize" [(ngModel)]="specialRequest"></textarea>
 
     </ion-card-content>
   </ion-card>

@@ -44,6 +44,7 @@
           </ion-icon>
         </ion-col>
       </ion-row>
+      <br/>
       <ion-row>
         <ion-col col-7>
           <h5>Total Line Items:</h5>
@@ -79,16 +80,22 @@
         <ion-radio value="true"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list radio-group [(ngModel)]="paymentType">
-      <ion-item>
-        <ion-label>Cash</ion-label>
-        <ion-radio value="cash"></ion-radio>
+    <ion-list>
+      <ion-item *ngIf="creditCard">
+        <ion-label>{{creditCard.cardNo}}</ion-label>
+        
       </ion-item>
       <ion-item>
-        <ion-label>Credit Card</ion-label>
-        <ion-radio value="creditCard"></ion-radio>
+          <ion-input placeholder="Enter cvv" ></ion-input>
       </ion-item>
+      <ion-item>
+          <ion-datetime placeholder="Expiry date" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" [(ngModel)]="myDate"></ion-datetime> 
+      </ion-item>
+    
     </ion-list>
+    <button ion-button block (click)="showActionSheet()">
+        Select credit payment
+      </button>
     <button ion-button color="queueme-orange" ion-button full (click)="doCheckout()">Checkout</button>
   </div>
 </ion-content>

@@ -82,4 +82,8 @@ export class ModalPage {
     this.view.dismiss();
   }
 
+  returnBack(){
+    this.view.dismiss();
+  }
+
 }

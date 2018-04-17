@@ -31,13 +31,13 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public fcm: FCM) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
-    this.fcm.getToken()
-      .then(token => {
-        console.log(`The token is ${token}`);
-      })
-      .catch(error => console.error('Error getting token', error));
+    // this.fcm.getToken()
+    //   .then(token => {
+    //     console.log(`The token is ${token}`);
+    //   })
+    //   .catch(error => console.error('Error getting token', error));
 
     if (sessionStorage.getItem('customerEntity') != null) {
       this.rootPage = MainPage;
@@ -52,17 +52,17 @@ export class MyApp {
       { title: 'List', component: ListPage },
     ];
 
-    platform.ready().then(() => {
-      fcm.onNotification().subscribe(data => {
-        if (data.wasTapped) {
-          console.log(JSON.stringify(data));
-          this.navCtrl.setRoot(ProfilePage);
-        } else {
-          console.log(JSON.stringify(data));
-          this.navCtrl.push(CreditcardPage);
-        }
-      })
-    })
+    // platform.ready().then(() => {
+    //   fcm.onNotification().subscribe(data => {
+    //     if (data.wasTapped) {
+    //       console.log(JSON.stringify(data));
+    //       this.navCtrl.setRoot(ProfilePage);
+    //     } else {
+    //       console.log(JSON.stringify(data));
+    //       this.navCtrl.push(CreditcardPage);
+    //     }
+    //   })
+    // })
   }
 
   initializeApp() {
