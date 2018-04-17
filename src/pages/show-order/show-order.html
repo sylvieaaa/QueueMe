@@ -1,0 +1,33 @@
+
+<ion-header>
+    <ion-navbar>
+      <ion-title>Order</ion-title>
+      <!-- <ion-buttons end>
+          <button ion-button (click)="closeModal()">Close</button>
+        </ion-buttons> -->
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+  
+      <ion-card *ngFor="let orderEntity of orderEntities"> 
+          <h2 style="font-weight:bold; margin-top: 15px; text-align: center">{{orderEntity.vendorEntity.vendorName}}</h2>
+        <ion-card *ngFor="let stlie of orderEntity.saleTransactionLineItemEntities">
+            <!-- <h2 style="font-weight:bold; margin-top: 15px">{{stlie.menuItemEntity.vendorEntity.vendorName}}</h2> -->
+            <h2 style="color: #000000">{{stlie.menuItemEntity.menuItemName}}</h2>
+        <h3 style="color: #504F4E">Quantity: {{stlie.quantity}} </h3>
+        <h3 style="color: #504F4E">Price: ${{stlie.menuItemEntity.price}}</h3>
+        <h3 style="color: #504F4E" *ngIf="stlie.specialRequest !=''">Special Request: {{stlie.specialRequest}} </h3>
+        <h3 style="color: #504F4E" *ngIf="stlie.specialRequest ==''">Special Request: NIL </h3>
+        <!-- <div style="float: right;">
+        <h3 style="color: #504F4E">Subtotal: <b>${{stlie.subTotal}}</b></h3> 
+      </div>   -->
+      </ion-card>
+      <br>
+        <div style="float: right;">
+          <h3 style="color: #010211" *ngIf="orderEntity.fulfilled"><b>Status</b>: Completed</h3>
+          <h3 style="color: #010211" *ngIf="!orderEntity.fulfilled"><b>Status</b>: In Progress</h3>
+        </div>   
+    </ion-card>
+  
+  </ion-content>
