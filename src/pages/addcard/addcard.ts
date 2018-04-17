@@ -17,35 +17,65 @@ import { CreditcardEntityProvider } from '../../providers/creditcard-entity/cred
   templateUrl: 'addcard.html',
 })
 export class AddcardPage {
-  customerEntity : CustomerEntity;
+  customerEntity: CustomerEntity;
   cardName: String;
   cardNum: String;
-  errorMessage: String;
+  errorMessage: string;
+  creditCards: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toastCtrl: ToastController, public creditCardEntityProvider: CreditcardEntityProvider) {
     this.customerEntity = new CustomerEntity();
-  }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddcardPage');
-    this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));   
-  }
-
-  createCard() {
-    let toast = this.toastCtrl.create({
-      duration: 3000,
-      position: 'bottom'
-    });
-    this.creditCardEntityProvider.createCard(this.cardNum, this.cardName, this.customerEntity).subscribe(
+    this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
+    this.creditCardEntityProvider.retrieveAllCreditCards(this.customerEntity.businessId).subscribe(
       response => {
-        toast.setMessage("Card successfully added!");
-         toast.present();
+        this.creditCards = response.creditCardEntities;
       },
       error => {
         this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
       }
-    )
+
+    );
   }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad AddcardPage');
+    this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
   }
+
+  createCard() {
+    console.log(this.cardNum);
+
+    let toast = this.toastCtrl.create({
+      duration: 3000,
+      position: 'bottom'
+    });
+    console.log(this.creditCards);
+    
+    if (this.creditCards != null) {
+      for (let creditCard of this.creditCards) {
+        if (creditCard.cardNo == this.cardNum){
+          toast.setMessage("Card already exist");
+          toast.present();
+          return;
+        }
+        console.log(creditCard);
+      }
+    }
+  
+      this.creditCardEntityProvider.createCard(this.cardNum, this.cardName, this.customerEntity).subscribe(
+        response => {
+          toast.setMessage("Card successfully added!");
+          toast.present();
+          this.navCtrl.pop();
+        },
+        error => {
+          this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+        }
+      )
+    
+    
+  }
+
+}

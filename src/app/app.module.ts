@@ -28,6 +28,7 @@ import { VendorEntityProvider } from '../providers/vendor-entity/vendor-entity';
 import { MenuitemEntityProvider } from '../providers/menuitem-entity/menuitem-entity';
 import { CreditcardEntityProvider } from '../providers/creditcard-entity/creditcard-entity';
 
+import {InputMaskModule} from 'primeng/inputmask';
 import {RatingModule} from 'primeng/rating';
 import {SpinnerModule} from 'primeng/spinner';
 import {AccordionModule} from 'primeng/accordion';
@@ -67,7 +68,8 @@ import { Vibration } from '@ionic-native/vibration';
     RatingModule,
     AccordionModule,
     SpinnerModule,
-    InputTextareaModule
+    InputTextareaModule,
+    InputMaskModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

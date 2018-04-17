@@ -19,14 +19,17 @@
   </div>
   <br>
 
-          <ion-item>
-              <ion-label color="primary">Card Number: </ion-label>
-              <ion-input placeholder="xxxx-xxxx-xxxx-xxxx" type="text" [(ngModel)]="cardNum" ></ion-input>
-            </ion-item>
+  <form>
+  <ion-item>
+    <!-- <ion-label color="primary">Card Number: </ion-label> -->
+     <span style="color:#488aff"  >Card Number: </span>
+    <!-- <ion-input name="cardNum" placeholder="xxxx-xxxx-xxxx-xxxx" type="text" [(ngModel)]="cardNum"></ion-input> -->
+    <p-inputMask mask="9999-9999-9999-9999" name="cardNum" [(ngModel)]="cardNum" placeholder="xxxx-xxxx-xxxx-xxxx"></p-inputMask>
+  </ion-item>
 
   <ion-item>
     <ion-label color="primary">Cardholder Name: </ion-label>
-    <ion-input placeholder="Name" type="text" [(ngModel)]="cardName"></ion-input>
+    <ion-input name="cardName" placeholder="Name" type="text" [(ngModel)]="cardName"></ion-input>
   </ion-item>
 
   <br>
@@ -38,5 +41,5 @@
     </button>
   </div>
 
-
+</form>
 </ion-content>
