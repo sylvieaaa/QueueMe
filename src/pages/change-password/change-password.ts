@@ -19,9 +19,9 @@ import { CustomerEntityProvider } from '../../providers/customer-entity/customer
 export class ChangePasswordPage {
 
   customerEntity : CustomerEntity;
-  oldPassword : string;
-  newPassword : string;
-  cfmPassword : string;
+  oldPassword : string = "";
+  newPassword : string = "";
+  cfmPassword : string = "";
   infoMessage : string;
   errorMessage: string;
 
@@ -42,10 +42,15 @@ export class ChangePasswordPage {
       duration: 3000,
       position: 'bottom'
     });
-    if (this.cfmPassword != this.newPassword) {
-      toast.setMessage("Password do not match. Please re-enter password.")
+    if (this.oldPassword == ""|| this.cfmPassword == ""|| this.newPassword == "") {
+      toast.setMessage("Form not complete, please fill in");
+      toast.present();
+    }    
+    else if (this.cfmPassword != this.newPassword) {
+      toast.setMessage("Password do not match. Please re-enter password.");
         toast.present();
-    } else {
+    } 
+    else {
     this.customerEntityProvider.updateCustomerPassword(this.customerEntity, this.oldPassword, this.newPassword).subscribe(
 			response => {	
          toast.setMessage("Password Updated!");

@@ -1,4 +1,6 @@
 import { myIPAddress } from './../../ipAddress';
+import { CustomerEntity } from './../../entities/CustomerEntity';
+import { SaleTransactionEntity } from './../../entities/SaleTransactionEntity';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
@@ -7,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { Platform } from 'ionic-angular';
 
 /*
-  Generated class for the VendorProvider provider.
+  Generated class for the CheckoutProvider provider.
 
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
@@ -17,23 +19,21 @@ const httpOptions = {
 };
 
 @Injectable()
-export class VendorEntityProvider {
+export class CheckoutProvider {
   ipAddress = new myIPAddress().ipaddress;
   portNo = '8080';
-  fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystemJsf/Resources/Vendor';
-  baseUrl = "/api/Vendor";
+  fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystemJsf/Resources/Checkout';
+  baseUrl = "/api/Checkout";
 
   constructor(public httpClient: HttpClient, public platform: Platform) {
-    console.log('Hello VendorProvider Provider');
+    console.log('Hello CheckoutProvider Provider');
   }
 
-  doVendors(foodCourt: any): Observable<any> {
+  doCheckout(saleTransactionEntity: SaleTransactionEntity, customerEntity: CustomerEntity) {
 
-    let getVendorReq = { "foodCourtEntity": foodCourt };
+    let checkoutReq: any = {"saleTransactionEntity" : saleTransactionEntity, "customerEntity" : customerEntity}
     let path: string = '';
-    let foodCourtId = (JSON.parse(foodCourt)).businessId;
-
-    // console.log(foodCourtId);
+    console.log(saleTransactionEntity)
 
     if (this.platform.is('core') || this.platform.is('mobileweb')) {
       path = this.baseUrl;
@@ -41,8 +41,8 @@ export class VendorEntityProvider {
     else {
       path = this.fullBaseUrl;
     }
-    
-    return this.httpClient.get<any>(path + "/retrieveVendors?foodCourtId=" + foodCourtId).pipe
+
+    return this.httpClient.put<any>(path, checkoutReq, httpOptions).pipe
       (
       catchError(this.handleError)
       );
@@ -58,5 +58,4 @@ export class VendorEntityProvider {
 
     return new ErrorObservable(error);
   }
-
 }

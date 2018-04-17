@@ -12,10 +12,10 @@
     <ion-toolbar>
 
       <ion-title align-self-center>
-        <img src="../assets/imgs/qme_web_light.png" height="80px" />
+        <img src="./assets/imgs/qme_web_light.png" height="80px" />
       </ion-title>
       <ion-buttons end>
-        <button ion-button icon-only color="queueme-orange" padding-right>
+        <button ion-button icon-only color="queueme-orange" (click)="openShoppingCart()" padding-right>
           <ion-icon name="cart">
           </ion-icon>
         </button>
@@ -51,7 +51,7 @@
 
       <ion-card *ngFor="let foodcourt of foodCourts">
         <button ion-item (click)="navFoodCourt($event, foodcourt)" style="background-color:white">
-          <img src="http://localhost:8080/queueme-uploads/foodCourtLogos/{{foodcourt.fileURL}}">
+          <img src="http://{{myIPAddress}}:8080/queueme-uploads/foodCourtLogos/{{foodcourt.fileURL}}">
           
           <h2 style="font-weight:bold; margin-top: 15px">{{foodcourt.name}}</h2>
           <h3 style="color: #696969"> {{foodcourt.address}}</h3>

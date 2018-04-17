@@ -5,7 +5,7 @@ import { CreateAccountPage } from '../create-account/create-account';
 import { CustomerEntityProvider } from '../../providers/customer-entity/customer-entity';
 import { CustomerEntity } from '../../entities/CustomerEntity';
 import { MainPage } from '../main/main';
-import {RatingModule} from 'primeng/rating';
+import { RatingModule } from 'primeng/rating';
 import { ToastController } from 'ionic-angular';
 import { ProfilePage } from '../profile/profile';
 
@@ -29,7 +29,7 @@ export class HomePage {
 
 
   ionViewDidLoad() {
-    
+
   }
 
   openForgetPasswordPage() {
@@ -40,7 +40,7 @@ export class HomePage {
     this.navCtrl.push(CreateAccountPage);
   }
 
-  openProfilePage(){
+  openProfilePage() {
     this.navCtrl.setRoot(ProfilePage);
   }
 
@@ -59,12 +59,12 @@ export class HomePage {
           this.customerEntity = response.customerEntity;
           // this.a = response.customerEntity;
           sessionStorage.setItem("customerEntity", JSON.stringify(this.customerEntity));
-          toast.setMessage("Welcome " + this.customerEntity.firstName);
+          toast.setMessage("Welcome " + this.customerEntity.firstName + "!");
           toast.present();
           this.navCtrl.setRoot(MainPage);
         }, error => {
           this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
-          toast.setMessage("Invalid login credentials");
+          toast.setMessage(this.errorMessage);
           toast.present();
         })
     }

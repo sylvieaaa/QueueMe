@@ -1,3 +1,4 @@
+import { myIPAddress } from './../../ipAddress';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
@@ -15,7 +16,7 @@ import { CustomerEntity } from '../../entities/CustomerEntity';
 @Injectable()
 export class OrderEntityProvider {
 
-  ipAddress = '192.168.1.98';
+  ipAddress = new myIPAddress().ipaddress;
   portNo = '8080';
   fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystem/Resources/Order';
   baseUrl = "/api/Order";

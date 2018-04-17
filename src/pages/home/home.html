@@ -8,12 +8,13 @@
 </ion-header>
 
 <ion-content class="background" padding>
+  <form (ngSubmit)="doLogin()">
   <ion-grid>
-    <ion-row style="margin-top: 130px">
+    <ion-row style="margin-top: 110px">
       <ion-col col-1></ion-col>
       <ion-col col-10 align-self-center>
         <div text-center>
-          <img src="../assets/imgs/qme_web_light.png" />
+          <img src="./assets/imgs/qme_web_light.png" />
         </div>
       </ion-col>
       <ion-col col-1></ion-col>
@@ -21,32 +22,30 @@
     <ion-row padding-top>
       <ion-col col-2></ion-col>
       <ion-col>
-        <ion-input class="textboxWhite" [(ngModel)]="username" type="email" placeholder="Email Address" clearInput></ion-input>
+        <ion-input class="textboxWhite" name="username" [(ngModel)]="username" type="email" placeholder="Email Address" clearInput></ion-input>
       </ion-col>
       <ion-col col-2></ion-col>
     </ion-row>
     <ion-row>
         <ion-col col-2></ion-col>
         <ion-col>
-          <ion-input class="textboxWhite" [(ngModel)]="password"  type="password" placeholder="Password"></ion-input>
+          <ion-input class="textboxWhite" name="password" [(ngModel)]="password"  type="password" placeholder="Password"></ion-input>
         </ion-col>
         <ion-col col-2></ion-col>
       </ion-row>
       <ion-row padding-top>
           <ion-col col-2></ion-col>
           <ion-col>
-              <button color="queueme-orange" ion-button full (click)="doLogin()">SIGN IN</button>
+              <button color="queueme-orange" ion-button full type="submit">SIGN IN</button>
           </ion-col>
           <ion-col col-2></ion-col>
         </ion-row>
-        <ion-row text-center>
-          <ion-col>
-              <a (click)="openForgetPasswordPage()" style="color:slategray">Forget Password?</a>
-          </ion-col>
-        </ion-row>
   </ion-grid>
+</form>
+<div text-center><a (click)="openForgetPasswordPage()" style="color:slategray">Forget Password?</a></div>
+
+<div text-center style="margin-top: 100px">
+  <a (click)="openCreateAccountPage()" style="color:royalblue; font-size: 1.2em">Don't have an account?</a>
+</div>
   
 </ion-content>
-<ion-footer text-center no-shadow no-border padding-bottom class="background">
-      <a (click)="openCreateAccountPage()" style="color:royalblue; font-size: 1.2em">Don't have an account?</a>
- </ion-footer>

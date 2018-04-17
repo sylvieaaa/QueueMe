@@ -10,7 +10,7 @@
     <ion-title>Order</ion-title>
 
     <ion-buttons end>
-      <button ion-button (click)="closeModal()">Close</button>
+      <button ion-button (click)="returnBack()">Close</button>
     </ion-buttons>
   </ion-navbar>
 
@@ -19,27 +19,34 @@
 
 <ion-content padding>
   <ion-card>
-    <img src="http://localhost:8080/queueme-uploads/foodPhotos/{{data.photoURL}}">
+    <img src="http://{{myIPAddress}}:8080/queueme-uploads/foodPhotos/{{menuItem.photoURL}}">
     <ion-row>
-      <ion-title>{{data.menuItemName}}</ion-title>
+      <ion-title>{{menuItem.menuItemName}}</ion-title>
     </ion-row>
     <ion-row>
-      <ion-title>$ {{data.price}}</ion-title>
+      <ion-title>$ {{menuItem.price}}</ion-title>
     </ion-row>
 
 
     <ion-card-content text-wrap>
-      <p-spinner size="45" [(ngModel)]="quantity" placeholder="Quantity"></p-spinner>
+<<<<<<< HEAD
+      <p-spinner size="35" [(ngModel)]="quantity" placeholder="Quantity"></p-spinner>
       <br/>
       <br/>
-      <textarea [rows]="5" [cols]="50" placeholder="Enter special request(s), if any" pInputTextarea autoResize="autoResize" [(ngModel)]="specialRequest"></textarea>
+      <textarea [rows]="5" [cols]="40" placeholder="Enter special request(s), if any" pInputTextarea autoResize="autoResize" [(ngModel)]="specialRequest"></textarea>
+=======
+      <p-spinner size="30" [(ngModel)]="quantity" placeholder="Quantity"></p-spinner>
+      <br/>
+      <br/>
+      <textarea [rows]="5" [cols]="30" placeholder="Enter special request(s), if any" pInputTextarea autoResize="autoResize" [(ngModel)]="specialRequest"></textarea>
+>>>>>>> c69307bbebc4b30d9210a554f984bbba2b4fbad2
 
     </ion-card-content>
   </ion-card>
 
   <div style="text-align: center">
     <ion-buttons>
-      <button ion-button (click)="closeModal()" round outline>Add to Cart</button>
+      <button ion-button (click)="addItemToCart()" round outline>Add to Cart</button>
     </ion-buttons>
   </div>
 </ion-content>

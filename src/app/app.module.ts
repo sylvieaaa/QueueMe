@@ -1,3 +1,4 @@
+import { ShoppingCartPage } from './../pages/shopping-cart/shopping-cart';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -30,9 +31,13 @@ import { CreditcardEntityProvider } from '../providers/creditcard-entity/creditc
 import {RatingModule} from 'primeng/rating';
 import {SpinnerModule} from 'primeng/spinner';
 import {AccordionModule} from 'primeng/accordion';
+import { CheckoutProvider } from '../providers/checkout/checkout';
+// import { Push } from '@ionic-native/push';
+import { FCM } from '@ionic-native/fcm';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import { ViewOrderPage } from '../pages/view-order/view-order';
 import { OrderEntityProvider } from '../providers/order-entity/order-entity';
+import { Vibration } from '@ionic-native/vibration';
 
 @NgModule({
   declarations: [
@@ -50,7 +55,9 @@ import { OrderEntityProvider } from '../providers/order-entity/order-entity';
     VendorPage,
     ModalPage,
     ViewOrderPage,
-    ModalOrderPage
+    ModalOrderPage,
+    ShoppingCartPage,
+    ViewOrderPage
   ],
   imports: [
     BrowserModule,
@@ -78,7 +85,9 @@ import { OrderEntityProvider } from '../providers/order-entity/order-entity';
     VendorPage,
     ModalPage,
     ViewOrderPage,
-    ModalOrderPage
+    ModalOrderPage,
+    ShoppingCartPage,
+    ViewOrderPage
   ],
   providers: [
     StatusBar,
@@ -89,7 +98,10 @@ import { OrderEntityProvider } from '../providers/order-entity/order-entity';
     VendorEntityProvider,
     MenuitemEntityProvider,
     CreditcardEntityProvider,
-    OrderEntityProvider
+    CheckoutProvider,
+    FCM,
+    OrderEntityProvider,
+    Vibration
   ]
 })
 export class AppModule {}

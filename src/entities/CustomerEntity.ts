@@ -6,5 +6,6 @@ export class CustomerEntity {
     address: string;
     username: string;
     password: null;
+    pushToken: any;
     constructor(){}
 }

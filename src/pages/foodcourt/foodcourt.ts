@@ -1,8 +1,8 @@
+import { myIPAddress } from './../../ipAddress';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {VendorEntityProvider} from '../../providers/vendor-entity/vendor-entity';
 import { VendorPage } from '../vendor/vendor';
-
 /**
  * Generated class for the FoodcourtPage page.
  *
@@ -15,6 +15,7 @@ import { VendorPage } from '../vendor/vendor';
   templateUrl: 'foodcourt.html',
 })
 export class FoodcourtPage {
+  myIPAddress: string = new myIPAddress().ipaddress;
   vendors: any ;
   foodCourt: any;
   errorMessage: string;
@@ -28,15 +29,14 @@ export class FoodcourtPage {
     console.log('ionViewDidLoad FoodcourtPage');
     this.foodCourt = sessionStorage.getItem("foodCourt");
     this.retrieveVendors();
-    console.log(this.vendors);
+    
   }
 
   retrieveVendors(){
     this.vendorEntityProvider.doVendors(this.foodCourt).subscribe(
       response => {
         this.vendors = response.vendorEntities;
-   
-      
+        console.log(this.vendors);
       },
       error => {
         this.errorMessage = "HTTP " + error.status + ": " + error.error.message;

@@ -1,0 +1,101 @@
+<!--
+  Generated template for the ShoppingCartPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Shopping Cart</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="background">
+  <div *ngIf="!haveItems">
+    <h1>No items in cart</h1>
+  </div>
+  <div *ngIf="haveItems">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2>
+          <h5>S/N</h5>
+        </ion-col>
+        <ion-col col-3>
+          <h5>Item Name</h5>
+        </ion-col>
+        <ion-col col-2>
+          <h5>Qty</h5>
+        </ion-col>
+        <ion-col col-3>
+          <h5>Special Req</h5>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+      <ion-row *ngFor="let lineItem of lineItems">
+        <ion-col col-2>{{lineItem.serialNumber}}</ion-col>
+        <ion-col col-3>{{lineItem.menuItemEntity.menuItemName}}</ion-col>
+        <ion-col col-2>{{lineItem.quantity}}</ion-col>
+        <ion-col col-3>{{lineItem.specialRequest}}</ion-col>
+        <ion-col col-1>
+          <ion-icon name="close" (click)="removeItem(lineItem)">
+          </ion-icon>
+        </ion-col>
+      </ion-row>
+      <br/>
+      <ion-row>
+        <ion-col col-7>
+          <h5>Total Line Items:</h5>
+        </ion-col>
+        <ion-col col-5>
+          {{totalLineItems}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-7>
+          <h5>Total Quantity:</h5>
+        </ion-col>
+        <ion-col col-5>
+          {{totalQuantity}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-7>
+          <h5>Total Amount:</h5>
+        </ion-col>
+        <ion-col col-5>
+          ${{totalAmount}}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-list radio-group [(ngModel)]="diningOptions">
+      <ion-item>
+        <ion-label>Dine in</ion-label>
+        <ion-radio value="false"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Takeaway</ion-label>
+        <ion-radio value="true"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item *ngIf="creditCard">
+        <ion-label>{{creditCard.cardNo}}</ion-label>
+        
+      </ion-item>
+      <ion-item>
+          <ion-input placeholder="Enter cvv" ></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-datetime placeholder="Expiry date" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" [(ngModel)]="myDate"></ion-datetime> 
+      </ion-item>
+    
+    </ion-list>
+    <button ion-button block (click)="showActionSheet()">
+        Select credit payment
+      </button>
+    <button ion-button color="queueme-orange" ion-button full (click)="doCheckout()">Checkout</button>
+  </div>
+</ion-content>
