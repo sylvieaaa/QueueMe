@@ -1,3 +1,4 @@
+import { ShoppingCartPage } from './../shopping-cart/shopping-cart';
 import { myIPAddress } from './../../ipAddress';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
@@ -50,6 +51,8 @@ export class FoodcourtPage {
     this.navCtrl.push(VendorPage);
   }
 
-
+  openShoppingCart() {
+    this.navCtrl.push(ShoppingCartPage);
+  }
 
 }

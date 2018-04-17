@@ -1,3 +1,4 @@
+import { MainPage } from './../main/main';
 import { CheckoutProvider } from './../../providers/checkout/checkout';
 import { SaleTransactionEntity } from './../../entities/SaleTransactionEntity';
 import { SaleTransactionLineItemEntity } from './../../entities/SaleTransactionLineItemEntity';
@@ -161,7 +162,7 @@ export class ShoppingCartPage {
           sessionStorage.removeItem("shoppingCart");
           toast.setMessage("Successfully checked out!");
           toast.present();
-          this.navCtrl.pop();
+          this.navCtrl.setRoot(MainPage);
         }, error => {
           toast.setMessage("HTTP " + error.status + ": " + error.error.message);
           toast.present();
@@ -230,12 +231,13 @@ export class ShoppingCartPage {
           buttons: ['OK']
         });
       this.creditCard = card;
-      alert.present();
+      //alert.present();
     }
     else {
       let alert = this.alertCtrl.create(
         {
-          title: "Credit card is already set as default!",
+          title : "Info",
+          subTitle: "Credit card is already selected!",
           buttons: ['OK']
         });
       alert.present();

@@ -39,26 +39,18 @@
         <ion-col col-3>{{lineItem.menuItemEntity.menuItemName}}</ion-col>
         <ion-col col-2>{{lineItem.quantity}}</ion-col>
         <ion-col col-3>{{lineItem.specialRequest}}</ion-col>
-        <ion-col col-1>
-          <ion-icon name="close" (click)="removeItem(lineItem)">
+        <ion-col>
+          <ion-icon style="font-size: 20px" name="close" (click)="removeItem(lineItem)">
           </ion-icon>
         </ion-col>
       </ion-row>
       <br/>
       <ion-row>
         <ion-col col-7>
-          <h5>Total Line Items:</h5>
-        </ion-col>
-        <ion-col col-5>
-          {{totalLineItems}}
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-7>
           <h5>Total Quantity:</h5>
         </ion-col>
         <ion-col col-5>
-          {{totalQuantity}}
+          <h5>{{totalQuantity}}</h5>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -66,21 +58,25 @@
           <h5>Total Amount:</h5>
         </ion-col>
         <ion-col col-5>
-          ${{totalAmount}}
+          <h5>${{totalAmount}}</h5>
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-list radio-group [(ngModel)]="diningOptions">
-      <ion-item>
+    <ion-item>
+        <ion-label color="primary">Dining Options</ion-label>
+    <ion-select [(ngModel)]="diningOptions">
+      <ion-option value="false">Dine in</ion-option>
+      <ion-option value="true">Takeaway</ion-option>
+      <!-- <ion-item>
         <ion-label>Dine in</ion-label>
         <ion-radio value="false"></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>Takeaway</ion-label>
         <ion-radio value="true"></ion-radio>
-      </ion-item>
-    </ion-list>
-
+      </ion-item> -->
+    </ion-select>
+    </ion-item>
     <ion-list>
       <div *ngIf="creditCard">
         <ion-row>
@@ -121,7 +117,7 @@
 
 
     <button ion-button block (click)="showActionSheet()">
-      Select credit payment
+      Select credit card
     </button>
     <div>
       <button ion-button color="queueme-orange" ion-button full (click)="doCheckout()">Checkout</button>

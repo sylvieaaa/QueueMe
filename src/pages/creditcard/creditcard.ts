@@ -30,7 +30,7 @@ export class CreditcardPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public creditCardEntityProvider: CreditcardEntityProvider, private toastCtrl: ToastController) {
-    this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
+    this.customerEntity = JSON.parse(localStorage.getItem('customerEntity'));
     this.creditCardEntityProvider.retrieveAllCreditCards(this.customerEntity.businessId).subscribe(
       response => {
         this.creditCards = response.creditCardEntities;

@@ -1,4 +1,3 @@
-import { myIPAddress } from './../../ipAddress';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { CustomerEntity } from '../../entities/CustomerEntity';

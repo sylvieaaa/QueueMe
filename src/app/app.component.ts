@@ -38,10 +38,10 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public fcm: FCM, 
-    public vibration: Vibration, private alertCtrl: AlertController, public customerEntityProvider: CustomerEntityProvider,public modal: ModalController) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public fcm: FCM,
+    public vibration: Vibration, private alertCtrl: AlertController, public customerEntityProvider: CustomerEntityProvider, public modal: ModalController) {
     this.initializeApp();
-    
+
 
     if (localStorage.getItem('customerEntity') != null) {
       this.rootPage = MainPage;
@@ -56,7 +56,7 @@ export class MyApp {
       { title: 'List', component: ListPage },
     ];
 
-    
+
   }
 
   initializeApp() {
@@ -66,15 +66,15 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.fcm.getToken()
-      .then(token => {
-        this.pushToken = token;
-        localStorage.setItem("pushToken", this.pushToken);
-        console.log(`The token is ${token}`);
-      })
-      .catch(error => console.error('Error getting token', error));
+        .then(token => {
+          this.pushToken = token;
+          localStorage.setItem("pushToken", this.pushToken);
+          console.log(`The token is ${token}`);
+        })
+        .catch(error => console.error('Error getting token', error));
       this.fcm.onTokenRefresh().subscribe(token => {
-        if(localStorage.getItem('customerEntity') != null) {
-        let customerEntity:CustomerEntity = JSON.parse(localStorage.getItem('customerEntity'));
+        if (localStorage.getItem('customerEntity') != null) {
+          let customerEntity: CustomerEntity = JSON.parse(localStorage.getItem('customerEntity'));
           customerEntity.pushToken = token;
           this.customerEntityProvider.updateToken(customerEntity).subscribe(
             response => {
@@ -86,15 +86,16 @@ export class MyApp {
         }
       })
       this.fcm.onNotification().subscribe(data => {
-        let saleTransaction:SaleTransactionEntity = data.saleTransactionEntity;
-        let myModal = this.modal.create(ModalOrderPage, {saleTransactionEntity: saleTransaction});
-    
-        
+        let saleTransaction: SaleTransactionEntity = JSON.parse(data.saleTransactionEntity);
+        // saleTransaction = new SaleTransactionEntity();
+
+        console.log(data.saleTransactionEntity);
         if (data.wasTapped) {
           console.log(JSON.stringify(data));
-          this.rootPage = CreditcardPage;
-          //  this.nav.setRoot(ModalOrderPage, {saleTransactionEntity: saleTransaction});
-           myModal.present();
+          sessionStorage.setItem("showOrderPage", JSON.stringify(saleTransaction));
+          //this.rootPage = CreditcardPage;
+          //  this.navCtrl.setRoot(ShowOrderPage, {saleTransactionEntity: saleTransaction});
+          this.navCtrl.setRoot(ShowOrderPage);
           // window.location.href = "/pages/profile/profile.html";
           //this.rootPage = ProfilePage;
         } else {
@@ -112,19 +113,26 @@ export class MyApp {
                   handler: () => {
                     this.vibration.vibrate(0);
                     console.log('Cancel clicked');
-                    alert.dismiss().then(() => { 
-                      // this.navCtrl.push(ModalOrderPage, {saleTransactionEntity: saleTransaction});
-                      myModal.present();
+                    alert.dismiss().then(() => {
+                      this.navCtrl.pop();
+                      this.navCtrl.push(ShowOrderPage);
+                      sessionStorage.setItem("showOrderPage", JSON.stringify(saleTransaction));
+                      console.log("innnn");
+                      console.log(sessionStorage.getItem("showOrderPage"));
+                      // this.nav.push(ShowOrderPage, {saleTransactionEntity: saleTransaction});
+                      //this.navCtrl.push(CreateAccountPage);
                     })
-                    
+
                   }
                 }
               ]
           })
           alert.present();
-      //     // this.navCtrl.push(CreditcardPage);
-      //     // this.vibration.vibrate(0);
+          //     // this.navCtrl.push(CreditcardPage);
+          //     // this.vibration.vibrate(0);
         }
+      }, error => {
+        alert(error);
       })
       // this.pushSetUp();
     });
@@ -161,8 +169,19 @@ export class MyApp {
 
   logout() {
     if (localStorage.getItem('customerEntity') != null) {
-      localStorage.removeItem('customerEntity');
-      this.nav.setRoot(HomePage);
+      let customerEntity: CustomerEntity = JSON.parse(localStorage.getItem('customerEntity'));
+      customerEntity.pushToken = null;
+      this.customerEntityProvider.updateToken(customerEntity).subscribe(
+        response => {
+          localStorage.removeItem('customerEntity');
+          sessionStorage.clear();
+          this.nav.setRoot(HomePage);
+        }, error => {
+          localStorage.removeItem('customerEntity');
+          sessionStorage.clear();
+          this.nav.setRoot(HomePage);
+        }
+      )
     }
   }
 }

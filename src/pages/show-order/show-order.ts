@@ -23,32 +23,38 @@ export class ShowOrderPage {
   saleTransactionLineEntities: any;
   selectedSaleTransactionLineItemEntity: any;
   selectedMenuItemEntity: any;
- 
+
 
   constructor(public navParams: NavParams, public view: ViewController, private toastCtrl: ToastController,
     public orderEntityProvider: OrderEntityProvider) {
-      this.saleTransactionEntity= this.navParams.get('saleTransactionEntity');
-      console.log(this.saleTransactionEntity);
-   this.saleTransactionId = this.saleTransactionEntity.saleTransactionId;
+    this.saleTransactionEntity = this.navParams.get('saleTransactionEntity');
+    if(this.saleTransactionEntity == null) {
+      console.log("1 aa");
+      console.log(sessionStorage.getItem("showOrderPage"));
+      this.saleTransactionEntity = JSON.parse(sessionStorage.getItem("showOrderPage"));
+    }
+    console.log(this.saleTransactionEntity.saleTransactionId);
+    this.saleTransactionId = this.saleTransactionEntity.saleTransactionId;
+    console.log(this.saleTransactionId + " here");
   }
 
   ionViewDidLoad() {
-    let customerEntity:CustomerEntity = JSON.parse(localStorage.getItem("customerEntity"));
+    let customerEntity: CustomerEntity = JSON.parse(localStorage.getItem("customerEntity"));
     console.log('ionViewDidLoad ShowOrderPage');
     this.orderEntityProvider.retrieveAllOrders(this.saleTransactionId, customerEntity.businessId).subscribe(
-      response => { 
+      response => {
         console.log(response);
-        this.orderEntities = response.orderEntities; 
+        this.orderEntities = response.orderEntities;
         for (let orderEntity of this.orderEntities) {
           this.saleTransactionLineEntities = orderEntity.saleTransactionLineItemEntities;
           for (let stlie of this.saleTransactionLineEntities) {
             this.selectedSaleTransactionLineItemEntity = stlie;
           }
-        }       
-      }, 
+        }
+      },
       error => {
-      this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
-    }
-  );
-}
+        this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+      }
+    );
+  }
 }

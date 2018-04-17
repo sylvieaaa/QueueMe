@@ -27,7 +27,7 @@ export class AddcardPage {
     private toastCtrl: ToastController, public creditCardEntityProvider: CreditcardEntityProvider) {
     this.customerEntity = new CustomerEntity();
 
-    this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
+    this.customerEntity = JSON.parse(localStorage.getItem('customerEntity'));
     this.creditCardEntityProvider.retrieveAllCreditCards(this.customerEntity.businessId).subscribe(
       response => {
         this.creditCards = response.creditCardEntities;
@@ -41,7 +41,7 @@ export class AddcardPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddcardPage');
-    this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
+    this.customerEntity = JSON.parse(localStorage.getItem('customerEntity'));
   }
 
   createCard() {
