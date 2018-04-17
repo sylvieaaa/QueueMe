@@ -1,3 +1,4 @@
+import { CreateAccountPage } from './../pages/create-account/create-account';
 import { CustomerEntityProvider } from './../providers/customer-entity/customer-entity';
 import { CreditcardPage } from './../pages/creditcard/creditcard';
 import { Vibration } from '@ionic-native/vibration';
@@ -39,6 +40,7 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public fcm: FCM, 
     public vibration: Vibration, private alertCtrl: AlertController, public customerEntityProvider: CustomerEntityProvider) {
     this.initializeApp();
+<<<<<<< HEAD
     // this.fcm.getToken()
     //   .then(token => {
     //     this.pushToken = token;
@@ -46,6 +48,9 @@ export class MyApp {
     //     console.log(`The token is ${token}`);
     //   })
     //   .catch(error => console.error('Error getting token', error));
+=======
+    
+>>>>>>> f7e8d92bbe887d6ec69f10c7b517e2a30ed3fa5a
 
     if (sessionStorage.getItem('customerEntity') != null) {
       this.rootPage = MainPage;
@@ -60,6 +65,7 @@ export class MyApp {
       { title: 'List', component: ListPage },
     ];
 
+<<<<<<< HEAD
     platform.ready().then(() => {
       // fcm.onTokenRefresh().subscribe(token => {
       //   if(sessionStorage.getItem('customerEntity') != null) {
@@ -115,6 +121,70 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+=======
+    
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+      this.fcm.getToken()
+      .then(token => {
+        this.pushToken = token;
+        sessionStorage.setItem("pushToken", this.pushToken);
+        console.log(`The token is ${token}`);
+      })
+      .catch(error => console.error('Error getting token', error));
+      this.fcm.onTokenRefresh().subscribe(token => {
+        if(sessionStorage.getItem('customerEntity') != null) {
+        let customerEntity:CustomerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
+          customerEntity.pushToken = token;
+          this.customerEntityProvider.updateToken(customerEntity).subscribe(
+            response => {
+              sessionStorage.setItem('customerEntity', JSON.stringify(customerEntity));
+            }, error => {
+              console.log("something went wrong");
+            }
+          )
+        }
+      })
+      this.fcm.onNotification().subscribe(data => {
+        if (data.wasTapped) {
+          console.log(JSON.stringify(data));
+          this.rootPage = CreditcardPage;
+           this.nav.setRoot(CreateAccountPage);
+          // window.location.href = "/pages/profile/profile.html";
+          //this.rootPage = ProfilePage;
+        } else {
+          console.log(JSON.stringify(data));
+          let receiveMessage = JSON.stringify(data);
+          this.vibration.vibrate([2000, 1000, 2000]);
+          let alert = this.alertCtrl.create({
+            title: "Your food is ready!",
+            message: data.data,
+            buttons:
+              [
+                {
+                  text: 'OK',
+                  role: 'OK',
+                  handler: () => {
+                    this.vibration.vibrate(0);
+                    console.log('Cancel clicked');
+                    alert.dismiss().then(() => { this.navCtrl.push(CreateAccountPage);})
+                    
+                  }
+                }
+              ]
+          })
+          alert.present();
+          // this.navCtrl.push(CreditcardPage);
+          // this.vibration.vibrate(0);
+        }
+      })
+>>>>>>> f7e8d92bbe887d6ec69f10c7b517e2a30ed3fa5a
       // this.pushSetUp();
     });
   }
