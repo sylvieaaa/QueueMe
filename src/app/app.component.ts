@@ -17,6 +17,7 @@ import { AddcardPage } from '../pages/addcard/addcard'
 
 import { VendorPage } from '../pages/vendor/vendor';
 import { ModalPage } from '../pages/modal/modal';
+import { ModalOrderPage } from '../pages/modal-order/modal-order';
 
 
 @Component({

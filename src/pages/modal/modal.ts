@@ -27,7 +27,7 @@ export class ModalPage {
     console.log('ionViewDidLoad ModalPage');
   
   }
-
+  
   closeModal(){
     let toast = this.toastCtrl.create({
       duration: 3000,
