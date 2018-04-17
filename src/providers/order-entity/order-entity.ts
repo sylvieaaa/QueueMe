@@ -25,7 +25,7 @@ export class OrderEntityProvider {
     console.log('Hello OrderEntityProvider Provider');
   }
 
-  retrieveAllOrders(customerId: number): Observable<any> 
+  retrieveAllSaleTransactions(customerId: number): Observable<any> 
 	{	
     let path: string = '';
     
@@ -38,8 +38,28 @@ export class OrderEntityProvider {
 		{
 			path = this.fullBaseUrl;
 		}
+		console.log("return");
+		return this.httpClient.get<any>(path + "/retrieveAllSaleTransactions?customerId="+ customerId).pipe
+		(
+			catchError(this.handleError)
+		);		
+	}
 	
-		return this.httpClient.get<any>(path + "/retrieveAllOrders?customerId="+ customerId).pipe
+	retrieveAllOrders(saleTransactionId: number): Observable<any> 
+	{	
+    let path: string = '';
+    
+		
+		if(this.platform.is('core') || this.platform.is('mobileweb')) 
+		{
+			path = this.baseUrl;
+		}
+		else
+		{
+			path = this.fullBaseUrl;
+		}
+		console.log("Client has been returned");
+		return this.httpClient.get<any>(path + "/retrieveAllOrders?saleTransactionId="+ saleTransactionId).pipe
 		(
 			catchError(this.handleError)
 		);		

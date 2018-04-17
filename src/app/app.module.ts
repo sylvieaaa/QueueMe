@@ -17,6 +17,7 @@ import { CreditcardPage } from '../pages/creditcard/creditcard';
 import { AddcardPage } from '../pages/addcard/addcard';
 import { VendorPage } from '../pages/vendor/vendor';
 import { ModalPage } from '../pages/modal/modal';
+import { ModalOrderPage } from '../pages/modal-order/modal-order';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -53,6 +54,8 @@ import { Vibration } from '@ionic-native/vibration';
     AddcardPage,
     VendorPage,
     ModalPage,
+    ViewOrderPage,
+    ModalOrderPage,
     ShoppingCartPage,
     ViewOrderPage
   ],
@@ -81,6 +84,8 @@ import { Vibration } from '@ionic-native/vibration';
     AddcardPage,
     VendorPage,
     ModalPage,
+    ViewOrderPage,
+    ModalOrderPage,
     ShoppingCartPage,
     ViewOrderPage
   ],

@@ -17,11 +17,12 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { FoodcourtPage } from '../pages/foodcourt/foodcourt';
 import { ViewOrderPage } from '../pages/view-order/view-order';
 
-import { AddcardPage } from '../pages/addcard/addcard'
+import { AddcardPage } from '../pages/addcard/addcard';
 
 
 import { VendorPage } from '../pages/vendor/vendor';
 import { ModalPage } from '../pages/modal/modal';
+import { ModalOrderPage } from '../pages/modal-order/modal-order';
 import { CustomerEntity } from '../entities/CustomerEntity';
 
 @Component({
