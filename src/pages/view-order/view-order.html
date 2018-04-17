@@ -9,14 +9,14 @@
 
 <ion-content padding>
 
-    <ion-card *ngFor="let order of orders">
-        <ion-card-title>{{order.vendorEntity.foodCourtEntity.name}}</ion-card-title> 
-        <ion-card-header>{{order.vendorEntity.vendorName}}></ion-card-header>
-        <ion-card-header>{{order.dateTime}}></ion-card-header>
-        <ion-card-header> Items: </ion-card-header>
-          <ion-card *ngFor="let saleTransactionLineItem of order.saleTransactionLineItemEntities">
-            <ion-card-content>{{saleTransactionLineItem.menuItemEntity.menuItemName}}</ion-card-content>
-          </ion-card>
-        <ion-card-content style="float: right;">{{order.totalEarnings}}</ion-card-content>
+    <ion-card *ngFor="let saleTransactionEntity of saleTransactionEntities">
+        <ion-item (click)="openModal($event, saleTransactionEntity)">   
+        <img src="http://localhost:8080/queueme-uploads/foodCourtLogos/{{selectedFoodCourt.fileURL}}">
+        <h2 style="font-weight:bold; margin-top: 15px">{{selectedFoodCourt.name}}</h2>
+        <h3 style="color: #696969"> {{saleTransactionEntity.transactionDateTime | date:'short'}}</h3>
+          <div style="float: right;">
+            <ion-card-content> <b>Total: </b>${{saleTransactionEntity.totalAmount}} </ion-card-content>
+      </div>
+    </ion-item>
       </ion-card>
 </ion-content>

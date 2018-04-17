@@ -84,8 +84,15 @@
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.2.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
+<<<<<<< HEAD
     <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
     <plugin name="cordova-plugin-vibration" spec="^3.0.1" />
     <allow-navigation href="http://172.25.103.242:8100" />
     <engine name="android" spec="6.4.0" />
+=======
+    <allow-navigation href="http://172.25.103.242:8100" />
+    <engine name="android" spec="6.4.0" />
+    <plugin name="cordova-plugin-vibration" spec="^3.1.0" />
+    <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
+>>>>>>> 733e6a42c6d450548f131658502f3a173e73fc44
 </widget>

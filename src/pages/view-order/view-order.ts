@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { CustomerEntity } from '../../entities/CustomerEntity';
 import { ToastController } from 'ionic-angular';
-import { OrderEntityProvider } from '../../providers/order-entity/order-entity'
+import { OrderEntityProvider } from '../../providers/order-entity/order-entity';
+import { ModalOrderPage } from '../../pages/modal-order/modal-order';
+import { DatePipe } from '@angular/common';
 
 /**
  * Generated class for the ViewOrderPage page.
@@ -18,26 +20,44 @@ import { OrderEntityProvider } from '../../providers/order-entity/order-entity'
 export class ViewOrderPage {
 
   customerEntity: CustomerEntity;
-  orders: any;
+  saleTransactionEntities: any;
+  stliEntities: any;
+  selectedSaleTransactionLineItem: any;
+  selectedMenuItem: any;
+  selectedVendor: any;
+  selectedFoodCourt: any;
   errorMessage: String;
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,  private toastCtrl: ToastController,
+  constructor(public modal: ModalController, public navCtrl: NavController, public navParams: NavParams,  private toastCtrl: ToastController,
     public orderEntityProvider: OrderEntityProvider) {
       this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ViewOrderPage');
-    this.orderEntityProvider.retrieveAllOrders(this.customerEntity.businessId).subscribe(
+    this.orderEntityProvider.retrieveAllSaleTransactions(this.customerEntity.businessId).subscribe(
       response => {
-        this.orders = response.orderEntities;
-        console.log(response.orderEntities);
+        this.saleTransactionEntities = response.saleTransactionEntities;
+        for (let saleTransactionEntity of this.saleTransactionEntities) {
+          this.stliEntities = saleTransactionEntity.saleTransactionLineItemEntities;
+          for (let stli of this.stliEntities) {
+            this.selectedSaleTransactionLineItem = stli;
+            this.selectedMenuItem = stli.menuItemEntity;
+            this.selectedVendor = stli.menuItemEntity.vendorEntity;
+            this.selectedFoodCourt = stli.menuItemEntity.vendorEntity.foodCourtEntity;
+          }
+        }
       },
       error => {
         this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
       }
     );
+  }
+
+  openModal(event, saleTransactionEntity){
+    let myModal = this.modal.create(ModalOrderPage, {saleTransactionEntity: saleTransactionEntity});
+    myModal.present();
   }
 
 }
