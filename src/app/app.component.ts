@@ -1,3 +1,4 @@
+import { CreateAccountPage } from './../pages/create-account/create-account';
 import { CustomerEntityProvider } from './../providers/customer-entity/customer-entity';
 import { CreditcardPage } from './../pages/creditcard/creditcard';
 import { Vibration } from '@ionic-native/vibration';
@@ -38,13 +39,7 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public fcm: FCM, 
     public vibration: Vibration, private alertCtrl: AlertController, public customerEntityProvider: CustomerEntityProvider) {
     this.initializeApp();
-    this.fcm.getToken()
-      .then(token => {
-        this.pushToken = token;
-        sessionStorage.setItem("pushToken", this.pushToken);
-        console.log(`The token is ${token}`);
-      })
-      .catch(error => console.error('Error getting token', error));
+    
 
     if (sessionStorage.getItem('customerEntity') != null) {
       this.rootPage = MainPage;
@@ -59,8 +54,23 @@ export class MyApp {
       { title: 'List', component: ListPage },
     ];
 
-    platform.ready().then(() => {
-      fcm.onTokenRefresh().subscribe(token => {
+    
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+      this.fcm.getToken()
+      .then(token => {
+        this.pushToken = token;
+        sessionStorage.setItem("pushToken", this.pushToken);
+        console.log(`The token is ${token}`);
+      })
+      .catch(error => console.error('Error getting token', error));
+      this.fcm.onTokenRefresh().subscribe(token => {
         if(sessionStorage.getItem('customerEntity') != null) {
         let customerEntity:CustomerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
           customerEntity.pushToken = token;
@@ -73,16 +83,17 @@ export class MyApp {
           )
         }
       })
-      fcm.onNotification().subscribe(data => {
+      this.fcm.onNotification().subscribe(data => {
         if (data.wasTapped) {
           console.log(JSON.stringify(data));
-          //  this.navCtrl.setRoot(ProfilePage);
+          this.rootPage = CreditcardPage;
+           this.nav.setRoot(CreateAccountPage);
           // window.location.href = "/pages/profile/profile.html";
           //this.rootPage = ProfilePage;
         } else {
           console.log(JSON.stringify(data));
           let receiveMessage = JSON.stringify(data);
-          this.vibration.vibrate([2000, 1000, 2000, 1000, 2000, 1000, 2000, 1000, 2000]);
+          this.vibration.vibrate([2000, 1000, 2000]);
           let alert = this.alertCtrl.create({
             title: "Your food is ready!",
             message: data.data,
@@ -94,7 +105,7 @@ export class MyApp {
                   handler: () => {
                     this.vibration.vibrate(0);
                     console.log('Cancel clicked');
-                    alert.dismiss().then(() => { this.navCtrl.push(CreditcardPage);})
+                    alert.dismiss().then(() => { this.navCtrl.push(CreateAccountPage);})
                     
                   }
                 }
@@ -105,15 +116,6 @@ export class MyApp {
           // this.vibration.vibrate(0);
         }
       })
-    })
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
       // this.pushSetUp();
     });
   }
