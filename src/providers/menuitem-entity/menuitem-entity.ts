@@ -1,3 +1,4 @@
+import { myIPAddress } from './../../ipAddress';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
@@ -18,7 +19,7 @@ export class MenuitemEntityProvider {
     console.log('Hello MenuitemEntityProvider Provider');
   }
 
-  ipAddress = '172.17.169.193';
+  ipAddress = new myIPAddress().ipaddress;
   portNo = '8080';
   fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystemJsf/Resources/Menu';
   baseUrl = "/api/Menu";

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { MenuitemEntityProvider } from '../../providers/menuitem-entity/menuitem-entity';
 import { ModalPage } from '../modal/modal';
+import { myIPAddress } from './../../ipAddress';
 
 /**
  * Generated class for the VendorPage page.
@@ -15,7 +16,7 @@ import { ModalPage } from '../modal/modal';
   templateUrl: 'vendor.html',
 })
 export class VendorPage {
-
+  myIPAddress: string = new myIPAddress().ipaddress;
   vendor: any;
   menu: any;
   errorMessage: string;

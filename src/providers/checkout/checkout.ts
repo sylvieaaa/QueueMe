@@ -1,3 +1,4 @@
+import { myIPAddress } from './../../ipAddress';
 import { CustomerEntity } from './../../entities/CustomerEntity';
 import { SaleTransactionEntity } from './../../entities/SaleTransactionEntity';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -19,10 +20,9 @@ const httpOptions = {
 
 @Injectable()
 export class CheckoutProvider {
-
-  ipAddress = '172.17.169.193';
+  ipAddress = new myIPAddress().ipaddress;
   portNo = '8080';
-  fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystemJsf/Resources/CreditCard';
+  fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystemJsf/Resources/Checkout';
   baseUrl = "/api/Checkout";
 
   constructor(public httpClient: HttpClient, public platform: Platform) {

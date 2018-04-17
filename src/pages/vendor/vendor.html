@@ -19,7 +19,7 @@
       <p-accordionTab header = {{category.name}} >
           <ion-card *ngFor="let menuItem of category.menuItemEntities" >
            <ion-item (click)="openModal($event, menuItem)">
-            <img src = "http://localhost:8080/queueme-uploads/foodPhotos/{{menuItem.photoURL}}"> 
+            <img src = "http://{{myIPAddress}}:8080/queueme-uploads/foodPhotos/{{menuItem.photoURL}}"> 
             <ion-row>{{menuItem.menuItemName}}</ion-row>
             <ion-row>$ {{menuItem.price}}  </ion-row>
            </ion-item>

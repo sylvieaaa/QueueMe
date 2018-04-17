@@ -16,7 +16,7 @@
 <ion-content class="background">
   <ion-card *ngFor="let vendor of vendors">
     <button ion-item (click)="navVendor($event, vendor)" style="background-color: white">
-      <img src="http://localhost:8080/queueme-uploads/vendorLogos/{{vendor.photoURL}}">
+      <img src="http://{{myIPAddress}}:8080/queueme-uploads/vendorLogos/{{vendor.photoURL}}">
       <ion-card-title>{{vendor.vendorName}}</ion-card-title>
       <p-rating text-center [ngModel]="vendor.rating" readonly="true" stars="5" [cancel]="false"></p-rating>
     </button>

@@ -36,6 +36,7 @@ import { FCM } from '@ionic-native/fcm';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import { ViewOrderPage } from '../pages/view-order/view-order';
 import { OrderEntityProvider } from '../providers/order-entity/order-entity';
+import { Vibration } from '@ionic-native/vibration';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { OrderEntityProvider } from '../providers/order-entity/order-entity';
     CreditcardEntityProvider,
     CheckoutProvider,
     FCM,
-    OrderEntityProvider
+    OrderEntityProvider,
+    Vibration
   ]
 })
 export class AppModule {}

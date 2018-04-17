@@ -1,3 +1,4 @@
+import { myIPAddress } from './../../ipAddress';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
@@ -13,7 +14,7 @@ const httpOptions = {
 @Injectable()
 export class CustomerEntityProvider {
 
-	ipAddress = '172.17.169.193';
+	ipAddress = new myIPAddress().ipaddress;
 	portNo = '8080';
 	fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystemJsf/Resources/Customer';
 	baseUrl = "/api/Customer";
@@ -114,6 +115,23 @@ export class CustomerEntityProvider {
 		}
 
 		return this.httpClient.post<any>(path + "/changePassword", changePasswordReq, httpOptions).pipe
+			(
+			catchError(this.handleError)
+			);
+	}
+
+	updateToken(customerEntity: CustomerEntity) {
+		let updateCustomerReq = {"customerEntity" : customerEntity};
+		let path: string = '';
+
+		if (this.platform.is('core') || this.platform.is('mobileweb')) {
+			path = this.baseUrl;
+		}
+		else {
+			path = this.fullBaseUrl;
+		}
+
+		return this.httpClient.post<any>(path +  "/updateToken", updateCustomerReq, httpOptions).pipe
 			(
 			catchError(this.handleError)
 			);
