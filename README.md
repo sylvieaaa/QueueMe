@@ -10,7 +10,14 @@ copyPrimeng: {
     src: ['{{ROOT}}/node_modules/primeng/resources/themes/omega/theme.css', '{{ROOT}}/node_modules/primeng/resources/primeng.min.css', '{{ROOT}}/node_modules/font-awesome/css/font-awesome.min.css'],
     dest: '{{BUILD}}/assets/css'
   }, <br/>
-  copyFontAwesome: {
+copyFontAwesome: {
     src: ["{{ROOT}}/node_modules/font-awesome/fonts/**/*"],
     dest: "{{BUILD}}/assets/fonts"
   }
+
+
+## Set up firebase
+**ionic cordova platform remove android** <br/>
+**ionic cordova platform add android@6.4.0 --save** <br/>
+**ionic cordova plugin add cordova-plugin-fcm** <br/>
+**npm install --save @ionic-native/fcm** <br/>
