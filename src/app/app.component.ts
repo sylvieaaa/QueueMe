@@ -1,10 +1,11 @@
+import { SaleTransactionEntity } from './../entities/SaleTransactionEntity';
 import { CreateAccountPage } from './../pages/create-account/create-account';
 import { CustomerEntityProvider } from './../providers/customer-entity/customer-entity';
 import { CreditcardPage } from './../pages/creditcard/creditcard';
 import { Vibration } from '@ionic-native/vibration';
 import { FCM } from '@ionic-native/fcm';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, NavController, AlertController } from 'ionic-angular';
+import { Nav, Platform, NavController, AlertController, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 // import { Push, PushObject, PushOptions } from '@ionic-native/push';
@@ -38,21 +39,11 @@ export class MyApp {
   pages: Array<{ title: string, component: any }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public fcm: FCM, 
-    public vibration: Vibration, private alertCtrl: AlertController, public customerEntityProvider: CustomerEntityProvider) {
+    public vibration: Vibration, private alertCtrl: AlertController, public customerEntityProvider: CustomerEntityProvider,public modal: ModalController) {
     this.initializeApp();
-<<<<<<< HEAD
-    // this.fcm.getToken()
-    //   .then(token => {
-    //     this.pushToken = token;
-    //     sessionStorage.setItem("pushToken", this.pushToken);
-    //     console.log(`The token is ${token}`);
-    //   })
-    //   .catch(error => console.error('Error getting token', error));
-=======
     
->>>>>>> f7e8d92bbe887d6ec69f10c7b517e2a30ed3fa5a
 
-    if (sessionStorage.getItem('customerEntity') != null) {
+    if (localStorage.getItem('customerEntity') != null) {
       this.rootPage = MainPage;
     }
     // used for an example of ngFor and navigation
@@ -65,63 +56,6 @@ export class MyApp {
       { title: 'List', component: ListPage },
     ];
 
-<<<<<<< HEAD
-    platform.ready().then(() => {
-      // fcm.onTokenRefresh().subscribe(token => {
-      //   if(sessionStorage.getItem('customerEntity') != null) {
-      //   let customerEntity:CustomerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
-      //     customerEntity.pushToken = token;
-      //     this.customerEntityProvider.updateToken(customerEntity).subscribe(
-      //       response => {
-      //         sessionStorage.setItem('customerEntity', JSON.stringify(customerEntity));
-      //       }, error => {
-      //         console.log("something went wrong");
-      //       }
-      //     )
-      //   }
-      // })
-      // fcm.onNotification().subscribe(data => {
-      //   if (data.wasTapped) {
-      //     console.log(JSON.stringify(data));
-      //     //  this.navCtrl.setRoot(ProfilePage);
-      //     // window.location.href = "/pages/profile/profile.html";
-      //     //this.rootPage = ProfilePage;
-      //   } else {
-      //     console.log(JSON.stringify(data));
-      //     let receiveMessage = JSON.stringify(data);
-      //     this.vibration.vibrate([2000, 1000, 2000, 1000, 2000, 1000, 2000, 1000, 2000]);
-      //     let alert = this.alertCtrl.create({
-      //       title: "Your food is ready!",
-      //       message: data.data,
-      //       buttons:
-      //         [
-      //           {
-      //             text: 'OK',
-      //             role: 'OK',
-      //             handler: () => {
-      //               this.vibration.vibrate(0);
-      //               console.log('Cancel clicked');
-      //               alert.dismiss().then(() => { this.navCtrl.push(CreditcardPage);})
-                    
-      //             }
-      //           }
-      //         ]
-      //     })
-      //     alert.present();
-      //     // this.navCtrl.push(CreditcardPage);
-      //     // this.vibration.vibrate(0);
-      //   }
-      // })
-    })
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-=======
     
   }
 
@@ -134,17 +68,17 @@ export class MyApp {
       this.fcm.getToken()
       .then(token => {
         this.pushToken = token;
-        sessionStorage.setItem("pushToken", this.pushToken);
+        localStorage.setItem("pushToken", this.pushToken);
         console.log(`The token is ${token}`);
       })
       .catch(error => console.error('Error getting token', error));
       this.fcm.onTokenRefresh().subscribe(token => {
-        if(sessionStorage.getItem('customerEntity') != null) {
-        let customerEntity:CustomerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
+        if(localStorage.getItem('customerEntity') != null) {
+        let customerEntity:CustomerEntity = JSON.parse(localStorage.getItem('customerEntity'));
           customerEntity.pushToken = token;
           this.customerEntityProvider.updateToken(customerEntity).subscribe(
             response => {
-              sessionStorage.setItem('customerEntity', JSON.stringify(customerEntity));
+              localStorage.setItem('customerEntity', JSON.stringify(customerEntity));
             }, error => {
               console.log("something went wrong");
             }
@@ -152,10 +86,15 @@ export class MyApp {
         }
       })
       this.fcm.onNotification().subscribe(data => {
+        let saleTransaction:SaleTransactionEntity = data.saleTransactionEntity;
+        let myModal = this.modal.create(ModalOrderPage, {saleTransactionEntity: saleTransaction});
+    
+        
         if (data.wasTapped) {
           console.log(JSON.stringify(data));
           this.rootPage = CreditcardPage;
-           this.nav.setRoot(CreateAccountPage);
+          //  this.nav.setRoot(ModalOrderPage, {saleTransactionEntity: saleTransaction});
+           myModal.present();
           // window.location.href = "/pages/profile/profile.html";
           //this.rootPage = ProfilePage;
         } else {
@@ -173,7 +112,10 @@ export class MyApp {
                   handler: () => {
                     this.vibration.vibrate(0);
                     console.log('Cancel clicked');
-                    alert.dismiss().then(() => { this.navCtrl.push(CreateAccountPage);})
+                    alert.dismiss().then(() => { 
+                      // this.navCtrl.push(ModalOrderPage, {saleTransactionEntity: saleTransaction});
+                      myModal.present();
+                    })
                     
                   }
                 }
@@ -184,7 +126,6 @@ export class MyApp {
           // this.vibration.vibrate(0);
         }
       })
->>>>>>> f7e8d92bbe887d6ec69f10c7b517e2a30ed3fa5a
       // this.pushSetUp();
     });
   }
@@ -219,8 +160,8 @@ export class MyApp {
   }
 
   logout() {
-    if (sessionStorage.getItem('customerEntity') != null) {
-      sessionStorage.removeItem('customerEntity');
+    if (localStorage.getItem('customerEntity') != null) {
+      localStorage.removeItem('customerEntity');
       this.nav.setRoot(HomePage);
     }
   }

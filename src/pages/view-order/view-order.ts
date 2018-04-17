@@ -1,3 +1,4 @@
+import { myIPAddress } from './../../ipAddress';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { CustomerEntity } from '../../entities/CustomerEntity';
@@ -18,7 +19,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: 'view-order.html',
 })
 export class ViewOrderPage {
-
+  myIPAddress: string = new myIPAddress().ipaddress;
   customerEntity: CustomerEntity;
   saleTransactionEntities: any;
   stliEntities: any;
@@ -31,7 +32,7 @@ export class ViewOrderPage {
 
   constructor(public modal: ModalController, public navCtrl: NavController, public navParams: NavParams,  private toastCtrl: ToastController,
     public orderEntityProvider: OrderEntityProvider) {
-      this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
+      this.customerEntity = JSON.parse(localStorage.getItem('customerEntity'));
   }
 
   ionViewDidLoad() {
@@ -43,9 +44,9 @@ export class ViewOrderPage {
           this.stliEntities = saleTransactionEntity.saleTransactionLineItemEntities;
           for (let stli of this.stliEntities) {
             this.selectedSaleTransactionLineItem = stli;
-            this.selectedMenuItem = stli.menuItemEntity;
-            this.selectedVendor = stli.menuItemEntity.vendorEntity;
-            this.selectedFoodCourt = stli.menuItemEntity.vendorEntity.foodCourtEntity;
+            // this.selectedMenuItem = stli.menuItemEntity;
+            // this.selectedVendor = stli.menuItemEntity.vendorEntity;
+            // this.selectedFoodCourt = stli.menuItemEntity.vendorEntity.foodCourtEntity;
           }
         }
       },

@@ -31,13 +31,13 @@ export class MainPage {
   replicate: any;
 
   constructor(public navCtrl: NavController, public foodCourtEntityProvider: FoodcourtEntityProvider, public navParams: NavParams, public customerEntityProvider: CustomerEntityProvider) {
-    this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
-    let pushToken = sessionStorage.getItem("pushToken");
+    this.customerEntity = JSON.parse(localStorage.getItem('customerEntity'));
+    let pushToken = localStorage.getItem("pushToken");
     if (!(this.customerEntity.pushToken === pushToken)) {
       this.customerEntity.pushToken = pushToken;
       this.customerEntityProvider.updateToken(this.customerEntity).subscribe(
         response => {
-          sessionStorage.setItem('customerEntity', JSON.stringify(this.customerEntity));
+          localStorage.setItem('customerEntity', JSON.stringify(this.customerEntity));
         }, error => {
           console.log("something went wrong");
         }

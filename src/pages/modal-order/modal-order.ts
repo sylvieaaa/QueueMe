@@ -41,8 +41,10 @@ export class ModalOrderPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalOrderPage');
-    this.orderEntityProvider.retrieveAllOrders(this.saleTransactionId).subscribe(
+    let customerEntity:CustomerEntity = JSON.parse(localStorage.getItem("customerEntity"));
+    this.orderEntityProvider.retrieveAllOrders(this.saleTransactionId, customerEntity.businessId).subscribe(
       response => { 
+        console.log(response);
         this.orderEntities = response.orderEntities; 
         for (let orderEntity of this.orderEntities) {
           this.saleTransactionLineEntities = orderEntity.saleTransactionLineItemEntities;
