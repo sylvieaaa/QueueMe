@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { splitClasses } from '@angular/compiler';
+import { myIPAddress } from './../../ipAddress';
 
 /**
  * Generated class for the ModalPage page.
@@ -17,6 +18,7 @@ import { splitClasses } from '@angular/compiler';
   templateUrl: 'modal.html',
 })
 export class ModalPage {
+  myIPAddress: string = new myIPAddress().ipaddress;
   shoppingCart: any;
   menuItem:any;
   data:any;
@@ -69,16 +71,16 @@ export class ModalPage {
     this.shoppingCart.saleTransactionLineItems = saleTransactionLineItems;
     sessionStorage.setItem("shoppingCart", JSON.stringify(this.shoppingCart));
     console.log(saleTransactionLineItems);
-    this.closeModal();
-  }
-
-  closeModal(){
     let toast = this.toastCtrl.create({
       duration: 3000,
       position: 'bottom'
     });
     toast.setMessage("Added to cart successfully!");
     toast.present();
+    this.closeModal();
+  }
+
+  closeModal(){
     this.view.dismiss();
   }
 

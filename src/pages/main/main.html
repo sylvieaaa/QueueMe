@@ -51,7 +51,7 @@
 
       <ion-card *ngFor="let foodcourt of foodCourts">
         <button ion-item (click)="navFoodCourt($event, foodcourt)" style="background-color:white">
-          <img src="http://localhost:8080/queueme-uploads/foodCourtLogos/{{foodcourt.fileURL}}">
+          <img src="http://{{myIPAddress}}:8080/queueme-uploads/foodCourtLogos/{{foodcourt.fileURL}}">
           
           <h2 style="font-weight:bold; margin-top: 15px">{{foodcourt.name}}</h2>
           <h3 style="color: #696969"> {{foodcourt.address}}</h3>

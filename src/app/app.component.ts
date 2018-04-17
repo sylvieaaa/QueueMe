@@ -1,6 +1,9 @@
+import { CustomerEntityProvider } from './../providers/customer-entity/customer-entity';
+import { CreditcardPage } from './../pages/creditcard/creditcard';
+import { Vibration } from '@ionic-native/vibration';
 import { FCM } from '@ionic-native/fcm';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, NavController } from 'ionic-angular';
+import { Nav, Platform, NavController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 // import { Push, PushObject, PushOptions } from '@ionic-native/push';
@@ -13,12 +16,12 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { FoodcourtPage } from '../pages/foodcourt/foodcourt';
 import { ViewOrderPage } from '../pages/view-order/view-order';
 
-import { CreditcardPage } from '../pages/creditcard/creditcard';
 import { AddcardPage } from '../pages/addcard/addcard'
 
 
 import { VendorPage } from '../pages/vendor/vendor';
 import { ModalPage } from '../pages/modal/modal';
+import { CustomerEntity } from '../entities/CustomerEntity';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,13 +31,17 @@ export class MyApp {
   @ViewChild('myNav') navCtrl: NavController
 
   rootPage: any = HomePage;
+  pushToken: any;
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public fcm: FCM) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public fcm: FCM, 
+    public vibration: Vibration, private alertCtrl: AlertController, public customerEntityProvider: CustomerEntityProvider) {
     this.initializeApp();
     this.fcm.getToken()
       .then(token => {
+        this.pushToken = token;
+        sessionStorage.setItem("pushToken", this.pushToken);
         console.log(`The token is ${token}`);
       })
       .catch(error => console.error('Error getting token', error));
@@ -53,13 +60,49 @@ export class MyApp {
     ];
 
     platform.ready().then(() => {
+      fcm.onTokenRefresh().subscribe(token => {
+        if(sessionStorage.getItem('customerEntity') != null) {
+        let customerEntity:CustomerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
+          customerEntity.pushToken = token;
+          this.customerEntityProvider.updateToken(customerEntity).subscribe(
+            response => {
+              sessionStorage.setItem('customerEntity', JSON.stringify(customerEntity));
+            }, error => {
+              console.log("something went wrong");
+            }
+          )
+        }
+      })
       fcm.onNotification().subscribe(data => {
         if (data.wasTapped) {
           console.log(JSON.stringify(data));
-          this.navCtrl.setRoot(ProfilePage);
+          //  this.navCtrl.setRoot(ProfilePage);
+          // window.location.href = "/pages/profile/profile.html";
+          //this.rootPage = ProfilePage;
         } else {
           console.log(JSON.stringify(data));
-          this.navCtrl.push(CreditcardPage);
+          let receiveMessage = JSON.stringify(data);
+          this.vibration.vibrate([2000, 1000, 2000, 1000, 2000, 1000, 2000, 1000, 2000]);
+          let alert = this.alertCtrl.create({
+            title: "Your food is ready!",
+            message: data.data,
+            buttons:
+              [
+                {
+                  text: 'OK',
+                  role: 'OK',
+                  handler: () => {
+                    this.vibration.vibrate(0);
+                    console.log('Cancel clicked');
+                    alert.dismiss().then(() => { this.navCtrl.push(CreditcardPage);})
+                    
+                  }
+                }
+              ]
+          })
+          alert.present();
+          // this.navCtrl.push(CreditcardPage);
+          // this.vibration.vibrate(0);
         }
       })
     })
