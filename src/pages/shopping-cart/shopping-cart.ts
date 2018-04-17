@@ -18,10 +18,17 @@ import { CreditcardEntityProvider } from '../../providers/creditcard-entity/cred
   templateUrl: 'shopping-cart.html',
 })
 export class ShoppingCartPage {
-  myDate: any;
+  cvv: string ="";
+  expDate: any;
+  cardName: string = "";
+  cardNum: string = "";
+  saveCreditCard: boolean;
+  allowCheckOut:boolean;
+
   customerEntity: CustomerEntity;
   shoppingCart: any;
   foodcourtId: any;
+  specialRequest: string;
   haveItems: boolean = false;
   lineItems: Array<SaleTransactionLineItemEntity>;
 
@@ -33,11 +40,13 @@ export class ShoppingCartPage {
   creditCards: any;
   errorMessage: any;
   radioGroup: any;
-  creditCard: any;
+  creditCard: any
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public checkoutProvider: CheckoutProvider,
     private toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController,
     public creditCardEntityProvider: CreditcardEntityProvider, public alertCtrl: AlertController) {
+    this.creditCard = null;
+    this.allowCheckOut = true;
     if (sessionStorage.getItem("shoppingCart") != null) {
       this.shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"));
       this.foodcourtId = this.shoppingCart.foodcourtId;
@@ -56,7 +65,7 @@ export class ShoppingCartPage {
         this.checkDefaultCard();
         this.creditCard = this.radioGroup;
         console.log(this.creditCards);
-        console.log(this.creditCard.cardNo);
+        console.log(this.creditCard);
       },
       error => {
         this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
@@ -114,28 +123,80 @@ export class ShoppingCartPage {
       duration: 3000,
       position: 'bottom'
     });
+
     let saleTransactionEntity: SaleTransactionEntity = new SaleTransactionEntity();
     saleTransactionEntity.totalAmount = this.totalAmount;
     saleTransactionEntity.isTakeaway = this.diningOptions;
+    console.log("Check dining options:");
+    console.log(this.diningOptions);
     saleTransactionEntity.totalQuantity = this.totalQuantity;
     saleTransactionEntity.totalLineItem = this.totalLineItems;
     saleTransactionEntity.transactionDateTime = new Date();
     saleTransactionEntity.saleTransactionLineItemEntities = this.lineItems;
     let customerEntity: CustomerEntity = JSON.parse(sessionStorage.getItem("customerEntity"));
 
-    this.checkoutProvider.doCheckout(saleTransactionEntity, customerEntity).subscribe(
-      response => {
-        toast.setMessage(response);
-        toast.present();
-      }, error => {
-        toast.setMessage("HTTP " + error.status + ": " + error.error.message);
-        toast.present();
-      })
+    if (this.diningOptions === undefined) {
+      toast.setMessage("Please fill in dining options!");
+      toast.present();
+    }
+    else if (this.creditCard === undefined && (this.cardName === "" || this.cardNum === "")) {
+      toast.setMessage("Please ensure your card details are filled");
+      toast.present();
+    }
+    else if (this.cvv === "" || this.expDate === undefined) {
+      toast.setMessage("Please check if you have filled in cvv or expiry date");
+      toast.present();
+    }
+
+    else {
+      if (this.saveCreditCard === true) {
+        this.createCard();
+        if (this.allowCheckOut === false){
+          return;
+        }
+      }
+
+      this.checkoutProvider.doCheckout(saleTransactionEntity, customerEntity).subscribe(
+        response => {
+          toast.setMessage("Successfully checked out!");
+          toast.present();
+          this.navCtrl.pop();
+        }, error => {
+          toast.setMessage("HTTP " + error.status + ": " + error.error.message);
+          toast.present();
+        
+        })
+
+    }
   }
 
+  // alertCreditConfirm() {
+  //   console.log("reached");
+  //   let alert = this.alertCtrl.create({
+  //     title: 'Save card payment',
+  //     message: 'Do you want to save your details?',
+  //     buttons: [
+  //       {
+  //         text: 'Agree',
+  //         handler: () => {
+  //           console.log("agree clicked");
+  //           this.createCard();
+  //         }
+  //       },
+  //       {
+  //         text: 'Disagree',
+  //         role: 'cancel',
+  //         handler: () => {
+  //           console.log("cancel clicked");
+
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   alert.present();
+  // }
+
   showActionSheet() {
-
-
     let actionSheet = this.actionSheetCtrl.create(
       {
         title: 'Please select credit card to make payment',
@@ -180,4 +241,56 @@ export class ShoppingCartPage {
     }
 
   }
+
+  createCard() {
+    let toast = this.toastCtrl.create({
+      duration: 3000,
+      position: 'bottom'
+    });
+    console.log(this.creditCards);
+
+    if (this.creditCards != null) {
+      for (let creditCard of this.creditCards) {
+        if (creditCard.cardNo == this.cardNum) {
+          this.allowCheckOut=false;
+          toast.setMessage("Card already exist");
+          toast.present();
+          return;
+        }
+        console.log(creditCard);
+      }
+    }
+
+    this.creditCardEntityProvider.createCard(this.cardNum, this.cardName, this.customerEntity).subscribe(
+      response => {
+        toast.setMessage("Card successfully added!");
+        toast.present();
+      },
+      error => {
+        this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+      }
+    )
+
+  }
+
+  qtyChanged(event, selectLineItem, qty){
+    // console.log("i have come here");
+    for (let lineItem of this.lineItems){
+      if (lineItem === selectLineItem){
+        console.log(lineItem.quantity);
+        console.log(qty);
+        console.log(lineItem.quantity);
+        let diffQty = lineItem.quantity - qty;
+        console.log(diffQty);
+        this.totalQuantity += diffQty;
+        lineItem.quantity = qty;
+        lineItem.subTotal += (parseFloat(lineItem.menuItemEntity.price) * diffQty);
+        
+        this.totalAmount += lineItem.subTotal;
+        console.log(lineItem.subTotal);
+      }
+    }
+  }
+
+
 }

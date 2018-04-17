@@ -51,7 +51,7 @@ export class HomePage {
     });
     if (this.username == null || this.password == null || this.username.trim() == "" || this.password == "") {
 
-      toast.setMessage("Please fill in ");
+      toast.setMessage("Please complete the missing field(s)! ");
       toast.present();
     } else {
       this.customerEntityProvider.doCustomerLogin(this.username, this.password).subscribe(
@@ -64,7 +64,7 @@ export class HomePage {
           this.navCtrl.setRoot(MainPage);
         }, error => {
           this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
-          toast.setMessage(this.errorMessage);
+          toast.setMessage("Credentials do not match with any account! Try again or click 'Forgot password?' to reset");
           toast.present();
         })
     }

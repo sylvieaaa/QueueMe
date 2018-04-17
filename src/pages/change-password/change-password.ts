@@ -18,22 +18,22 @@ import { CustomerEntityProvider } from '../../providers/customer-entity/customer
 })
 export class ChangePasswordPage {
 
-  customerEntity : CustomerEntity;
-  oldPassword : string = "";
-  newPassword : string = "";
-  cfmPassword : string = "";
-  infoMessage : string;
+  customerEntity: CustomerEntity;
+  oldPassword: string = "";
+  newPassword: string = "";
+  cfmPassword: string = "";
+  infoMessage: string;
   errorMessage: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public customerEntityProvider: CustomerEntityProvider,
     private toastCtrl: ToastController) {
-      this.customerEntity = new CustomerEntity();
+    this.customerEntity = new CustomerEntity();
+    this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChangePasswordPage');
-    this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
   }
 
 
@@ -42,27 +42,27 @@ export class ChangePasswordPage {
       duration: 3000,
       position: 'bottom'
     });
-    if (this.oldPassword == ""|| this.cfmPassword == ""|| this.newPassword == "") {
+    if (this.oldPassword === "" || this.cfmPassword === "" || this.newPassword === "") {
       toast.setMessage("Form not complete, please fill in");
       toast.present();
-    }    
+    }
     else if (this.cfmPassword != this.newPassword) {
       toast.setMessage("Password do not match. Please re-enter password.");
-        toast.present();
-    } 
+      toast.present();
+    }
     else {
-    this.customerEntityProvider.updateCustomerPassword(this.customerEntity, this.oldPassword, this.newPassword).subscribe(
-			response => {	
-         toast.setMessage("Password Updated!");
-         toast.present();
-			},
-			error => {				
-        toast.setMessage("Old password is wrong! Please try again.")
-        toast.present();
-				this.infoMessage = null;
-				this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
-			}
-		);
+      this.customerEntityProvider.updateCustomerPassword(this.customerEntity, this.oldPassword, this.newPassword).subscribe(
+        response => {
+          toast.setMessage("Password Updated!");
+          toast.present();
+        },
+        error => {
+          toast.setMessage("Old password is wrong! Please try again.")
+          toast.present();
+          this.infoMessage = null;
+          this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+        }
+      );
+    }
   }
-}
 }
