@@ -5,6 +5,7 @@ import { ToastController } from 'ionic-angular';
 import { OrderEntityProvider } from '../../providers/order-entity/order-entity';
 import { ModalOrderPage } from '../../pages/modal-order/modal-order';
 import { DatePipe } from '@angular/common';
+import { myIPAddress } from './../../ipAddress';
 
 /**
  * Generated class for the ViewOrderPage page.
@@ -18,7 +19,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: 'view-order.html',
 })
 export class ViewOrderPage {
-
+  myIPAddress: string = new myIPAddress().ipaddress;
   customerEntity: CustomerEntity;
   saleTransactionEntities: any;
   stliEntities: any;
