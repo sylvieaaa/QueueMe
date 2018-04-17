@@ -4,21 +4,18 @@ import { ToastController } from 'ionic-angular';
 import { CustomerEntity } from '../../entities/CustomerEntity';
 import { OrderEntityProvider } from '../../providers/order-entity/order-entity';
 
-
 /**
- * Generated class for the ModalOrderPage page.
+ * Generated class for the ShowOrderPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-modal-order',
-  templateUrl: 'modal-order.html',
+  selector: 'page-show-order',
+  templateUrl: 'show-order.html',
 })
-export class ModalOrderPage {
-
-  // customerEntity: CustomerEntity;
+export class ShowOrderPage {
   orderEntities: any;
   errorMessage: String;
   saleTransactionId: any;
@@ -30,17 +27,13 @@ export class ModalOrderPage {
 
   constructor(public navParams: NavParams, public view: ViewController, private toastCtrl: ToastController,
     public orderEntityProvider: OrderEntityProvider) {
-   this.saleTransactionEntity= this.navParams.get('saleTransactionEntity');
+      this.saleTransactionEntity= this.navParams.get('saleTransactionEntity');
+      console.log(this.saleTransactionEntity);
    this.saleTransactionId = this.saleTransactionEntity.saleTransactionId;
-  //  this.saleTransactionLineItemEntities = this.saleTransactionEntity.saleTransactionLineItemEntities;
-  //  for (let stli2 of this.saleTransactionLineItemEntities) {
-  //   this.selectedVendor = stli2.menuItemEntity.vendorEntity;
-  //  }
-   console.log("this is the passed sale transaction id: " + this.saleTransactionId);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalOrderPage');
+    console.log('ionViewDidLoad ShowOrderPage');
     this.orderEntityProvider.retrieveAllOrders(this.saleTransactionId).subscribe(
       response => { 
         this.orderEntities = response.orderEntities; 
@@ -56,8 +49,4 @@ export class ModalOrderPage {
     }
   );
 }
-
-  closeModal(){
-    this.view.dismiss();
-  }
 }

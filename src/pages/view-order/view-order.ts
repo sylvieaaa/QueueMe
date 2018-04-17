@@ -3,9 +3,9 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { CustomerEntity } from '../../entities/CustomerEntity';
 import { ToastController } from 'ionic-angular';
 import { OrderEntityProvider } from '../../providers/order-entity/order-entity';
-import { ModalOrderPage } from '../../pages/modal-order/modal-order';
 import { DatePipe } from '@angular/common';
 import { myIPAddress } from './../../ipAddress';
+import { ShowOrderPage } from '../show-order/show-order';
 
 /**
  * Generated class for the ViewOrderPage page.
@@ -56,9 +56,8 @@ export class ViewOrderPage {
     );
   }
 
-  openModal(event, saleTransactionEntity){
-    let myModal = this.modal.create(ModalOrderPage, {saleTransactionEntity: saleTransactionEntity});
-    myModal.present();
+  openOrderItem(event, saleTransactionEntity){
+    this.navCtrl.push(ShowOrderPage, {saleTransactionEntity: saleTransactionEntity});
   }
 
 }
