@@ -4,21 +4,18 @@ import { ToastController } from 'ionic-angular';
 import { CustomerEntity } from '../../entities/CustomerEntity';
 import { OrderEntityProvider } from '../../providers/order-entity/order-entity';
 
-
 /**
- * Generated class for the ModalOrderPage page.
+ * Generated class for the ShowOrderPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-modal-order',
-  templateUrl: 'modal-order.html',
+  selector: 'page-show-order',
+  templateUrl: 'show-order.html',
 })
-export class ModalOrderPage {
-
-  // customerEntity: CustomerEntity;
+export class ShowOrderPage {
   orderEntities: any;
   errorMessage: String;
   saleTransactionId: any;
@@ -26,38 +23,38 @@ export class ModalOrderPage {
   saleTransactionLineEntities: any;
   selectedSaleTransactionLineItemEntity: any;
   selectedMenuItemEntity: any;
- 
+
 
   constructor(public navParams: NavParams, public view: ViewController, private toastCtrl: ToastController,
     public orderEntityProvider: OrderEntityProvider) {
-   this.saleTransactionEntity= this.navParams.get('saleTransactionEntity');
-   this.saleTransactionId = this.saleTransactionEntity.saleTransactionId;
-  //  this.saleTransactionLineItemEntities = this.saleTransactionEntity.saleTransactionLineItemEntities;
-  //  for (let stli2 of this.saleTransactionLineItemEntities) {
-  //   this.selectedVendor = stli2.menuItemEntity.vendorEntity;
-  //  }
-   console.log("this is the passed sale transaction id: " + this.saleTransactionId);
+    this.saleTransactionEntity = this.navParams.get('saleTransactionEntity');
+    if(this.saleTransactionEntity == null) {
+      console.log("1 aa");
+      console.log(sessionStorage.getItem("showOrderPage"));
+      this.saleTransactionEntity = JSON.parse(sessionStorage.getItem("showOrderPage"));
+    }
+    console.log(this.saleTransactionEntity.saleTransactionId);
+    this.saleTransactionId = this.saleTransactionEntity.saleTransactionId;
+    console.log(this.saleTransactionId + " here");
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalOrderPage');
-    this.orderEntityProvider.retrieveAllOrders(this.saleTransactionId).subscribe(
-      response => { 
-        this.orderEntities = response.orderEntities; 
+    let customerEntity: CustomerEntity = JSON.parse(localStorage.getItem("customerEntity"));
+    console.log('ionViewDidLoad ShowOrderPage');
+    this.orderEntityProvider.retrieveAllOrders(this.saleTransactionId, customerEntity.businessId).subscribe(
+      response => {
+        console.log(response);
+        this.orderEntities = response.orderEntities;
         for (let orderEntity of this.orderEntities) {
           this.saleTransactionLineEntities = orderEntity.saleTransactionLineItemEntities;
           for (let stlie of this.saleTransactionLineEntities) {
             this.selectedSaleTransactionLineItemEntity = stlie;
           }
-        }       
-      }, 
+        }
+      },
       error => {
-      this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
-    }
-  );
-}
-
-  closeModal(){
-    this.view.dismiss();
+        this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+      }
+    );
   }
 }

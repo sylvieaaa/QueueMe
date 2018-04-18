@@ -29,8 +29,8 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
-    this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
-    console.log(JSON.parse(sessionStorage.getItem('customerEntity')));       
+    this.customerEntity = JSON.parse(localStorage.getItem('customerEntity'));
+    console.log(JSON.parse(localStorage.getItem('customerEntity')));       
   }
 
   editCustomer()
@@ -49,7 +49,7 @@ export class ProfilePage {
     this.customerEntityProvider.updateCustomer(this.customerEntity).subscribe(
 			response => {	
          
-         sessionStorage.setItem("customerEntity", JSON.stringify(this.customerEntity));
+        localStorage.setItem("customerEntity", JSON.stringify(this.customerEntity));
          console.log(JSON.stringify(this.customerEntity));
          toast.setMessage("Profile Updated!");
          toast.present();

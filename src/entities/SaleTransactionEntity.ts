@@ -1,5 +1,6 @@
 import { SaleTransactionLineItemEntity } from './SaleTransactionLineItemEntity';
 export class SaleTransactionEntity {
+    saleTransactionId: number;
     totalLineItem: number;
     totalQuantity: number;
     totalAmount: number;

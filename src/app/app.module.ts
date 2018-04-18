@@ -17,7 +17,7 @@ import { CreditcardPage } from '../pages/creditcard/creditcard';
 import { AddcardPage } from '../pages/addcard/addcard';
 import { VendorPage } from '../pages/vendor/vendor';
 import { ModalPage } from '../pages/modal/modal';
-import { ModalOrderPage } from '../pages/modal-order/modal-order';
+import { ShowOrderPage } from '../pages/show-order/show-order';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -40,6 +40,7 @@ import { ViewOrderPage } from '../pages/view-order/view-order';
 import { OrderEntityProvider } from '../providers/order-entity/order-entity';
 import { Vibration } from '@ionic-native/vibration';
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -56,9 +57,9 @@ import { Vibration } from '@ionic-native/vibration';
     VendorPage,
     ModalPage,
     ViewOrderPage,
-    ModalOrderPage,
     ShoppingCartPage,
-    ViewOrderPage
+    ViewOrderPage,
+    ShowOrderPage
   ],
   imports: [
     BrowserModule,
@@ -87,9 +88,9 @@ import { Vibration } from '@ionic-native/vibration';
     VendorPage,
     ModalPage,
     ViewOrderPage,
-    ModalOrderPage,
     ShoppingCartPage,
-    ViewOrderPage
+    ViewOrderPage,
+    ShowOrderPage
   ],
   providers: [
     StatusBar,

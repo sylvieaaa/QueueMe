@@ -10,9 +10,9 @@
 <ion-content padding>
 
     <ion-card *ngFor="let saleTransactionEntity of saleTransactionEntities">
-        <ion-item (click)="openModal($event, saleTransactionEntity)">   
-        <img src="http://localhost:8080/queueme-uploads/foodCourtLogos/{{selectedFoodCourt.fileURL}}">
-        <h2 style="font-weight:bold; margin-top: 15px">{{selectedFoodCourt.name}}</h2>
+        <ion-item (click)="openOrderItem($event, saleTransactionEntity)">   
+        <img src="http://{{myIPAddress}}:8080/queueme-uploads/foodCourtLogos/{{saleTransactionEntity.saleTransactionLineItemEntities[0].menuItemEntity.vendorEntity.foodCourtEntity.fileURL}}">
+        <h2 style="font-weight:bold; margin-top: 15px">{{saleTransactionEntity.saleTransactionLineItemEntities[0].menuItemEntity.vendorEntity.foodCourtEntity.name}}</h2>
         <h3 style="color: #696969"> {{saleTransactionEntity.transactionDateTime | date:'short'}}</h3>
           <div style="float: right;">
             <ion-card-content> <b>Total: </b>${{saleTransactionEntity.totalAmount}} </ion-card-content>

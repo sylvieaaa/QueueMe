@@ -58,7 +58,7 @@ export class HomePage {
         response => {
           this.customerEntity = response.customerEntity;
           // this.a = response.customerEntity;
-          sessionStorage.setItem("customerEntity", JSON.stringify(this.customerEntity));
+          localStorage.setItem("customerEntity", JSON.stringify(this.customerEntity));
           toast.setMessage("Welcome " + this.customerEntity.firstName + "!");
           toast.present();
           this.navCtrl.setRoot(MainPage);

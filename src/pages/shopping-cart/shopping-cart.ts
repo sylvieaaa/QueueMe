@@ -1,3 +1,4 @@
+import { MainPage } from './../main/main';
 import { CheckoutProvider } from './../../providers/checkout/checkout';
 import { SaleTransactionEntity } from './../../entities/SaleTransactionEntity';
 import { SaleTransactionLineItemEntity } from './../../entities/SaleTransactionLineItemEntity';
@@ -58,7 +59,7 @@ export class ShoppingCartPage {
         this.haveItems = false;
       }
     }
-    this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
+    this.customerEntity = JSON.parse(localStorage.getItem('customerEntity'));
     this.creditCardEntityProvider.retrieveAllCreditCards(this.customerEntity.businessId).subscribe(
       response => {
         this.creditCards = response.creditCardEntities;
@@ -133,7 +134,7 @@ export class ShoppingCartPage {
     saleTransactionEntity.totalLineItem = this.totalLineItems;
     saleTransactionEntity.transactionDateTime = new Date();
     saleTransactionEntity.saleTransactionLineItemEntities = this.lineItems;
-    let customerEntity: CustomerEntity = JSON.parse(sessionStorage.getItem("customerEntity"));
+    let customerEntity: CustomerEntity = JSON.parse(localStorage.getItem("customerEntity"));
 
     if (this.diningOptions === undefined) {
       toast.setMessage("Please fill in dining options!");
@@ -158,9 +159,10 @@ export class ShoppingCartPage {
 
       this.checkoutProvider.doCheckout(saleTransactionEntity, customerEntity).subscribe(
         response => {
+          sessionStorage.removeItem("shoppingCart");
           toast.setMessage("Successfully checked out!");
           toast.present();
-          this.navCtrl.pop();
+          this.navCtrl.setRoot(MainPage);
         }, error => {
           toast.setMessage("HTTP " + error.status + ": " + error.error.message);
           toast.present();
@@ -229,9 +231,17 @@ export class ShoppingCartPage {
           buttons: ['OK']
         });
       this.creditCard = card;
+      //alert.present();
+    }
+    else {
+      let alert = this.alertCtrl.create(
+        {
+          title : "Info",
+          subTitle: "Credit card is already selected!",
+          buttons: ['OK']
+        });
       alert.present();
     }
-
 
   }
 

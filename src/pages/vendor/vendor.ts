@@ -1,3 +1,4 @@
+import { ShoppingCartPage } from './../shopping-cart/shopping-cart';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { MenuitemEntityProvider } from '../../providers/menuitem-entity/menuitem-entity';
@@ -58,6 +59,9 @@ export class VendorPage {
 
   }
   
+  openShoppingCart() {
+    this.navCtrl.push(ShoppingCartPage);
+  }
 
 
 

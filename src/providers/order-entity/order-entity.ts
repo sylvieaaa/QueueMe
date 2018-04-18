@@ -18,7 +18,7 @@ export class OrderEntityProvider {
 
   ipAddress = new myIPAddress().ipaddress;
   portNo = '8080';
-  fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystem/Resources/Order';
+  fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystemJsf/Resources/Order';
   baseUrl = "/api/Order";
 
   constructor(public httpClient: HttpClient, public platform: Platform) {
@@ -45,7 +45,7 @@ export class OrderEntityProvider {
 		);		
 	}
 	
-	retrieveAllOrders(saleTransactionId: number): Observable<any> 
+	retrieveAllOrders(saleTransactionId: number, customerId:number): Observable<any> 
 	{	
     let path: string = '';
     
@@ -59,7 +59,7 @@ export class OrderEntityProvider {
 			path = this.fullBaseUrl;
 		}
 		console.log("Client has been returned");
-		return this.httpClient.get<any>(path + "/retrieveAllOrders?saleTransactionId="+ saleTransactionId).pipe
+		return this.httpClient.get<any>(path + "/retrieveAllOrders?saleTransactionId="+ saleTransactionId + "&customerId=" + customerId).pipe
 		(
 			catchError(this.handleError)
 		);		
