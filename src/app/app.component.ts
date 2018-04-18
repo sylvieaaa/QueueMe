@@ -53,7 +53,6 @@ export class MyApp {
       { title: 'Change Password', component: ChangePasswordPage },
       { title: 'Payment', component: CreditcardPage },
       { title: "Orders", component: ViewOrderPage },
-      { title: 'List', component: ListPage },
     ];
 
   }
@@ -113,7 +112,7 @@ export class MyApp {
                     this.vibration.vibrate(0);
                     console.log('Cancel clicked');
                     alert.dismiss().then(() => {
-                      this.navCtrl.pop();
+                      //this.navCtrl.pop();
                       this.navCtrl.push(ShowOrderPage);
                       sessionStorage.setItem("showOrderPage", JSON.stringify(saleTransaction));
                       console.log("innnn");

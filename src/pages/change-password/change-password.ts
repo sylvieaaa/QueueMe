@@ -29,7 +29,7 @@ export class ChangePasswordPage {
     public customerEntityProvider: CustomerEntityProvider,
     private toastCtrl: ToastController) {
     this.customerEntity = new CustomerEntity();
-    this.customerEntity = JSON.parse(sessionStorage.getItem('customerEntity'));
+    this.customerEntity = JSON.parse(localStorage.getItem('customerEntity'));
   }
 
   ionViewDidLoad() {
