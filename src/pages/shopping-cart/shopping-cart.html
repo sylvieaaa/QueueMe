@@ -78,6 +78,7 @@
     </ion-select>
     </ion-item>
     <ion-list>
+      <br/>
       <div *ngIf="creditCard">
         <ion-row>
           <ion-col align-self-start>
@@ -88,7 +89,8 @@
       <div *ngIf="!creditCard">
         <ion-row>
           <ion-col align-self-start>
-            <ion-input placeholder="Enter Credit Card Details: xxxx-xxxx-xxxx-xxxx " [(ngModel)]="cardNum"></ion-input>
+              <p-inputMask mask="9999-9999-9999-9999" name="cardNum" [(ngModel)]="cardNum" placeholder="Enter Credit Card Details: xxxx-xxxx-xxxx-xxxx"></p-inputMask>
+            <!-- <ion-input placeholder="Enter Credit Card Details: xxxx-xxxx-xxxx-xxxx " [(ngModel)]="cardNum"></ion-input> -->
           </ion-col>
         </ion-row>
         <ion-row>
