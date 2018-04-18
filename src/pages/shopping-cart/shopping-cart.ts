@@ -231,14 +231,7 @@ export class ShoppingCartPage {
       this.creditCard = card;
       alert.present();
     }
-    else {
-      let alert = this.alertCtrl.create(
-        {
-          title: "Credit card is already set as default!",
-          buttons: ['OK']
-        });
-      alert.present();
-    }
+
 
   }
 
