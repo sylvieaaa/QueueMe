@@ -18,8 +18,8 @@ import { CreditcardEntityProvider } from '../../providers/creditcard-entity/cred
 })
 export class AddcardPage {
   customerEntity: CustomerEntity;
-  cardName: String;
-  cardNum: String;
+  cardName: string = "";
+  cardNum: string = "";
   errorMessage: string;
   creditCards: any;
 
@@ -53,6 +53,13 @@ export class AddcardPage {
     });
     console.log(this.creditCards);
     
+    if(this.cardName === "" || this.cardNum === ""){
+      toast.setMessage("Please complete the form");
+      toast.present();
+      return;
+    }
+
+
     if (this.creditCards != null) {
       for (let creditCard of this.creditCards) {
         if (creditCard.cardNo == this.cardNum){
