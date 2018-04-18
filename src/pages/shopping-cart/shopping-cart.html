@@ -108,7 +108,8 @@
       </div>
       <ion-row justify-content-around>
         <ion-col align-self-start>
-          <ion-input placeholder="Enter cvv" type="number" [(ngModel)]="cvv"></ion-input>
+            <p-inputMask mask="999" name="cvv" [(ngModel)]="cvv" placeholder="cvv: xxx"></p-inputMask>
+          <!-- <ion-input placeholder="Enter cvv" type="number" [(ngModel)]="cvv" max="3" min="3"></ion-input> -->
         </ion-col>
         <ion-col align-self-end>
           <ion-datetime placeholder="Expiry date" type="number" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" min="2018-04" max="2030-12" [(ngModel)]="expDate"></ion-datetime>
