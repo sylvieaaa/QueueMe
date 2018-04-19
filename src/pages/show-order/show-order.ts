@@ -32,6 +32,7 @@ export class ShowOrderPage {
       console.log("1 aa");
       console.log(sessionStorage.getItem("showOrderPage"));
       this.saleTransactionEntity = JSON.parse(sessionStorage.getItem("showOrderPage"));
+      sessionStorage.removeItem("showOrderPage");
     }
     console.log(this.saleTransactionEntity.saleTransactionId);
     this.saleTransactionId = this.saleTransactionEntity.saleTransactionId;

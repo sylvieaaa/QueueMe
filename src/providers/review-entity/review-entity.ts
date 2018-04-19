@@ -34,7 +34,7 @@ export class ReviewEntityProvider {
     console.log(vendorEntity);
     console.log(reviewEntity);
     console.log(customerEntity);
-    let reviewReq: any = {"vendorEntity" : vendorEntity, "reviewEntity" : reviewEntity, "customerEntity" : customerEntity};
+    let reviewReq: any = { "vendorEntity" : vendorEntity, "reviewEntity" : reviewEntity, "customerEntity" : customerEntity };
     console.log(reviewReq);
     // console.log(foodCourtId);
 
