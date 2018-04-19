@@ -24,7 +24,6 @@ export class ShowOrderPage {
   selectedSaleTransactionLineItemEntity: any;
   selectedMenuItemEntity: any;
 
-
   constructor(public navParams: NavParams, public view: ViewController, private toastCtrl: ToastController,
     public orderEntityProvider: OrderEntityProvider) {
     this.saleTransactionEntity = this.navParams.get('saleTransactionEntity');

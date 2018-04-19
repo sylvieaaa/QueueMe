@@ -18,7 +18,7 @@
 
 <ion-content padding>
   <div style="display: block; text-align: center">
-  <h3>Rating: {{value}}/5</h3>
+  <h3>Rating: {{rating}}/5</h3>
     <p-rating [(ngModel)]="rating" [cancel]="false"></p-rating>
     <h3>Review: </h3>
     <textarea [rows]="5" [cols]="40" placeholder="We would like to have your feedback!" pInputTextarea autoResize="autoResize" [(ngModel)]="description"></textarea>
