@@ -54,7 +54,7 @@ export class AddcardPage {
     console.log(this.creditCards);
     
     if(this.cardName === "" || this.cardNum === ""){
-      toast.setMessage("Please complete the form");
+      toast.setMessage("Please complete the form ");
       toast.present();
       return;
     }

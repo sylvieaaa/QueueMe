@@ -17,14 +17,16 @@ import { ProfilePage } from '../pages/profile/profile';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { FoodcourtPage } from '../pages/foodcourt/foodcourt';
 import { ViewOrderPage } from '../pages/view-order/view-order';
-import { ShowOrderPage } from '../pages/show-order/show-order'
+import { ShowOrderPage } from '../pages/show-order/show-order';
 
+import { ModalVendorReviewPage } from '../pages/modal-vendor-review/modal-vendor-review';
 import { AddcardPage } from '../pages/addcard/addcard';
 
 
 import { VendorPage } from '../pages/vendor/vendor';
 import { ModalPage } from '../pages/modal/modal';
 import { CustomerEntity } from '../entities/CustomerEntity';
+
 
 @Component({
   templateUrl: 'app.html'

@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, ActionSheetController, AlertController } from 'ionic-angular';
 import { CustomerEntity } from '../../entities/CustomerEntity';
 import { CreditcardEntityProvider } from '../../providers/creditcard-entity/creditcard-entity';
-
 /**
  * Generated class for the ShoppingCartPage page.
  *
@@ -294,6 +293,28 @@ export class ShoppingCartPage {
       }
     }
   }
+
+  doQtyEdit(event, lineItem, quantity){
+    console.log(lineItem);
+    for(let line of this.lineItems){
+      if (line.serialNumber == lineItem.serialNumber){
+        this.totalQuantity -= line.quantity;
+        this.totalAmount -= line.subTotal;
+        line.subTotal =0;
+        line.quantity = lineItem.quantity;
+        this.totalQuantity += line.quantity;
+        line.subTotal += (line.quantity * line.unitPrice);
+        this.totalAmount += line.subTotal;
+        this.initValues();
+      }
+    }
+
+  }
+
+  backSpace(){
+
+  }
+
 
 
 }

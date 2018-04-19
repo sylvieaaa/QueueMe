@@ -18,6 +18,7 @@ import { AddcardPage } from '../pages/addcard/addcard';
 import { VendorPage } from '../pages/vendor/vendor';
 import { ModalPage } from '../pages/modal/modal';
 import { ShowOrderPage } from '../pages/show-order/show-order';
+import { ModalVendorReviewPage} from '../pages/modal-vendor-review/modal-vendor-review';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -39,6 +40,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import { ViewOrderPage } from '../pages/view-order/view-order';
 import { OrderEntityProvider } from '../providers/order-entity/order-entity';
 import { Vibration } from '@ionic-native/vibration';
+import { ReviewEntityProvider } from '../providers/review-entity/review-entity';
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import { Vibration } from '@ionic-native/vibration';
     ViewOrderPage,
     ShoppingCartPage,
     ViewOrderPage,
-    ShowOrderPage
+    ShowOrderPage,
+    ModalVendorReviewPage
+
   ],
   imports: [
     BrowserModule,
@@ -90,7 +94,9 @@ import { Vibration } from '@ionic-native/vibration';
     ViewOrderPage,
     ShoppingCartPage,
     ViewOrderPage,
-    ShowOrderPage
+    ShowOrderPage,
+    ModalVendorReviewPage
+
   ],
   providers: [
     StatusBar,
@@ -104,7 +110,8 @@ import { Vibration } from '@ionic-native/vibration';
     CheckoutProvider,
     FCM,
     OrderEntityProvider,
-    Vibration
+    Vibration,
+    ReviewEntityProvider
   ]
 })
 export class AppModule {}

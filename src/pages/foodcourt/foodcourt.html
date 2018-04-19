@@ -15,7 +15,7 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  
+
 </ion-header>
 
 
@@ -24,8 +24,18 @@
     <button ion-item (click)="navVendor($event, vendor)" style="background-color: white">
       <img src="http://{{myIPAddress}}:8080/queueme-uploads/vendorLogos/{{vendor.photoURL}}">
       <ion-card-title>{{vendor.vendorName}}</ion-card-title>
-      <p-rating text-center [ngModel]="vendor.rating" readonly="true" stars="5" [cancel]="false"></p-rating>
     </button>
+    <div style="display:block; text-align:center; color:goldenrod">
+      <button ion-button round outline icon-start  (click)="rateVendor($event, vendor)">
+        <ion-icon style="font-size: 20px; color:goldenrod; display: block; text-align: center" name="thumbs-up"></ion-icon>
+          Rate
+      </button>
+    </div>
+    <br/>
+    <p-rating text-center [ngModel]="vendor.rating" readonly="true" stars="5" [cancel]="false"></p-rating>
+    <br/>
+
+
   </ion-card>
 
 
