@@ -20,7 +20,7 @@ export class ModalVendorReviewPage {
   rating: number;
   description: string;
   customerEntity: CustomerEntity;
-  errorMessage:string;
+  errorMessage: string;
 
   constructor(public navCtrl: NavController, public reviewEntityProvider: ReviewEntityProvider, public navParams: NavParams, public view: ViewController, private toastCtrl: ToastController) {
     this.vendor = this.navParams.get('vendor');
@@ -60,14 +60,30 @@ export class ModalVendorReviewPage {
       review.description = this.description;
       review.rating = this.rating;
       this.reviewEntityProvider.updateReview(this.vendor, review, this.customerEntity).subscribe(
-        response=>{
-          console.log("end");
-        }
-        ,error => {
-          this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
-        }
+        response => {
+          console.log(response);
 
-      );
+          let toast = this.toastCtrl.create({
+            duration: 3000,
+            position: 'bottom'
+          });
+          toast.setMessage("Thank you for your review!");
+          toast.present();
+          this.navCtrl.pop();
+        },
+        error => {
+          console.log(error);
+        }
+      )
+      // this.reviewEntityProvider.updateReview(this.vendor, review, this.customerEntity).subscribe(
+      //   response=>{
+      //     console.log("end");
+      //   }
+      //   ,error => {
+      //     this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
+      //   }
+
+      // );
     }
   }
 

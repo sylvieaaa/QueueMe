@@ -65,77 +65,79 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.fcm.getToken()
-        .then(token => {
-          this.pushToken = token;
-          localStorage.setItem("pushToken", this.pushToken);
-          console.log(`The token is ${token}`);
-        })
-        .catch(error => console.error('Error getting token', error));
-      this.fcm.onTokenRefresh().subscribe(token => {
-        if (localStorage.getItem('customerEntity') != null) {
-          let customerEntity: CustomerEntity = JSON.parse(localStorage.getItem('customerEntity'));
-          customerEntity.pushToken = token;
-          this.customerEntityProvider.updateToken(customerEntity).subscribe(
-            response => {
-              localStorage.setItem('customerEntity', JSON.stringify(customerEntity));
-            }, error => {
-              console.log("something went wrong");
-            }
-          )
-        }
-      })
-      this.fcm.onNotification().subscribe(data => {
-        let saleTransaction: SaleTransactionEntity = JSON.parse(data.saleTransactionEntity);
-        // saleTransaction = new SaleTransactionEntity();
-
-        console.log(data.saleTransactionEntity);
-        if (data.wasTapped) {
-          console.log(JSON.stringify(data));
-          sessionStorage.setItem("showOrderPage", JSON.stringify(saleTransaction));
-          //this.rootPage = CreditcardPage;
-          //  this.navCtrl.setRoot(ShowOrderPage, {saleTransactionEntity: saleTransaction});
-          this.navCtrl.setRoot(ShowOrderPage);
-          // window.location.href = "/pages/profile/profile.html";
-          //this.rootPage = ProfilePage;
-        } else {
-          console.log(JSON.stringify(data));
-          let receiveMessage = JSON.stringify(data);
-          this.vibration.vibrate([2000, 1000, 2000]);
-          let alert = this.alertCtrl.create({
-            title: "Your food is ready!",
-            message: data.data,
-            buttons:
-              [
-                {
-                  text: 'OK',
-                  role: 'OK',
-                  handler: () => {
-                    this.vibration.vibrate(0);
-                    console.log('Cancel clicked');
-                    alert.dismiss().then(() => {
-                      //this.navCtrl.pop();
-                      this.navCtrl.push(ShowOrderPage);
-                      sessionStorage.setItem("showOrderPage", JSON.stringify(saleTransaction));
-                      console.log("innnn");
-                      console.log(sessionStorage.getItem("showOrderPage"));
-                      // this.nav.push(ShowOrderPage, {saleTransactionEntity: saleTransaction});
-                      //this.navCtrl.push(CreateAccountPage);
-                    })
-
-                  }
-                }
-              ]
+      if (this.platform.is('android')) {
+        this.fcm.getToken()
+          .then(token => {
+            this.pushToken = token;
+            localStorage.setItem("pushToken", this.pushToken);
+            console.log(`The token is ${token}`);
           })
-          alert.present();
-          //     // this.navCtrl.push(CreditcardPage);
-          //     // this.vibration.vibrate(0);
-        }
-      }, error => {
-        alert(error);
-      })
-      // this.pushSetUp();
+          .catch(error => console.error('Error getting token', error));
+        this.fcm.onTokenRefresh().subscribe(token => {
+          if (localStorage.getItem('customerEntity') != null) {
+            let customerEntity: CustomerEntity = JSON.parse(localStorage.getItem('customerEntity'));
+            customerEntity.pushToken = token;
+            this.customerEntityProvider.updateToken(customerEntity).subscribe(
+              response => {
+                localStorage.setItem('customerEntity', JSON.stringify(customerEntity));
+              }, error => {
+                console.log("something went wrong");
+              }
+            )
+          }
+        })
+        this.fcm.onNotification().subscribe(data => {
+          let saleTransaction: SaleTransactionEntity = JSON.parse(data.saleTransactionEntity);
+          // saleTransaction = new SaleTransactionEntity();
+
+          console.log(data.saleTransactionEntity);
+          if (data.wasTapped) {
+            console.log(JSON.stringify(data));
+            sessionStorage.setItem("showOrderPage", JSON.stringify(saleTransaction));
+            //this.rootPage = CreditcardPage;
+            //  this.navCtrl.setRoot(ShowOrderPage, {saleTransactionEntity: saleTransaction});
+            this.navCtrl.setRoot(ShowOrderPage);
+            // window.location.href = "/pages/profile/profile.html";
+            //this.rootPage = ProfilePage;
+          } else {
+            console.log(JSON.stringify(data));
+            let receiveMessage = JSON.stringify(data);
+            this.vibration.vibrate([2000, 1000, 2000]);
+            let alert = this.alertCtrl.create({
+              title: "Your food is ready!",
+              message: data.data,
+              buttons:
+                [
+                  {
+                    text: 'OK',
+                    role: 'OK',
+                    handler: () => {
+                      this.vibration.vibrate(0);
+                      console.log('Cancel clicked');
+                      alert.dismiss().then(() => {
+                        //this.navCtrl.pop();
+                        this.navCtrl.push(ShowOrderPage);
+                        sessionStorage.setItem("showOrderPage", JSON.stringify(saleTransaction));
+                        console.log(sessionStorage.getItem("showOrderPage"));
+                        // this.nav.push(ShowOrderPage, {saleTransactionEntity: saleTransaction});
+                        //this.navCtrl.push(CreateAccountPage);
+                      })
+
+                    }
+                  }
+                ]
+            })
+            alert.present();
+            //     // this.navCtrl.push(CreditcardPage);
+            //     // this.vibration.vibrate(0);
+          }
+        }, error => {
+          alert(error);
+        })
+        // this.pushSetUp();
+      }
     });
+
   }
 
   //   pushSetUp() {
