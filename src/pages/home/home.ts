@@ -55,12 +55,6 @@ export class HomePage {
       toast.setMessage("Please complete the missing field(s)! ");
       toast.present();
     } else {
-      let loading = this.loadingCtrl.create({
-        spinner: 'circles',
-        content: "Retriving Foodcourts...",
-        dismissOnPageChange: true
-      })
-      loading.present();
       this.customerEntityProvider.doCustomerLogin(this.username, this.password).subscribe(
         response => {
           this.customerEntity = response.customerEntity;
@@ -69,11 +63,16 @@ export class HomePage {
           toast.setMessage("Welcome " + this.customerEntity.firstName + "!");
           toast.present();
           this.navCtrl.setRoot(MainPage);
+          let loading = this.loadingCtrl.create({
+            spinner: 'circles',
+            content: "Retriving Foodcourts...",
+            dismissOnPageChange: true
+          })
+          loading.present();
         }, error => {
           this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
           toast.setMessage("Credentials do not match with any account! Try again or click 'Forgot password?' to reset");
           toast.present();
-          loading.dismiss();
         })
     }
   }
