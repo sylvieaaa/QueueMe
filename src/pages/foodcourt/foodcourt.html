@@ -9,7 +9,7 @@
   <ion-navbar>
     <ion-title>Vendors</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only color="queueme-orange" (click)="openShoppingCart()" padding-right>
+      <button ion-button icon-only style="color:purple" (click)="openShoppingCart()" padding-right>
         <ion-icon name="cart">
         </ion-icon>
       </button>
@@ -26,9 +26,9 @@
       <img src="http://{{myIPAddress}}/QueueMeSystemJsf/queueme-uploads/vendorLogos/{{vendor.photoURL}}">
       <ion-card-title>{{vendor.vendorName}}</ion-card-title>
     </button>
-    <div style="display:block; text-align:center; color:goldenrod">
+    <div style="display:block; text-align:center">
       <button ion-button round outline icon-start  (click)="rateVendor($event, vendor)">
-        <ion-icon style="font-size: 20px; color:goldenrod; display: block; text-align: center" name="thumbs-up"></ion-icon>
+        <ion-icon style="font-size: 20px; color:#ffa15c; display: block; text-align: center" name="thumbs-up"></ion-icon>
           Rate
       </button>
     </div>
