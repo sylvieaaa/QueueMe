@@ -22,7 +22,8 @@
 <ion-content class="background">
   <ion-card *ngFor="let vendor of vendors">
     <button ion-item (click)="navVendor($event, vendor)" style="background-color: white">
-      <img src="http://{{myIPAddress}}:8080/queueme-uploads/vendorLogos/{{vendor.photoURL}}">
+      <!-- <img src="http://{{myIPAddress}}:8080/queueme-uploads/vendorLogos/{{vendor.photoURL}}"> -->
+      <img src="http://{{myIPAddress}}/QueueMeSystemJsf/queueme-uploads/vendorLogos/{{vendor.photoURL}}">
       <ion-card-title>{{vendor.vendorName}}</ion-card-title>
     </button>
     <div style="display:block; text-align:center; color:goldenrod">

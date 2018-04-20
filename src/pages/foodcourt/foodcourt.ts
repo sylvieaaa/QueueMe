@@ -17,7 +17,7 @@ import { ModalVendorReviewPage } from '../modal-vendor-review/modal-vendor-revie
   templateUrl: 'foodcourt.html',
 })
 export class FoodcourtPage {
-  myIPAddress: string = new myIPAddress().ipaddress;
+  myIPAddress: string = new myIPAddress().ipaddress + ":" + new myIPAddress().portNo;
   vendors: any ;
   foodCourt: any;
   errorMessage: string;
@@ -66,7 +66,7 @@ export class FoodcourtPage {
       console.log("-----");
       console.log(vendor.rating);
       console.log("******")
-      this.ionViewDidLoad();
+      //this.ionViewDidLoad();
 
     });
     myModal.present();
