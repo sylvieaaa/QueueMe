@@ -73,6 +73,7 @@ export class HomePage {
           this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
           toast.setMessage("Credentials do not match with any account! Try again or click 'Forgot password?' to reset");
           toast.present();
+          loading.dismiss();
         })
     }
   }
