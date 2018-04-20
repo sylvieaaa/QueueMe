@@ -2,7 +2,7 @@ import { CustomerEntityProvider } from './../../providers/customer-entity/custom
 import { CustomerEntity } from './../../entities/CustomerEntity';
 import { ShoppingCartPage } from './../shopping-cart/shopping-cart';
 import { Component, trigger } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FoodcourtEntityProvider } from '../../providers/foodcourt-entity/foodcourt-entity';
 import { FoodcourtPage } from '../foodcourt/foodcourt';
 import { myIPAddress } from './../../ipAddress';
@@ -30,7 +30,8 @@ export class MainPage {
   fcourt: any;
   replicate: any;
 
-  constructor(public navCtrl: NavController, public foodCourtEntityProvider: FoodcourtEntityProvider, public navParams: NavParams, public customerEntityProvider: CustomerEntityProvider) {
+  constructor(public navCtrl: NavController, public foodCourtEntityProvider: FoodcourtEntityProvider, public navParams: NavParams, 
+    public customerEntityProvider: CustomerEntityProvider, public loadingCtrl: LoadingController) {
     this.customerEntity = JSON.parse(localStorage.getItem('customerEntity'));
     let pushToken = localStorage.getItem("pushToken");
     if (!(this.customerEntity.pushToken === pushToken)) {
@@ -53,7 +54,7 @@ export class MainPage {
     this.notChosen = true;
     this.name = "";
     this.generateFoodCourt();
-
+    
   }
 
 
@@ -126,6 +127,13 @@ export class MainPage {
 
     sessionStorage.setItem("foodCourt", JSON.stringify(this.foodCourt));
     this.navCtrl.push(FoodcourtPage);
+    let loading = this.loadingCtrl.create({
+      spinner: 'circles',
+      content: "Retriving vendors...",
+      dismissOnPageChange: true
+    })
+    loading.present();
+   
   }
 
   doInfinite(infiniteScroll) {

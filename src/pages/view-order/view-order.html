@@ -8,7 +8,10 @@
   </ion-header>
 
 <ion-content padding>
-
+    <div *ngIf="!haveItems">
+        <h1 style="text-align: center; margin-top: 7em">You have not made any order yet</h1>
+      </div>
+    <div *ngIf="haveItems">
     <ion-card *ngFor="let saleTransactionEntity of saleTransactionEntities">
         <ion-item (click)="openOrderItem($event, saleTransactionEntity)">   
         <img src="http://{{myIPAddress}}:8080/queueme-uploads/foodCourtLogos/{{saleTransactionEntity.saleTransactionLineItemEntities[0].menuItemEntity.vendorEntity.foodCourtEntity.fileURL}}">
@@ -19,4 +22,5 @@
       </div>
     </ion-item>
       </ion-card>
+      </div>
 </ion-content>

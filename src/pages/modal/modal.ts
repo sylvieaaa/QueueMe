@@ -1,7 +1,7 @@
 import { SaleTransactionEntity } from './../../entities/SaleTransactionEntity';
 import { SaleTransactionLineItemEntity } from './../../entities/SaleTransactionLineItemEntity';
 import { Component } from '@angular/core';
-import { NavParams, ViewController } from 'ionic-angular';
+import { NavParams, ViewController} from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { splitClasses } from '@angular/compiler';
 import { myIPAddress } from './../../ipAddress';
@@ -52,7 +52,7 @@ export class ModalPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalPage');
-  
+
   }
 
   addItemToCart() {

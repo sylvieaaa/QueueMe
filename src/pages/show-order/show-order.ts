@@ -23,6 +23,7 @@ export class ShowOrderPage {
   saleTransactionLineEntities: any;
   selectedSaleTransactionLineItemEntity: any;
   selectedMenuItemEntity: any;
+ 
 
   constructor(public navParams: NavParams, public view: ViewController, private toastCtrl: ToastController,
     public orderEntityProvider: OrderEntityProvider) {

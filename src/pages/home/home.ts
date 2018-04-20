@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController , LoadingController} from 'ionic-angular';
 import { ForgetPasswordPage } from '../forget-password/forget-password';
 import { CreateAccountPage } from '../create-account/create-account';
 import { CustomerEntityProvider } from '../../providers/customer-entity/customer-entity';
@@ -22,7 +22,8 @@ export class HomePage {
 
   // a: any;
 
-  constructor(public navCtrl: NavController, public customerEntityProvider: CustomerEntityProvider, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public customerEntityProvider: CustomerEntityProvider, 
+    private toastCtrl: ToastController, public loadingCtrl: LoadingController) {
 
   }
 
@@ -54,6 +55,12 @@ export class HomePage {
       toast.setMessage("Please complete the missing field(s)! ");
       toast.present();
     } else {
+      let loading = this.loadingCtrl.create({
+        spinner: 'circles',
+        content: "Retriving Foodcourts...",
+        dismissOnPageChange: true
+      })
+      loading.present();
       this.customerEntityProvider.doCustomerLogin(this.username, this.password).subscribe(
         response => {
           this.customerEntity = response.customerEntity;
@@ -66,6 +73,7 @@ export class HomePage {
           this.errorMessage = "HTTP " + error.status + ": " + error.error.message;
           toast.setMessage("Credentials do not match with any account! Try again or click 'Forgot password?' to reset");
           toast.present();
+          loading.dismiss();
         })
     }
   }
