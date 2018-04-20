@@ -76,61 +76,67 @@
         <ion-option value="true">Takeaway</ion-option>
       </ion-select>
     </ion-item>
-    <ion-list>
-      <br/>
-      <div *ngIf="creditCard">
-        <ion-grid>
-        <ion-row>
-          <ion-col align-self-start>
-            <ion-label>{{creditCard.cardNo}}</ion-label>
-          </ion-col>
-          <!-- <ion-col>
+
+    <form (ngSubmit)="doCheckout()">
+      <ion-list>
+        <br/>
+
+        <div *ngIf="creditCard">
+          <ion-grid>
+            <ion-row>
+              <ion-col align-self-start>
+                <ion-label>{{creditCard.cardNo}}</ion-label>
+              </ion-col>
+              <!-- <ion-col>
             <ion-icon style="font-size: 20px" name="close" (click)="removeItem(lineItem)">
             </ion-icon>
           </ion-col> -->
-        </ion-row>
-      </ion-grid>
-      </div>
-      <div *ngIf="!creditCard">
-        <ion-row>
+            </ion-row>
+          </ion-grid>
+        </div>
+        <div *ngIf="!creditCard">
+          <ion-row>
+            <ion-col align-self-start>
+              <p-inputMask mask="9999-9999-9999-9999" name="cardNum" [(ngModel)]="cardNum" placeholder="Enter Credit Card Details: xxxx-xxxx-xxxx-xxxx"></p-inputMask>
+            </ion-col>
+
+          </ion-row>
+          <ion-row>
+            <ion-col align-self-start>
+              <ion-input placeholder="Name: " name="cardName" [(ngModel)]="cardName" type="text"></ion-input>
+            </ion-col>
+            <ion-col align-self-center>
+              <p style="color: #a9a9a9">Save credit card: </p>
+            </ion-col>
+            <ion-col align-self-center>
+              <ion-checkbox name="save" [(ngModel)]="saveCreditCard"></ion-checkbox>
+            </ion-col>
+          </ion-row>
+
+        </div>
+        <ion-row justify-content-around>
           <ion-col align-self-start>
-            <p-inputMask mask="9999-9999-9999-9999" name="cardNum" [(ngModel)]="cardNum" placeholder="Enter Credit Card Details: xxxx-xxxx-xxxx-xxxx"></p-inputMask>
+            <div style="margin-top: 6px">
+              <p-inputMask mask="999" name="cvv" [(ngModel)]="cvv" placeholder="cvv: xxx"></p-inputMask>
+            </div>
+            <!-- <ion-input placeholder="Enter cvv" type="number" [(ngModel)]="cvv" max="3" min="3"></ion-input> -->
           </ion-col>
-
-        </ion-row>
-        <ion-row>
-          <ion-col align-self-start>
-            <ion-input placeholder="Name: " [(ngModel)]="cardName" type="text"></ion-input>
-          </ion-col>
-          <ion-col align-self-center>
-            <p style="color: #a9a9a9">Save credit card: </p>
-          </ion-col>
-          <ion-col align-self-center>
-            <ion-checkbox [(ngModel)]="saveCreditCard"></ion-checkbox>
+          <ion-col align-self-end>
+            <ion-datetime placeholder="Expiry date" name="date" type="number" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" min="2018-04"
+              max="2030-12" [(ngModel)]="expDate"></ion-datetime>
           </ion-col>
         </ion-row>
+      </ion-list>
 
+
+      <!-- <input type="button" name="paymentOption" (click)="showActionSheet()">Select Credit Card</input> -->
+
+      <button type="button" ion-button block (click)="showActionSheet()">
+        Select Credit Card
+      </button>
+      <div>
+        <button type="submit" ion-button color="queueme-orange" ion-button full>Checkout</button>
       </div>
-      <ion-row justify-content-around>
-        <ion-col align-self-start>
-          <p-inputMask mask="999" name="cvv" [(ngModel)]="cvv" placeholder="cvv: xxx"></p-inputMask>
-          <!-- <ion-input placeholder="Enter cvv" type="number" [(ngModel)]="cvv" max="3" min="3"></ion-input> -->
-        </ion-col>
-        <ion-col align-self-end>
-          <ion-datetime placeholder="Expiry date" type="number" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" min="2018-04" max="2030-12"
-            [(ngModel)]="expDate"></ion-datetime>
-        </ion-col>
-      </ion-row>
-    </ion-list>
-
-
-
-    <button ion-button block (click)="showActionSheet()">
-      Select credit card
-    </button>
-    <div>
-      <button ion-button color="queueme-orange" ion-button full (click)="doCheckout()">Checkout</button>
-    </div>
-
+    </form>
   </div>
 </ion-content>

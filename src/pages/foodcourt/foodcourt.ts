@@ -23,7 +23,6 @@ export class FoodcourtPage {
   errorMessage: string;
   selectVendor: any;
   rate: any;
-
   constructor(public modal: ModalController, public navCtrl: NavController, public vendorEntityProvider: VendorEntityProvider, public navParams: NavParams) {
   }
 
@@ -59,6 +58,15 @@ export class FoodcourtPage {
   rateVendor(event, vendor){
     console.log(vendor);
     let myModal = this.modal.create(ModalVendorReviewPage, {vendor: vendor});
+    myModal.onDidDismiss(vendorRating =>{
+      console.log(vendorRating);
+      vendor.rating= vendorRating;
+      console.log("-----");
+      console.log(vendor.rating);
+      console.log("******")
+      this.ionViewDidLoad();
+
+    });
     myModal.present();
   }
 
