@@ -3,7 +3,7 @@ import { CheckoutProvider } from './../../providers/checkout/checkout';
 import { SaleTransactionEntity } from './../../entities/SaleTransactionEntity';
 import { SaleTransactionLineItemEntity } from './../../entities/SaleTransactionLineItemEntity';
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, ActionSheetController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, ActionSheetController, AlertController, LoadingController } from 'ionic-angular';
 import { CustomerEntity } from '../../entities/CustomerEntity';
 import { CreditcardEntityProvider } from '../../providers/creditcard-entity/creditcard-entity';
 /**
@@ -44,7 +44,7 @@ export class ShoppingCartPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public checkoutProvider: CheckoutProvider,
     private toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController,
-    public creditCardEntityProvider: CreditcardEntityProvider, public alertCtrl: AlertController) {
+    public creditCardEntityProvider: CreditcardEntityProvider, public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
     this.creditCard = null;
     this.allowCheckOut = true;
     if (sessionStorage.getItem("shoppingCart") != null) {
@@ -156,8 +156,16 @@ export class ShoppingCartPage {
         }
       }
 
+      let loading = this.loadingCtrl.create({
+        spinner: 'circles',
+        content: "Please wait..."
+      })
+
+      loading.present();
+
       this.checkoutProvider.doCheckout(saleTransactionEntity, customerEntity).subscribe(
         response => {
+          loading.dismiss();
           sessionStorage.removeItem("shoppingCart");
           toast.setMessage("Successfully checked out!");
           toast.present();
