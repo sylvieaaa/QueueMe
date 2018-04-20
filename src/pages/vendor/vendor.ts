@@ -1,6 +1,6 @@
 import { ShoppingCartPage } from './../shopping-cart/shopping-cart';
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController} from 'ionic-angular';
 import { MenuitemEntityProvider } from '../../providers/menuitem-entity/menuitem-entity';
 import { ModalPage } from '../modal/modal';
 import { myIPAddress } from './../../ipAddress';
@@ -25,7 +25,8 @@ export class VendorPage {
   menuItems:any;
   selectCategory:any;
 
-  constructor(public modal: ModalController, public navCtrl: NavController, public menuitemEntityProvider: MenuitemEntityProvider, public navParams: NavParams) {
+  constructor(public modal: ModalController, public navCtrl: NavController, public menuitemEntityProvider: MenuitemEntityProvider, 
+    public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -53,10 +54,7 @@ export class VendorPage {
 
   openModal(event, menuItem){
     let myModal = this.modal.create(ModalPage, {data: menuItem});
-    console.log(menuItem);
-    myModal.present();
-
-
+    myModal.present();    
   }
   
   openShoppingCart() {

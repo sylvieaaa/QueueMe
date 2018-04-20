@@ -1,7 +1,7 @@
 import { ShoppingCartPage } from './../shopping-cart/shopping-cart';
 import { myIPAddress } from './../../ipAddress';
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import {VendorEntityProvider} from '../../providers/vendor-entity/vendor-entity';
 import { VendorPage } from '../vendor/vendor';
 import { ModalVendorReviewPage } from '../modal-vendor-review/modal-vendor-review';
@@ -24,7 +24,8 @@ export class FoodcourtPage {
   selectVendor: any;
   rate: any;
 
-  constructor(public modal: ModalController, public navCtrl: NavController, public vendorEntityProvider: VendorEntityProvider, public navParams: NavParams) {
+  constructor(public modal: ModalController, public navCtrl: NavController, public vendorEntityProvider: VendorEntityProvider, 
+    public navParams: NavParams, public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {

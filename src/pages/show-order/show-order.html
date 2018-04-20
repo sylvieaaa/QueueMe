@@ -9,7 +9,10 @@
   </ion-header>
   
   <ion-content padding>
-  
+      <div *ngIf="!haveItems">
+          <h1 style="text-align: center; margin-top: 7em">You have not made any order yet!</h1>
+        </div>
+      <div *ngIf="haveItems">
       <ion-card *ngFor="let orderEntity of orderEntities"> 
           <h2 style="font-weight:bold; margin-top: 15px; text-align: center">{{orderEntity.vendorEntity.vendorName}}</h2>
         <ion-card *ngFor="let stlie of orderEntity.saleTransactionLineItemEntities">
@@ -29,5 +32,5 @@
           <h3 style="color: #010211" *ngIf="!orderEntity.fulfilled"><b>Status</b>: In Progress</h3>
         </div>   
     </ion-card>
-  
+    </div>
   </ion-content>
