@@ -63,17 +63,10 @@ export class FoodcourtPage {
     myModal.onDidDismiss(vendorRating =>{
       console.log(vendorRating);
       vendor.rating= vendorRating;
-<<<<<<< HEAD
       console.log("-----");
       console.log(vendor.rating);
       console.log("******")
       //this.ionViewDidLoad();
-=======
-      // console.log("-----");
-      // console.log(vendor.rating);
-      // console.log("******")
-      this.ionViewDidLoad();
->>>>>>> d68e0ad33c822345cdfb3265569baab98d2c4b02
 
     });
     myModal.present();
