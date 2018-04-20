@@ -23,31 +23,52 @@
         <ion-col col-2>
           <h5>S/N</h5>
         </ion-col>
-        <ion-col col-3>
+        <ion-col col-5>
           <h5>Item Name</h5>
         </ion-col>
-        <ion-col col-2>
+        <ion-col col-3>
           <h5>Qty</h5>
         </ion-col>
-        <ion-col col-3>
+        <!-- <ion-col col-3>
           <h5>Special Req</h5>
-        </ion-col>
-        <ion-col col-1></ion-col>
+        </ion-col> -->
+        <ion-col col-2></ion-col>
       </ion-row>
       <ion-row *ngFor="let lineItem of lineItems">
         <ion-col col-2>{{lineItem.serialNumber}}</ion-col>
-        <ion-col col-3>{{lineItem.menuItemEntity.menuItemName}}</ion-col>
-        <ion-col col-2>
-          <p-spinner class="ui-spinner-input" (onChange)="doQtyEdit($event, lineItem, lineItem.quantity)" size="2" [(ngModel)]="lineItem.quantity"
+
+        <ion-col col-5>
+          <ion-row>
+            <ion-col>  {{lineItem.menuItemEntity.menuItemName}}</ion-col>  
+         </ion-row>
+         <ion-row >
+            
+          <textarea style="border:black solid 1px" pInputTextarea autoResize="autoResize" [(ngModel)]="lineItem.specialRequest"></textarea>
+
+         </ion-row>
+          
+        </ion-col>
+
+        <ion-col col-3>
+          <p-spinner class="blendBG" (onChange)="doQtyEdit($event, lineItem, lineItem.quantity)" size="2" [(ngModel)]="lineItem.quantity"
             placeholder="Quantity" [min]="1" [max]="1000"></p-spinner>
         </ion-col>
-        <ion-col col-4>
+
+        <ion-col col-2>
+            <ion-icon style="font-size: 20px" name="close" (click)="removeItem(lineItem)">
+            </ion-icon>
+          </ion-col>
+<!--         
+        <ion-col col-2></ion-col>
+        <ion-col col-5>
           <textarea pInputTextarea autoResize="autoResize" [(ngModel)]="lineItem.specialRequest"></textarea>
-        </ion-col>
+        </ion-col> -->
+<!-- 
         <ion-col>
           <ion-icon style="font-size: 20px" name="close" (click)="removeItem(lineItem)">
           </ion-icon>
         </ion-col>
+      -->
       </ion-row>
       <br/>
       <ion-row>
@@ -97,13 +118,16 @@
         <div *ngIf="!creditCard">
           <ion-row>
             <ion-col align-self-start>
-              <p-inputMask mask="9999-9999-9999-9999" name="cardNum" [(ngModel)]="cardNum" placeholder="Enter Credit Card Details: xxxx-xxxx-xxxx-xxxx"></p-inputMask>
+              <p-inputMask class="styleBorder" mask="9999-9999-9999-9999" name="cardNum" [(ngModel)]="cardNum" placeholder="Enter Credit Card Details: xxxx-xxxx-xxxx-xxxx"></p-inputMask>
             </ion-col>
 
           </ion-row>
           <ion-row>
             <ion-col align-self-start>
-              <ion-input placeholder="Name: " name="cardName" [(ngModel)]="cardName" type="text"></ion-input>
+              <!-- <ion-input placeholder="Name: " name="cardName" [(ngModel)]="cardName" type="text"></ion-input> --> 
+              <ion-row style="margin-top:20px">
+              <input type="text" name="cardName" [(ngModel)]="cardName" pInputText placeholder="Name: ">  
+              </ion-row>
             </ion-col>
             <ion-col align-self-center>
               <p style="color: #a9a9a9">Save credit card: </p>
@@ -122,7 +146,7 @@
             <!-- <ion-input placeholder="Enter cvv" type="number" [(ngModel)]="cvv" max="3" min="3"></ion-input> -->
           </ion-col>
           <ion-col align-self-end>
-            <ion-datetime placeholder="Expiry date" name="date" type="number" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" min="2018-04"
+            <ion-datetime style="background-color:white" placeholder="Expiry date" name="date" type="number" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" min="2018-04"
               max="2030-12" [(ngModel)]="expDate"></ion-datetime>
           </ion-col>
         </ion-row>

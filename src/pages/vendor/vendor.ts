@@ -53,11 +53,6 @@ export class VendorPage {
 
   openModal(event, menuItem){
     let myModal = this.modal.create(ModalPage, {data: menuItem});
-    // console.log(menuItem);
-    myModal.onDidDismiss(word =>{
-      console.log(word);
-    })
-    
     myModal.present();
 
 
