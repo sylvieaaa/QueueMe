@@ -88,17 +88,12 @@ export class MyApp {
         })
         this.fcm.onNotification().subscribe(data => {
           let saleTransaction: SaleTransactionEntity = JSON.parse(data.saleTransactionEntity);
-          // saleTransaction = new SaleTransactionEntity();
 
           console.log(data.saleTransactionEntity);
           if (data.wasTapped) {
             console.log(JSON.stringify(data));
             sessionStorage.setItem("showOrderPage", JSON.stringify(saleTransaction));
-            //this.rootPage = CreditcardPage;
-            //  this.navCtrl.setRoot(ShowOrderPage, {saleTransactionEntity: saleTransaction});
             this.navCtrl.setRoot(ShowOrderPage);
-            // window.location.href = "/pages/profile/profile.html";
-            //this.rootPage = ProfilePage;
           } else {
             console.log(JSON.stringify(data));
             let receiveMessage = JSON.stringify(data);
@@ -115,12 +110,9 @@ export class MyApp {
                       this.vibration.vibrate(0);
                       console.log('Cancel clicked');
                       alert.dismiss().then(() => {
-                        //this.navCtrl.pop();
                         this.navCtrl.push(ShowOrderPage);
                         sessionStorage.setItem("showOrderPage", JSON.stringify(saleTransaction));
                         console.log(sessionStorage.getItem("showOrderPage"));
-                        // this.nav.push(ShowOrderPage, {saleTransactionEntity: saleTransaction});
-                        //this.navCtrl.push(CreateAccountPage);
                       })
 
                     }
@@ -128,45 +120,23 @@ export class MyApp {
                 ]
             })
             alert.present();
-            //     // this.navCtrl.push(CreditcardPage);
-            //     // this.vibration.vibrate(0);
           }
         }, error => {
           alert(error);
         })
-        // this.pushSetUp();
       }
     });
 
   }
 
-  //   pushSetUp() {
-  //     const options: PushOptions = {
-  //       android: {
-  //         senderID: '735404994916'
-  //       }
-  //     };
-  //     const pushObject: PushObject = this.push.init(options);
-
-  //     pushObject.on('notification').subscribe((notification: any) => {
-  //       if (notification.additionalData.foreground) {
-  //         alert(notification.message);
-  //       }
-  //     });
-
-  //     pushObject.on('registration').subscribe((registration: any) => {
-  //       //do whatever you want with the registration ID
-  //     });
-
-  //     pushObject.on('error').subscribe(error => alert('Error with Push plugin' + error));
-
-
-  // }
-
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if (page.title === "Home") {
+      this.nav.setRoot(page.component);
+    } else {
+      this.nav.push(page.component);
+    }
   }
 
   logout() {

@@ -13,9 +13,9 @@ const httpOptions = {
 
 @Injectable()
 export class CustomerEntityProvider {
-
 	ipAddress = new myIPAddress().ipaddress;
-	portNo = '8080';
+	portNo = new myIPAddress().portNo;
+	// portNo = '8080';
 	fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystemJsf/Resources/Customer';
 	baseUrl = "/api/Customer";
 
@@ -25,6 +25,7 @@ export class CustomerEntityProvider {
 
 	doCustomerLogin(username: string, password: string): Observable<any> {
 		let path: string = '';
+		let customerLoginReq = {"username": username, "password": password}
 
 		if (this.platform.is('core') || this.platform.is('mobileweb')) {
 			path = this.baseUrl;
@@ -34,7 +35,7 @@ export class CustomerEntityProvider {
 		}
 		console.log(path);
 
-		return this.httpClient.get<any>(path + "/login?username=" + username + "&password=" + password).pipe
+		return this.httpClient.post<any>(path + "/login", customerLoginReq, httpOptions).pipe
 			(
 			catchError(this.handleError)
 			);

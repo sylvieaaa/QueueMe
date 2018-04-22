@@ -17,7 +17,7 @@ import { myIPAddress } from './../../ipAddress';
   templateUrl: 'vendor.html',
 })
 export class VendorPage {
-  myIPAddress: string = new myIPAddress().ipaddress;
+  myIPAddress: string = new myIPAddress().ipaddress + ":" + new myIPAddress().portNo;
   vendor: any;
   menu: any;
   errorMessage: string;
@@ -41,6 +41,7 @@ export class VendorPage {
       response => {
         this.menu = response.menuEntity;
         this.categories = this.menu.categoryEntities;
+        console.log(this.categories);
         for (let category of this.categories){
           this.selectCategory = category;
           this.menuItems = category.menuItemEntities;

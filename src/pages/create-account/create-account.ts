@@ -53,6 +53,7 @@ export class CreateAccountPage {
       duration: 3000,
       position: 'bottom'
     });
+    console.log(this.customerEntity.password);
     this.customerEntityProvider.createAccount(this.customerEntity).subscribe(
       response => {
         toast.setMessage("Account successfully created");

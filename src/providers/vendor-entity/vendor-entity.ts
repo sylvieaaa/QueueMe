@@ -19,7 +19,8 @@ const httpOptions = {
 @Injectable()
 export class VendorEntityProvider {
   ipAddress = new myIPAddress().ipaddress;
-  portNo = '8080';
+  portNo = new myIPAddress().portNo;
+  // portNo = '8080';
   fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystemJsf/Resources/Vendor';
   baseUrl = "/api/Vendor";
 

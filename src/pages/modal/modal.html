@@ -19,17 +19,23 @@
 
 <ion-content padding>
   <ion-card>
-    <img src="http://{{myIPAddress}}:8080/queueme-uploads/foodPhotos/{{menuItem.photoURL}}">
+      <img src="http://{{myIPAddress}}/QueueMeSystemJsf/queueme-uploads/foodPhotos/{{menuItem.photoURL}}">
+    <!-- <img src="http://{{myIPAddress}}:8080/queueme-uploads/foodPhotos/{{menuItem.photoURL}}"> -->
     <ion-row>
       <ion-title>{{menuItem.menuItemName}}</ion-title>
     </ion-row>
     <ion-row>
       <ion-title>$ {{menuItem.price}}</ion-title>
     </ion-row>
+    <ion-row padding-left>
+        <ion-chip color="primary" *ngFor="let tag of menuItem.tagEntities">
+            <ion-label>{{tag.type}}</ion-label>
+          </ion-chip>
+    </ion-row>
 
 
     <ion-card-content text-wrap>
-      <p-spinner size="30" [(ngModel)]="quantity" placeholder="Quantity" [min]="0" [max]="1000"></p-spinner>
+      <p-spinner size="27" [(ngModel)]="quantity" placeholder="Quantity" [min]="0" [max]="1000"></p-spinner>
       <br/>
       <br/>
       <textarea [rows]="5" [cols]="30" placeholder="Enter special request(s), if any" pInputTextarea autoResize="autoResize" [(ngModel)]="specialRequest"></textarea>

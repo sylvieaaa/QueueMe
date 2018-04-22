@@ -30,7 +30,9 @@
             <ion-row>{{menuItem.menuItemName}}</ion-row>
             <ion-row>$ {{menuItem.price}}  </ion-row>
             <ion-row>
-              
+                <ion-chip color="primary" *ngFor="let tag of menuItem.tagEntities">
+                    {{tag.type}}
+                  </ion-chip>
             </ion-row>
            </ion-item>
         </ion-card>

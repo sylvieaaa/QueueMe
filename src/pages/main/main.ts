@@ -19,7 +19,7 @@ import { myIPAddress } from './../../ipAddress';
   templateUrl: 'main.html',
 })
 export class MainPage {
-  myIPAddress: string = new myIPAddress().ipaddress;
+  myIPAddress: string = new myIPAddress().ipaddress + new myIPAddress().portNo;
   customerEntity: CustomerEntity;
   foodCourts: any;
   foodCourt: any;

@@ -133,6 +133,7 @@ export class ShoppingCartPage {
     saleTransactionEntity.totalLineItem = this.totalLineItems;
     saleTransactionEntity.transactionDateTime = new Date();
     saleTransactionEntity.saleTransactionLineItemEntities = this.lineItems;
+    saleTransactionEntity.paymentType = "creditCard";
     let customerEntity: CustomerEntity = JSON.parse(localStorage.getItem("customerEntity"));
 
     if (this.diningOptions === undefined) {
@@ -171,7 +172,8 @@ export class ShoppingCartPage {
           toast.present();
           this.navCtrl.setRoot(MainPage);
         }, error => {
-          toast.setMessage("HTTP " + error.status + ": " + error.error.message);
+          loading.dismiss();
+          toast.setMessage("An error occured while trying to process your order.");
           toast.present();
         
         })

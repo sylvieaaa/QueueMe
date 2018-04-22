@@ -14,7 +14,8 @@
     <div *ngIf="haveItems">
     <ion-card *ngFor="let saleTransactionEntity of saleTransactionEntities">
         <ion-item (click)="openOrderItem($event, saleTransactionEntity)">   
-        <img src="http://{{myIPAddress}}:8080/queueme-uploads/foodCourtLogos/{{saleTransactionEntity.saleTransactionLineItemEntities[0].menuItemEntity.vendorEntity.foodCourtEntity.fileURL}}">
+        <!-- <img src="http://{{myIPAddress}}:8080/queueme-uploads/foodCourtLogos/{{saleTransactionEntity.saleTransactionLineItemEntities[0].menuItemEntity.vendorEntity.foodCourtEntity.fileURL}}"> -->
+        <img src="http://{{myIPAddress}}/QueueMeSystemJsf/queueme-uploads/foodCourtLogos/{{saleTransactionEntity.saleTransactionLineItemEntities[0].menuItemEntity.vendorEntity.foodCourtEntity.fileURL}}">
         <h2 style="font-weight:bold; margin-top: 15px">{{saleTransactionEntity.saleTransactionLineItemEntities[0].menuItemEntity.vendorEntity.foodCourtEntity.name}}</h2>
         <h3 style="color: #696969"> {{saleTransactionEntity.transactionDateTime | date:'short'}}</h3>
           <div style="float: right;">

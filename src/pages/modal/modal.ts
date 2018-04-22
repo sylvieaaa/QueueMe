@@ -18,7 +18,7 @@ import { myIPAddress } from './../../ipAddress';
   templateUrl: 'modal.html',
 })
 export class ModalPage {
-  myIPAddress: string = new myIPAddress().ipaddress;
+  myIPAddress: string = new myIPAddress().ipaddress + ":" + new myIPAddress().portNo;
   shoppingCart: any;
   menuItem:any;
   data:any;

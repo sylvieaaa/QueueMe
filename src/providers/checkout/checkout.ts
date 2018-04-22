@@ -21,7 +21,8 @@ const httpOptions = {
 @Injectable()
 export class CheckoutProvider {
   ipAddress = new myIPAddress().ipaddress;
-  portNo = '8080';
+  portNo = new myIPAddress().portNo;
+  // portNo = '8080';
   fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystemJsf/Resources/Checkout';
   baseUrl = "/api/Checkout";
 

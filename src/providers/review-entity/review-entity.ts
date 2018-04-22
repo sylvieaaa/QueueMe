@@ -19,9 +19,9 @@ const httpOptions = {
 
 @Injectable()
 export class ReviewEntityProvider {
-
   ipAddress = new myIPAddress().ipaddress;
-  portNo = '8080';
+  portNo = new myIPAddress().portNo;
+  // portNo = '8080';
   fullBaseUrl = 'http://' + this.ipAddress + ':' + this.portNo + '/QueueMeSystemJsf/Resources/Review';
   baseUrl = "/api/Review";
 

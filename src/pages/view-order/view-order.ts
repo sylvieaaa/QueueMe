@@ -19,7 +19,7 @@ import { ShowOrderPage } from '../show-order/show-order';
   templateUrl: 'view-order.html',
 })
 export class ViewOrderPage {
-  myIPAddress: string = new myIPAddress().ipaddress;
+  myIPAddress: string = new myIPAddress().ipaddress + ":" + new myIPAddress().portNo;
   customerEntity: CustomerEntity;
   saleTransactionEntities: any;
   stliEntities: any;

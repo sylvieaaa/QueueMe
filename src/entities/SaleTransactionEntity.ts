@@ -6,6 +6,7 @@ export class SaleTransactionEntity {
     totalAmount: number;
     transactionDateTime: any;
     isTakeaway: boolean;
+    paymentType: string;
     saleTransactionLineItemEntities: Array<SaleTransactionLineItemEntity>;
     constructor(){}
 }
